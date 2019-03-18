@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.421
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "冲水阀水力特性测试机", "冲水阀水力特性测试机\冲水阀水力特性测试机.csproj", "{A7363BD8-B44C-4D56-9E6D-2ECC01F56952}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A7363BD8-B44C-4D56-9E6D-2ECC01F56952}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A7363BD8-B44C-4D56-9E6D-2ECC01F56952}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A7363BD8-B44C-4D56-9E6D-2ECC01F56952}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A7363BD8-B44C-4D56-9E6D-2ECC01F56952}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {D9807DA9-8BEB-4207-8CC3-C03DFE0ACD5E}
+	EndGlobalSection
+EndGlobal
