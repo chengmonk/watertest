@@ -134,12 +134,12 @@ namespace 冲水阀水力特性测试机
             Invoke(new Action(() =>
             {
 
-                //hslCurveHistory1.SetLeftCurve("温度", flow, Color.DodgerBlue, true, "{0:F1} ℃");
-                //hslCurveHistory1.SetDateTimes(dateTime);
-                hslCurveHistory1.SetLeftCurve("步序", steps);
-                hslCurveHistory1.SetLeftCurve("温度", data, Color.DodgerBlue, true, "{0:F1} ℃");
-                hslCurveHistory1.SetRightCurve("压力", press, Color.Tomato, true, "{0:F2} Mpa");
-                hslCurveHistory1.SetDateTimes(times);
+                hslCurveHistory1.SetLeftCurve("流量", flow, Color.DodgerBlue, true, "{0:F1} L/s");
+                hslCurveHistory1.SetDateTimes(dateTime);
+                //hslCurveHistory1.SetLeftCurve("步序", steps);
+                //hslCurveHistory1.SetLeftCurve("温度", data, Color.DodgerBlue, true, "{0:F1} ℃");
+                //hslCurveHistory1.SetRightCurve("压力", press, Color.Tomato, true, "{0:F2} Mpa");
+                //hslCurveHistory1.SetDateTimes(times);
                 //hslCurveHistory1.AddMarkForeSection(new HslControls.HslMarkForeSection()
                 //{
                 //    StartIndex = 900,
