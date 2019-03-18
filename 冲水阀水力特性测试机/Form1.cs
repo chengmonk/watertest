@@ -19,9 +19,7 @@ namespace 冲水阀水力特性测试机
         {
 
             startFlag = true;
-            pushWork = new System.Timers.Timer(1);
-            pushWork.Elapsed += new System.Timers.ElapsedEventHandler(pushWorkThread);//到达时间的时候执行事件； 
-            pushWork.AutoReset = false;//设置是执行一次（false）还是一直执行(true)；
+          
             pushWork.Enabled = true;//是否执行System.Timers.Timer.Elapsed事件；
             
 
@@ -288,7 +286,7 @@ namespace 冲水阀水力特性测试机
             reader.Close();
             return dt;
         }
-        System.Timers.Timer alarm;
+        //System.Timers.Timer alarm;
         System.Timers.Timer pushWork;
         System.Timers.Timer monitor;
         double maxPressure, maxHammer;
@@ -340,6 +338,9 @@ namespace 冲水阀水力特性测试机
             monitor.AutoReset = true;//设置是执行一次（false）还是一直执行(true)；
             monitor.Enabled = true;//是否执行System.Timers.Timer.Elapsed事件； 
 
+            pushWork = new System.Timers.Timer(1);
+            pushWork.Elapsed += new System.Timers.ElapsedEventHandler(pushWorkThread);//到达时间的时候执行事件； 
+            pushWork.AutoReset = false;//设置是执行一次（false）还是一直执行(true)；
 
             dt.Columns.Add("时间", typeof(string));
             dt.Columns.Add("压力", typeof(double));   //新建第一列
@@ -410,21 +411,25 @@ namespace 冲水阀水力特性测试机
 
             //变频器报警
             //重置所有设置
-            //if (GetbitValue(diData, 0) == 1)
-            //    System.Console.WriteLine("alarm");
+            if (GetbitValue(diData, 0) == 1)
+                System.Console.WriteLine("alarm");
 
         }
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
+            
             if (MessageBox.Show("关闭窗体后，程序会退出！！", "提示！！", MessageBoxButtons.YesNo) == DialogResult.Yes)
             {
-                waveformAiCtrl1_Stop();
+                
                 e.Cancel = false;
                 System.Environment.Exit(0);
             }
             else
             {
-                e.Cancel = true;
+                waveformAiCtrl1_Stop();
+                monitor.Dispose();
+                pushWork.Dispose();
+                //e.Cancel = true;
             }
         }
 

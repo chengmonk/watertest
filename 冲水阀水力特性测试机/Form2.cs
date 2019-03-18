@@ -23,9 +23,7 @@ namespace 冲水阀水力特性测试机
         private void hslButton1_Click(object sender, EventArgs e)
         {
             loadDataFlag = true;
-            pushWork = new System.Timers.Timer(1);
-            pushWork.Elapsed += new System.Timers.ElapsedEventHandler(pushWorkThread);//到达时间的时候执行事件； 
-            pushWork.AutoReset = false;//设置是执行一次（false）还是一直执行(true)；
+           
             pushWork.Enabled = true;//是否执行System.Timers.Timer.Elapsed事件；
             //t.Enabled = true;//是否执行System.Timers.Timer.Elapsed事件；   
         }
@@ -157,6 +155,9 @@ namespace 冲水阀水力特性测试机
             monitor.AutoReset = true;//设置是执行一次（false）还是一直执行(true)；
             monitor.Enabled = true;//是否执行System.Timers.Timer.Elapsed事件； 
 
+            pushWork = new System.Timers.Timer(1);
+            pushWork.Elapsed += new System.Timers.ElapsedEventHandler(pushWorkThread);//到达时间的时候执行事件； 
+            pushWork.AutoReset = false;//设置是执行一次（false）还是一直执行(true)；
             daq.InstantAi();
             t.Start();
         }
@@ -242,7 +243,9 @@ namespace 冲水阀水力特性测试机
         }
         private void Form2_FormClosing(object sender, FormClosingEventArgs e)
         {
-            t.Stop();
+            
+            
+           
             if (MessageBox.Show("关闭窗体后，程序会退出！！", "提示！！", MessageBoxButtons.YesNo) == DialogResult.Yes)
             {
                 e.Cancel = false;
@@ -251,6 +254,12 @@ namespace 冲水阀水力特性测试机
             }
             else
             {
+                if(t.Enabled)
+                t.Dispose();
+                if(monitor.Enabled)
+                monitor.Dispose();
+                if(pushWork.Enabled)
+                pushWork.Dispose();
                 //e.Cancel = true;
             }
         }
