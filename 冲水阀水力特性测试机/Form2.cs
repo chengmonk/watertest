@@ -20,6 +20,8 @@ namespace 冲水阀水力特性测试机
         System.Timers.Timer t;
         static List<double> l;
         bool loadDataFlag = false;
+
+        bool pushFlag = false;
         private void hslButton1_Click(object sender, EventArgs e)
         {
             loadDataFlag = true;
@@ -32,11 +34,16 @@ namespace 冲水阀水力特性测试机
             doData[0] = set_bit(doData[0], 3, true);
             daq.InstantDo_Write(doData);
             //System.Console.WriteLine("push:" + doData[0]);
+            for (; true;)
+            {
+                if (pushFlag) break;
+            }
             double t = 1000 * (double)numericUpDown1.Value;
             System.Threading.Thread.Sleep((int)t);//
             doData[0] = set_bit(doData[0], 3, false);
             daq.InstantDo_Write(doData);
             // System.Console.WriteLine("push:" + doData[0]);
+            pushFlag = false;
         }
         void theout(object source, System.Timers.ElapsedEventArgs e)
 
@@ -80,7 +87,7 @@ namespace 冲水阀水力特性测试机
             waterTemperature.Text = "温度：" +Math.Round( data[0],2);
             waterFlow.Text = "流量：" + Math.Round( data[2],2);
             maxWaterFlow.Text = "最大流量:" + Math.Round( maxFlow,2);
-
+            if (Math.Round(data[2], 2) > 0.1) pushFlag = true;
             bpqreturn.Text = Math.Round(data[1], 2).ToString();
 
             if (l.Count > 8 && loadDataFlag)
@@ -109,7 +116,8 @@ namespace 冲水阀水力特性测试机
         {
            
             maxFlow = -1;
-
+            pushFlag = false;
+            loadDataFlag = false;
             c = new config();
             c.channelCount = 3;
             c.convertClkRate = 1000;

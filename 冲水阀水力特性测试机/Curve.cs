@@ -221,7 +221,7 @@ namespace 冲水阀水力特性测试机
                 hslCurveHistory1.RenderCurveUI();
                 Console.WriteLine("AY:" + A.Y + ":" + A.X);
 
-                if (totalFlow >= 9)//总流量达到9L加载数据
+                if (totalFlow <= 9)//总流量达到9L加载数据
                 { 
                     //9L 流量图
                     hslCurveHistory2.SetLeftCurve("温度", flow, Color.DodgerBlue, true, "{0:F1} ℃");

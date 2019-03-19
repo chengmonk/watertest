@@ -123,6 +123,8 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBox1.Controls.Add(this.hslSwitch1);
             this.groupBox1.Controls.Add(this.hslBlower1);
             this.groupBox1.Controls.Add(this.bpqreturn);
@@ -133,7 +135,7 @@
             this.groupBox1.Controls.Add(this.sbyali);
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Controls.Add(this.open);
-            this.groupBox1.Location = new System.Drawing.Point(743, 35);
+            this.groupBox1.Location = new System.Drawing.Point(743, 13);
             this.groupBox1.Margin = new System.Windows.Forms.Padding(4);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Padding = new System.Windows.Forms.Padding(4);
@@ -335,6 +337,8 @@
             // 
             // groupBox2
             // 
+            this.groupBox2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBox2.Controls.Add(this.qdfstatus);
             this.groupBox2.Controls.Add(this.label4);
             this.groupBox2.Controls.Add(this.tqgj);
@@ -386,15 +390,17 @@
             // 
             // groupBox3
             // 
+            this.groupBox3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.groupBox3.Controls.Add(this.hslButton5);
             this.groupBox3.Controls.Add(this.hslButton2);
             this.groupBox3.Controls.Add(this.hslButton4);
             this.groupBox3.Controls.Add(this.hslButton1);
             this.groupBox3.Controls.Add(this.hslButton3);
-            this.groupBox3.Location = new System.Drawing.Point(48, 422);
+            this.groupBox3.Location = new System.Drawing.Point(12, 422);
             this.groupBox3.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.groupBox3.Size = new System.Drawing.Size(283, 170);
+            this.groupBox3.Size = new System.Drawing.Size(630, 170);
             this.groupBox3.TabIndex = 27;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "操作区";
@@ -446,10 +452,10 @@
             // hslButton5
             // 
             this.hslButton5.CustomerInformation = null;
-            this.hslButton5.Location = new System.Drawing.Point(338, 509);
+            this.hslButton5.Location = new System.Drawing.Point(315, 96);
             this.hslButton5.Margin = new System.Windows.Forms.Padding(4);
             this.hslButton5.Name = "hslButton5";
-            this.hslButton5.Size = new System.Drawing.Size(174, 83);
+            this.hslButton5.Size = new System.Drawing.Size(159, 38);
             this.hslButton5.TabIndex = 5;
             this.hslButton5.Text = "绘制流量曲线统计图";
             this.hslButton5.Click += new System.EventHandler(this.hslButton5_Click);
@@ -478,7 +484,6 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1197, 634);
-            this.Controls.Add(this.hslButton5);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);

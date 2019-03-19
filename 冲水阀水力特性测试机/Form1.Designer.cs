@@ -92,7 +92,7 @@
             this.hslButton2.Location = new System.Drawing.Point(156, 25);
             this.hslButton2.Margin = new System.Windows.Forms.Padding(4);
             this.hslButton2.Name = "hslButton2";
-            this.hslButton2.Size = new System.Drawing.Size(127, 51);
+            this.hslButton2.Size = new System.Drawing.Size(119, 51);
             this.hslButton2.TabIndex = 2;
             this.hslButton2.Text = "停止读取数据";
             this.hslButton2.Click += new System.EventHandler(this.hslButton2_Click);
@@ -100,10 +100,10 @@
             // hslButton3
             // 
             this.hslButton3.CustomerInformation = null;
-            this.hslButton3.Location = new System.Drawing.Point(14, 93);
+            this.hslButton3.Location = new System.Drawing.Point(309, 25);
             this.hslButton3.Margin = new System.Windows.Forms.Padding(4);
             this.hslButton3.Name = "hslButton3";
-            this.hslButton3.Size = new System.Drawing.Size(127, 54);
+            this.hslButton3.Size = new System.Drawing.Size(119, 51);
             this.hslButton3.TabIndex = 3;
             this.hslButton3.Text = "保存数据";
             this.hslButton3.Click += new System.EventHandler(this.hslButton3_Click);
@@ -118,10 +118,10 @@
             this.waterTemperature,
             this.pressureMax,
             this.waterHammerMax});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 566);
+            this.statusStrip1.Location = new System.Drawing.Point(0, 580);
             this.statusStrip1.Name = "statusStrip1";
             this.statusStrip1.Padding = new System.Windows.Forms.Padding(1, 0, 13, 0);
-            this.statusStrip1.Size = new System.Drawing.Size(1290, 25);
+            this.statusStrip1.Size = new System.Drawing.Size(1297, 25);
             this.statusStrip1.TabIndex = 4;
             this.statusStrip1.Text = "statusStrip1";
             // 
@@ -176,11 +176,17 @@
             // 
             // hslCurve1
             // 
+            this.hslCurve1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.hslCurve1.Location = new System.Drawing.Point(36, 15);
             this.hslCurve1.Margin = new System.Windows.Forms.Padding(4);
             this.hslCurve1.Name = "hslCurve1";
-            this.hslCurve1.Size = new System.Drawing.Size(795, 299);
+            this.hslCurve1.Size = new System.Drawing.Size(802, 424);
             this.hslCurve1.TabIndex = 5;
+            this.hslCurve1.ValueMaxLeft = 10F;
+            this.hslCurve1.ValueMaxRight = 10F;
+            this.hslCurve1.ValueSegment = 20;
             this.hslCurve1.Load += new System.EventHandler(this.hslCurve1_Load);
             // 
             // axgj
@@ -207,6 +213,8 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBox1.Controls.Add(this.hslBlower1);
             this.groupBox1.Controls.Add(this.hslSwitch1);
             this.groupBox1.Controls.Add(this.bpqreturn);
@@ -217,11 +225,11 @@
             this.groupBox1.Controls.Add(this.sbyali);
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Controls.Add(this.open);
-            this.groupBox1.Location = new System.Drawing.Point(839, 47);
+            this.groupBox1.Location = new System.Drawing.Point(849, 13);
             this.groupBox1.Margin = new System.Windows.Forms.Padding(4);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Padding = new System.Windows.Forms.Padding(4);
-            this.groupBox1.Size = new System.Drawing.Size(435, 478);
+            this.groupBox1.Size = new System.Drawing.Size(435, 364);
             this.groupBox1.TabIndex = 9;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "水泵控制";
@@ -236,7 +244,7 @@
             this.hslBlower1.Color6 = System.Drawing.Color.FromArgb(((int)(((byte)(108)))), ((int)(((byte)(114)))), ((int)(((byte)(121)))));
             this.hslBlower1.Color7 = System.Drawing.Color.FromArgb(((int)(((byte)(158)))), ((int)(((byte)(165)))), ((int)(((byte)(173)))));
             this.hslBlower1.Color8 = System.Drawing.Color.FromArgb(((int)(((byte)(176)))), ((int)(((byte)(182)))), ((int)(((byte)(189)))));
-            this.hslBlower1.Location = new System.Drawing.Point(134, 191);
+            this.hslBlower1.Location = new System.Drawing.Point(155, 177);
             this.hslBlower1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.hslBlower1.Name = "hslBlower1";
             this.hslBlower1.Size = new System.Drawing.Size(141, 157);
@@ -399,10 +407,10 @@
             // hslButton4
             // 
             this.hslButton4.CustomerInformation = null;
-            this.hslButton4.Location = new System.Drawing.Point(156, 93);
+            this.hslButton4.Location = new System.Drawing.Point(454, 25);
             this.hslButton4.Margin = new System.Windows.Forms.Padding(4);
             this.hslButton4.Name = "hslButton4";
-            this.hslButton4.Size = new System.Drawing.Size(127, 54);
+            this.hslButton4.Size = new System.Drawing.Size(119, 51);
             this.hslButton4.TabIndex = 17;
             this.hslButton4.Text = "误差修正";
             this.hslButton4.Click += new System.EventHandler(this.hslButton4_Click_2);
@@ -430,6 +438,7 @@
             // 
             // groupBox2
             // 
+            this.groupBox2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBox2.Controls.Add(this.qdfstatus);
             this.groupBox2.Controls.Add(this.workName);
             this.groupBox2.Controls.Add(this.label4);
@@ -438,9 +447,9 @@
             this.groupBox2.Controls.Add(this.numericUpDown1);
             this.groupBox2.Controls.Add(this.axgj);
             this.groupBox2.Controls.Add(this.label3);
-            this.groupBox2.Location = new System.Drawing.Point(396, 328);
+            this.groupBox2.Location = new System.Drawing.Point(849, 386);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(418, 197);
+            this.groupBox2.Size = new System.Drawing.Size(435, 191);
             this.groupBox2.TabIndex = 20;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "工件属性";
@@ -457,13 +466,15 @@
             // 
             // groupBox3
             // 
+            this.groupBox3.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBox3.Controls.Add(this.hslButton2);
             this.groupBox3.Controls.Add(this.hslButton1);
             this.groupBox3.Controls.Add(this.hslButton4);
             this.groupBox3.Controls.Add(this.hslButton3);
-            this.groupBox3.Location = new System.Drawing.Point(74, 328);
+            this.groupBox3.Location = new System.Drawing.Point(36, 462);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(301, 197);
+            this.groupBox3.Size = new System.Drawing.Size(611, 101);
             this.groupBox3.TabIndex = 21;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "操作区";
@@ -472,7 +483,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1290, 591);
+            this.ClientSize = new System.Drawing.Size(1297, 605);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
