@@ -286,27 +286,32 @@ namespace 冲水阀水力特性测试机
     
 
         private void hslButton1_Click(object sender, EventArgs e)
-        {           
-      
-            Bitmap map = new Bitmap(hslCurveHistory1.Width, hslCurveHistory1.Height);
-            hslCurveHistory1.DrawToBitmap(map, hslCurveHistory1.ClientRectangle);
-            map.Save("D:/EN 6L.bmp");
-            //Graphics graph = hslCurveHistory1.CreateGraphics();
-            //Size s = hslCurveHistory1.Size;
-            //Bitmap memoryImage = new Bitmap(s.Width, s.Height, graph);
-            //Graphics memoryGraphics = Graphics.FromImage(memoryImage);
-            //Point screen = hslCurveHistory1.PointToScreen(hslCurveHistory1.Location);
-            //graph.CompositingQuality = CompositingQuality.HighQuality;//质量设为最高
-            //memoryGraphics.CopyFromScreen(screen.X, screen.Y, 0, 0, s);
-            //memoryImage.Save("D:/EN 6L.bmp");
+        {
+
+            SaveFileDialog fileDialog = new SaveFileDialog();
+            fileDialog.Filter = "图片|*.png";
+            fileDialog.InitialDirectory = Application.StartupPath;
+            if (fileDialog.ShowDialog() == DialogResult.OK)
+            {
+                hslCurveHistory1.SaveToBitmap().Save(fileDialog.FileName);
+                MessageBox.Show("保存成功!");
+            }
+            fileDialog.Dispose();
+
 
         }
 
         private void hslButton2_Click(object sender, EventArgs e)
-        {        
-            Bitmap map = new Bitmap(hslCurveHistory2.Width, hslCurveHistory2.Height);
-            hslCurveHistory2.DrawToBitmap(map, hslCurveHistory2.ClientRectangle);
-            map.Save("D:/EN 9L.bmp");       
+        {
+            SaveFileDialog fileDialog = new SaveFileDialog();
+            fileDialog.Filter = "图片|*.png";
+            fileDialog.InitialDirectory = Application.StartupPath;
+            if (fileDialog.ShowDialog() == DialogResult.OK)
+            {
+                hslCurveHistory2.SaveToBitmap().Save(fileDialog.FileName);
+                MessageBox.Show("保存成功!");
+            }
+            fileDialog.Dispose();
         }
         float xAxis=7;
         private void hslButton3_Click(object sender, EventArgs e)
