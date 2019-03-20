@@ -213,23 +213,23 @@ namespace 冲水阀水力特性测试机
 
         private void hslButton3_Click(object sender, EventArgs e)
         {
-
-            FolderBrowserDialog dialog = new FolderBrowserDialog();
-            dialog.Description = "请选择文件路径";
-            DirectoryInfo theFolder;
-            string foldPath = null;
-            if (dialog.ShowDialog() == DialogResult.OK)
-            {
-                foldPath = dialog.SelectedPath;
-                theFolder = new DirectoryInfo(foldPath);
-                //MessageBox.Show(foldPath);
-            }
             if (workName.TextLength == 0)
             {
                 MessageBox.Show("工件名称不能为空", "警报！！", MessageBoxButtons.OK);
             }
             else
-            dataTableToCsvT(dt, foldPath +workName.Text +".csv");
+            {
+                SaveFileDialog fileDialog = new SaveFileDialog();
+                fileDialog.Filter = "文档|*.csv";
+                fileDialog.FileName = workName.Text + ".csv";
+                fileDialog.InitialDirectory = Application.StartupPath;
+                if (fileDialog.ShowDialog() == DialogResult.OK)
+                {
+                    dataTableToCsvT(dt, fileDialog.FileName);
+                    MessageBox.Show("保存成功!");
+                }
+                fileDialog.Dispose();
+            }
         }
         /// <summary>
         /// DataTable导出为CSV
@@ -434,15 +434,15 @@ namespace 冲水阀水力特性测试机
             //重置所有设置
             if (GetbitValue(diData, 0) == 1)
             {
-                startFlag = false;
-                pushFlag = false;
-                pushedFlag = false;
+                //startFlag = false;
+                //pushFlag = false;
+                //pushedFlag = false;
 
-                doData[0] = set_bit(doData[0], 1, false);
-                daq.InstantDo_Write(doData);
-                open.Text = "打开水泵";
+                //doData[0] = set_bit(doData[0], 1, false);
+                //daq.InstantDo_Write(doData);
+                //open.Text = "打开水泵";
 
-                systemInfo.Text += "警报！！变频器报警！！！";
+                //systemInfo.Text += "警报！！变频器报警！！！";
             }
 
         }
