@@ -15,11 +15,14 @@ namespace 冲水阀水力特性测试机
             dt = new DataTable();
         }
         bool startFlag = false;
+        bool pushFlag = false;
+        bool pushedFlag = false;
         private void hslButton1_Click(object sender, EventArgs e)
         {
-
+            dt.Clear();
+            //hslCurve1.RemoveCurve("A");
             startFlag = true;
-          
+            systemInfo.Text = "系统信息：";
             pushWork.Enabled = true;//是否执行System.Timers.Timer.Elapsed事件；
             
 
@@ -29,11 +32,17 @@ namespace 冲水阀水力特性测试机
             doData[0] = set_bit(doData[0], 3, true);
             daq.InstantDo_Write(doData);
             //System.Console.WriteLine("push:" + doData[0]);
+            for (; true;)
+            {
+                if (pushFlag) break;
+            }
             double t= 1000 * (double)numericUpDown1.Value;
             System.Threading.Thread.Sleep((int)t);//
             doData[0] = set_bit(doData[0], 3, false);
             daq.InstantDo_Write(doData);
-           // System.Console.WriteLine("push:" + doData[0]);
+            pushedFlag = true;
+            pushFlag = false;
+            // System.Console.WriteLine("push:" + doData[0]);
         }
         private delegate void myDelegate(double[] data);//声明委托   
         private delegate void alarmDelegate(byte[] data,byte diData);//声明委托   
@@ -130,10 +139,18 @@ namespace 冲水阀水力特性测试机
                             Math.Round(m_dataScaled[i], 2),
                             Math.Round(m_dataScaled[i + 1], 2),
                             Math.Round(m_dataScaled[i + 2], 2));
-                    
+                        if (Math.Round(m_dataScaled[i], 2) > 0.1)//当压力大于某个数值开始 计按下工件的延时
+                            pushFlag = true;
                     
                     if(maxPressure < Math.Round(m_dataScaled[i], 2)) { maxPressure = Math.Round(m_dataScaled[i], 2); }
                     if(maxHammer< Math.Round(m_dataScaled[i + 1], 2)) { maxHammer = Math.Round(m_dataScaled[i + 1], 2); }
+                    if(pushedFlag&& Math.Round(m_dataScaled[i], 2)<=0)//当压力小于等于某个数值，停止向缓冲区写数据
+                        {
+                            startFlag = false;
+                            pushFlag = false;
+                            pushedFlag = false;
+                            systemInfo.Text = "系统信息：测试已完成！！！请及时保存数据。";
+                        }
                     }
                     t = t.AddMilliseconds(1.0); 
                 }
@@ -171,6 +188,7 @@ namespace 冲水阀水力特性测试机
                 waterHammerMax.Text = "最大水冲击力：" + maxHammer;
                 pressureMax.Text = "最大压力：" + maxPressure;
             }
+
             bpqreturn.Text = Math.Round( m_dataScaled[m_dataScaled.Length - 1],2).ToString();
             waterHammer.Text = "水冲击力：" + Math.Round(data[data.Length - 1],2)+" N";
             waterPresuer.Text = "压力：" + Math.Round( data[data.Length - 2],2)+" Bar";
@@ -190,6 +208,7 @@ namespace 冲水阀水力特性测试机
         private void hslButton2_Click(object sender, EventArgs e)
         {
             startFlag = false;
+            pushedFlag = false;
         }
 
         private void hslButton3_Click(object sender, EventArgs e)
@@ -292,6 +311,9 @@ namespace 冲水阀水力特性测试机
         double maxPressure, maxHammer;
         private void Form1_Load(object sender, EventArgs e)
         {
+            pushedFlag = false;
+            startFlag = false;
+            pushFlag = false;
             maxHammer = -1;
             maxPressure = -1;
             c = new config();
@@ -412,7 +434,17 @@ namespace 冲水阀水力特性测试机
             //变频器报警
             //重置所有设置
             if (GetbitValue(diData, 0) == 1)
-                System.Console.WriteLine("alarm");
+            {
+                startFlag = false;
+                pushFlag = false;
+                pushedFlag = false;
+
+                doData[0] = set_bit(doData[0], 1, false);
+                daq.InstantDo_Write(doData);
+                open.Text = "打开水泵";
+
+                systemInfo.Text += "警报！！变频器报警！！！";
+            }
 
         }
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)

@@ -20,12 +20,13 @@ namespace 冲水阀水力特性测试机
         System.Timers.Timer t;
         static List<double> l;
         bool loadDataFlag = false;
-
+        bool pushedFlag = false;
         bool pushFlag = false;
         private void hslButton1_Click(object sender, EventArgs e)
         {
             loadDataFlag = true;
-           
+            
+            systemInfo.Text = "系统信息：";
             pushWork.Enabled = true;//是否执行System.Timers.Timer.Elapsed事件；
             //t.Enabled = true;//是否执行System.Timers.Timer.Elapsed事件；   
         }
@@ -43,6 +44,7 @@ namespace 冲水阀水力特性测试机
             doData[0] = set_bit(doData[0], 3, false);
             daq.InstantDo_Write(doData);
             // System.Console.WriteLine("push:" + doData[0]);
+            pushedFlag = true;
             pushFlag = false;
         }
         void theout(object source, System.Timers.ElapsedEventArgs e)
@@ -100,7 +102,17 @@ namespace 冲水阀水力特性测试机
                   (float) l[l.Count - 4]
                         }
                     );
+                Console.WriteLine("pushedFlag:" + pushedFlag);
+                if (l[l.Count - 1] < 0.1 && pushedFlag)
+                {
+                    loadDataFlag = false;
+                    pushFlag = false;
+                    pushedFlag = false;
+                    systemInfo.Text = "系统信息：测试已完成！！！请及时保存数据。";
+                    
+                }
             }
+            
         }
         DAQ_profile daq;
         private config c;
@@ -116,6 +128,7 @@ namespace 冲水阀水力特性测试机
         {
            
             maxFlow = -1;
+            pushedFlag = false;
             pushFlag = false;
             loadDataFlag = false;
             c = new config();
@@ -220,8 +233,18 @@ namespace 冲水阀水力特性测试机
 
             //变频器报警
             //重置所有设置
-            //if (GetbitValue(diData, 0) == 1)
-            //    System.Console.WriteLine("alarm");
+            if (GetbitValue(diData, 0) == 1) {
+                loadDataFlag = false;
+                pushFlag = false;
+                pushedFlag = false;
+
+                doData[0] = set_bit(doData[0], 1, false);
+                daq.InstantDo_Write(doData);
+                open.Text = "打开水泵";
+
+                systemInfo.Text += "警报！！变频器报警！！！";
+            }
+                
 
         }
         /// <summary>
@@ -288,6 +311,7 @@ namespace 冲水阀水力特性测试机
         private void hslButton3_Click(object sender, EventArgs e)
         {
             loadDataFlag = false;
+            pushedFlag = false;
         }
         private byte[] doData;
         private void hslButton4_Click(object sender, EventArgs e)
@@ -324,9 +348,7 @@ namespace 冲水阀水力特性测试机
         {
             doData[0] = set_bit(doData[0], 2, false);
             daq.InstantDo_Write(doData);
-            //bp.Enabled = false;
-            //dp.Enabled = true;
-            //bpqzt.Text = "变频器当前状态：变频";
+            
         }
 
         private void sbyali_ValueChanged(object sender, EventArgs e)
@@ -452,6 +474,13 @@ namespace 冲水阀水力特性测试机
 
         private void hslBlower1_Load(object sender, EventArgs e)
         {
+
+        }
+
+        private void hslButton6_Click(object sender, EventArgs e)
+        {
+            dt.Clear();
+            hslCurve1.RemoveAllCurve();
 
         }
     }
