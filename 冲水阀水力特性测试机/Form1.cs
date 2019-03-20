@@ -337,9 +337,7 @@ namespace 冲水阀水力特性测试机
             daq.InstantDo();
             doData = new byte[2] { 0x00,0x00};
             
-            axgj.Enabled = true;
-            tqgj.Enabled = false;
-           
+            
             bpqzt.Text = "变频器当前状态：变频";
             sbzt.Text = "水泵当前状态：";
             sbyali.Value = Properties.Settings.Default.水泵压力;
@@ -425,9 +423,10 @@ namespace 冲水阀水力特性测试机
             if (GetbitValue(data[0], 2) == 1)
             {
                 qdfstatus.Text = "气动阀当前状态：已按下...";
+                hslSwitch2.SwitchStatus = true;
             }else
             {
-               
+                hslSwitch2.SwitchStatus = false;
                 qdfstatus.Text = "气动阀当前状态：关闭";
             }
 
@@ -482,11 +481,7 @@ namespace 冲水阀水力特性测试机
 
         private void hslButton4_Click(object sender, EventArgs e)
         {
-            doData[0] = set_bit(doData[0], 3, true);
-            daq.InstantDo_Write(doData);
-            //System.Console.WriteLine(":" + doData[0]);
-            axgj.Enabled = false;
-            tqgj.Enabled = true;
+          
         }
 
         /// <summary>
@@ -506,11 +501,6 @@ namespace 冲水阀水力特性测试机
         
         private void hslButton5_Click(object sender, EventArgs e)
         {
-            doData[0] = set_bit(doData[0], 3, false);
-            daq.InstantDo_Write(doData);
-
-            axgj.Enabled = true;
-            tqgj.Enabled = false;
         }
 
         private void numericUpDown1_ValueChanged(object sender, EventArgs e)
@@ -622,6 +612,22 @@ namespace 冲水阀水力特性测试机
         {
 
           
+        }
+
+        private void hslSwitch2_OnSwitchChanged(object arg1, bool arg2)
+        {
+            if (arg2)
+            {
+                doData[0] = set_bit(doData[0], 3, true);
+                daq.InstantDo_Write(doData);
+
+            }
+            else
+            {
+                doData[0] = set_bit(doData[0], 3, false);
+                daq.InstantDo_Write(doData);
+
+            }
         }
 
         private void workName_TextChanged(object sender, EventArgs e)

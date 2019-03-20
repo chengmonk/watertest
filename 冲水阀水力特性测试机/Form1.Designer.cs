@@ -45,8 +45,6 @@
             this.instantDiCtrl1 = new Automation.BDaq.InstantDiCtrl(this.components);
             this.instantAiCtrl1 = new Automation.BDaq.InstantAiCtrl(this.components);
             this.hslCurve1 = new HslControls.HslCurve();
-            this.axgj = new HslControls.HslButton();
-            this.tqgj = new HslControls.HslButton();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.hslBlower1 = new HslControls.HslBlower();
             this.hslSwitch1 = new HslControls.HslSwitch();
@@ -68,6 +66,7 @@
             this.qdfstatus = new System.Windows.Forms.Label();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.systemInfo = new System.Windows.Forms.Label();
+            this.hslSwitch2 = new HslControls.HslSwitch();
             this.statusStrip1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.sbyali)).BeginInit();
@@ -192,28 +191,6 @@
             this.hslCurve1.ValueSegment = 20;
             this.hslCurve1.Load += new System.EventHandler(this.hslCurve1_Load);
             // 
-            // axgj
-            // 
-            this.axgj.CustomerInformation = null;
-            this.axgj.Location = new System.Drawing.Point(300, 25);
-            this.axgj.Margin = new System.Windows.Forms.Padding(4);
-            this.axgj.Name = "axgj";
-            this.axgj.Size = new System.Drawing.Size(109, 44);
-            this.axgj.TabIndex = 6;
-            this.axgj.Text = "按下工件";
-            this.axgj.Click += new System.EventHandler(this.hslButton4_Click);
-            // 
-            // tqgj
-            // 
-            this.tqgj.CustomerInformation = null;
-            this.tqgj.Location = new System.Drawing.Point(300, 96);
-            this.tqgj.Margin = new System.Windows.Forms.Padding(4);
-            this.tqgj.Name = "tqgj";
-            this.tqgj.Size = new System.Drawing.Size(109, 44);
-            this.tqgj.TabIndex = 7;
-            this.tqgj.Text = "抬起工件";
-            this.tqgj.Click += new System.EventHandler(this.hslButton5_Click);
-            // 
             // groupBox1
             // 
             this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -248,6 +225,7 @@
             this.hslBlower1.Color6 = System.Drawing.Color.FromArgb(((int)(((byte)(108)))), ((int)(((byte)(114)))), ((int)(((byte)(121)))));
             this.hslBlower1.Color7 = System.Drawing.Color.FromArgb(((int)(((byte)(158)))), ((int)(((byte)(165)))), ((int)(((byte)(173)))));
             this.hslBlower1.Color8 = System.Drawing.Color.FromArgb(((int)(((byte)(176)))), ((int)(((byte)(182)))), ((int)(((byte)(189)))));
+            this.hslBlower1.Cursor = System.Windows.Forms.Cursors.Hand;
             this.hslBlower1.Location = new System.Drawing.Point(155, 177);
             this.hslBlower1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.hslBlower1.Name = "hslBlower1";
@@ -443,13 +421,12 @@
             // groupBox2
             // 
             this.groupBox2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox2.Controls.Add(this.hslSwitch2);
             this.groupBox2.Controls.Add(this.qdfstatus);
             this.groupBox2.Controls.Add(this.workName);
             this.groupBox2.Controls.Add(this.label4);
             this.groupBox2.Controls.Add(this.label5);
-            this.groupBox2.Controls.Add(this.tqgj);
             this.groupBox2.Controls.Add(this.numericUpDown1);
-            this.groupBox2.Controls.Add(this.axgj);
             this.groupBox2.Controls.Add(this.label3);
             this.groupBox2.Font = new System.Drawing.Font("黑体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.groupBox2.Location = new System.Drawing.Point(849, 386);
@@ -496,6 +473,18 @@
             this.systemInfo.TabIndex = 22;
             this.systemInfo.Text = "系统信息：";
             // 
+            // hslSwitch2
+            // 
+            this.hslSwitch2.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.hslSwitch2.Location = new System.Drawing.Point(314, 28);
+            this.hslSwitch2.Name = "hslSwitch2";
+            this.hslSwitch2.Size = new System.Drawing.Size(101, 109);
+            this.hslSwitch2.SwitchForeground = System.Drawing.Color.FromArgb(((int)(((byte)(36)))), ((int)(((byte)(36)))), ((int)(((byte)(36)))));
+            this.hslSwitch2.SwitchStatusDescription = "抬起;按下";
+            this.hslSwitch2.TabIndex = 30;
+            this.hslSwitch2.Text = "工件控制器";
+            this.hslSwitch2.OnSwitchChanged += new System.Action<object, bool>(this.hslSwitch2_OnSwitchChanged);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
@@ -541,8 +530,6 @@
         private Automation.BDaq.InstantDiCtrl instantDiCtrl1;
         private Automation.BDaq.InstantAiCtrl instantAiCtrl1;
         private HslControls.HslCurve hslCurve1;
-        private HslControls.HslButton axgj;
-        private HslControls.HslButton tqgj;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.NumericUpDown sbyali;
         private System.Windows.Forms.Label label1;
@@ -566,6 +553,7 @@
         private HslControls.HslSwitch hslSwitch1;
         private HslControls.HslBlower hslBlower1;
         private System.Windows.Forms.Label systemInfo;
+        private HslControls.HslSwitch hslSwitch2;
     }
 }
 

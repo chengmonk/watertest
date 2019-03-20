@@ -55,9 +55,8 @@
             this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
             this.label4 = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.hslSwitch2 = new HslControls.HslSwitch();
             this.qdfstatus = new System.Windows.Forms.Label();
-            this.tqgj = new HslControls.HslButton();
-            this.axgj = new HslControls.HslButton();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.hslButton5 = new HslControls.HslButton();
             this.hslButton2 = new HslControls.HslButton();
@@ -169,6 +168,7 @@
             this.hslBlower1.Color6 = System.Drawing.Color.FromArgb(((int)(((byte)(108)))), ((int)(((byte)(114)))), ((int)(((byte)(121)))));
             this.hslBlower1.Color7 = System.Drawing.Color.FromArgb(((int)(((byte)(158)))), ((int)(((byte)(165)))), ((int)(((byte)(173)))));
             this.hslBlower1.Color8 = System.Drawing.Color.FromArgb(((int)(((byte)(176)))), ((int)(((byte)(182)))), ((int)(((byte)(189)))));
+            this.hslBlower1.Cursor = System.Windows.Forms.Cursors.Hand;
             this.hslBlower1.Location = new System.Drawing.Point(145, 191);
             this.hslBlower1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.hslBlower1.Name = "hslBlower1";
@@ -341,11 +341,10 @@
             // 
             this.groupBox2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox2.Controls.Add(this.hslSwitch2);
             this.groupBox2.Controls.Add(this.qdfstatus);
             this.groupBox2.Controls.Add(this.label4);
-            this.groupBox2.Controls.Add(this.tqgj);
             this.groupBox2.Controls.Add(this.workName);
-            this.groupBox2.Controls.Add(this.axgj);
             this.groupBox2.Controls.Add(this.numericUpDown1);
             this.groupBox2.Controls.Add(this.label5);
             this.groupBox2.Controls.Add(this.label3);
@@ -359,6 +358,18 @@
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "工件属性";
             // 
+            // hslSwitch2
+            // 
+            this.hslSwitch2.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.hslSwitch2.Location = new System.Drawing.Point(315, 37);
+            this.hslSwitch2.Name = "hslSwitch2";
+            this.hslSwitch2.Size = new System.Drawing.Size(101, 109);
+            this.hslSwitch2.SwitchForeground = System.Drawing.Color.FromArgb(((int)(((byte)(36)))), ((int)(((byte)(36)))), ((int)(((byte)(36)))));
+            this.hslSwitch2.SwitchStatusDescription = "抬起;按下";
+            this.hslSwitch2.TabIndex = 29;
+            this.hslSwitch2.Text = "工件控制器";
+            this.hslSwitch2.OnSwitchChanged += new System.Action<object, bool>(this.hslSwitch2_OnSwitchChanged);
+            // 
             // qdfstatus
             // 
             this.qdfstatus.AutoSize = true;
@@ -368,28 +379,6 @@
             this.qdfstatus.Size = new System.Drawing.Size(135, 15);
             this.qdfstatus.TabIndex = 25;
             this.qdfstatus.Text = "气动阀当前状态：";
-            // 
-            // tqgj
-            // 
-            this.tqgj.CustomerInformation = null;
-            this.tqgj.Location = new System.Drawing.Point(307, 100);
-            this.tqgj.Margin = new System.Windows.Forms.Padding(4);
-            this.tqgj.Name = "tqgj";
-            this.tqgj.Size = new System.Drawing.Size(109, 44);
-            this.tqgj.TabIndex = 12;
-            this.tqgj.Text = "抬起工件";
-            this.tqgj.Click += new System.EventHandler(this.tqgj_Click);
-            // 
-            // axgj
-            // 
-            this.axgj.CustomerInformation = null;
-            this.axgj.Location = new System.Drawing.Point(307, 32);
-            this.axgj.Margin = new System.Windows.Forms.Padding(4);
-            this.axgj.Name = "axgj";
-            this.axgj.Size = new System.Drawing.Size(109, 44);
-            this.axgj.TabIndex = 11;
-            this.axgj.Text = "按下工件";
-            this.axgj.Click += new System.EventHandler(this.axgj_Click);
             // 
             // groupBox3
             // 
@@ -547,8 +536,6 @@
         private System.Windows.Forms.NumericUpDown sbyali;
         private System.Windows.Forms.Label label1;
         private HslControls.HslButton open;
-        private HslControls.HslButton tqgj;
-        private HslControls.HslButton axgj;
         private System.Windows.Forms.TextBox workName;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label3;
@@ -564,5 +551,6 @@
         private HslControls.HslSwitch hslSwitch1;
         private System.Windows.Forms.ToolStripStatusLabel maxWaterFlow;
         private System.Windows.Forms.Label systemInfo;
+        private HslControls.HslSwitch hslSwitch2;
     }
 }
