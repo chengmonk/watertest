@@ -82,7 +82,7 @@
             this.statusStrip1.Location = new System.Drawing.Point(0, 612);
             this.statusStrip1.Name = "statusStrip1";
             this.statusStrip1.Padding = new System.Windows.Forms.Padding(1, 0, 13, 0);
-            this.statusStrip1.Size = new System.Drawing.Size(1197, 22);
+            this.statusStrip1.Size = new System.Drawing.Size(1092, 22);
             this.statusStrip1.TabIndex = 1;
             this.statusStrip1.Text = "statusStrip1";
             // 
@@ -135,11 +135,11 @@
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Controls.Add(this.open);
             this.groupBox1.Font = new System.Drawing.Font("黑体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.groupBox1.Location = new System.Drawing.Point(743, 13);
+            this.groupBox1.Location = new System.Drawing.Point(672, 13);
             this.groupBox1.Margin = new System.Windows.Forms.Padding(4);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Padding = new System.Windows.Forms.Padding(4);
-            this.groupBox1.Size = new System.Drawing.Size(441, 369);
+            this.groupBox1.Size = new System.Drawing.Size(407, 403);
             this.groupBox1.TabIndex = 10;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "水泵控制";
@@ -147,7 +147,7 @@
             // hslSwitch1
             // 
             this.hslSwitch1.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.hslSwitch1.Location = new System.Drawing.Point(287, 25);
+            this.hslSwitch1.Location = new System.Drawing.Point(268, 20);
             this.hslSwitch1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.hslSwitch1.Name = "hslSwitch1";
             this.hslSwitch1.Size = new System.Drawing.Size(128, 146);
@@ -348,11 +348,11 @@
             this.groupBox2.Controls.Add(this.label5);
             this.groupBox2.Controls.Add(this.label3);
             this.groupBox2.Font = new System.Drawing.Font("黑体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.groupBox2.Location = new System.Drawing.Point(742, 410);
+            this.groupBox2.Location = new System.Drawing.Point(672, 422);
             this.groupBox2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.groupBox2.Size = new System.Drawing.Size(436, 182);
+            this.groupBox2.Size = new System.Drawing.Size(408, 182);
             this.groupBox2.TabIndex = 25;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "工件属性";
@@ -360,7 +360,7 @@
             // hslSwitch2
             // 
             this.hslSwitch2.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.hslSwitch2.Location = new System.Drawing.Point(315, 37);
+            this.hslSwitch2.Location = new System.Drawing.Point(296, 35);
             this.hslSwitch2.Name = "hslSwitch2";
             this.hslSwitch2.Size = new System.Drawing.Size(101, 109);
             this.hslSwitch2.SwitchForeground = System.Drawing.Color.FromArgb(((int)(((byte)(36)))), ((int)(((byte)(36)))), ((int)(((byte)(36)))));
@@ -454,7 +454,7 @@
             this.hslCurve1.Location = new System.Drawing.Point(12, 4);
             this.hslCurve1.Margin = new System.Windows.Forms.Padding(4);
             this.hslCurve1.Name = "hslCurve1";
-            this.hslCurve1.Size = new System.Drawing.Size(723, 412);
+            this.hslCurve1.Size = new System.Drawing.Size(652, 412);
             this.hslCurve1.TabIndex = 2;
             this.hslCurve1.ValueMaxLeft = 10F;
             this.hslCurve1.ValueMaxRight = 10F;
@@ -475,7 +475,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1197, 634);
+            this.ClientSize = new System.Drawing.Size(1092, 634);
             this.Controls.Add(this.systemInfo);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox2);
