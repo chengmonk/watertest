@@ -25,7 +25,7 @@ namespace 冲水阀水力特性测试机
         private void hslButton1_Click(object sender, EventArgs e)
         {
             loadDataFlag = true;
-            
+            dt.Clear();
             systemInfo.Text = "系统信息：";
             pushWork.Enabled = true;//是否执行System.Timers.Timer.Elapsed事件；
             //t.Enabled = true;//是否执行System.Timers.Timer.Elapsed事件；   
@@ -108,6 +108,8 @@ namespace 冲水阀水力特性测试机
                     loadDataFlag = false;
                     pushFlag = false;
                     pushedFlag = false;
+                    hslPlay1.Text = "自动运行";
+                    hslPlay1.Played = false;
                     systemInfo.Text = "系统信息：测试已完成！！！请及时保存数据。";
                     
                 }
@@ -492,6 +494,25 @@ namespace 冲水阀水力特性测试机
                 doData[0] = set_bit(doData[0], 3, false);
                 daq.InstantDo_Write(doData);
                 
+            }
+        }
+
+        private void hslPlay1_OnPlayChanged(object arg1, bool arg2)
+        {
+            if (arg2)
+            {
+                pushedFlag = false;
+                pushFlag = false;
+                loadDataFlag = true;
+                hslPlay1.Text = "停止";
+                systemInfo.Text = "系统信息：";
+                pushWork.Enabled = true;//是否执行System.Timers.Timer.Elapsed事件；
+            }
+            else
+            {
+                loadDataFlag = false;
+                pushedFlag = false;
+                hslPlay1.Text = "自动运行";
             }
         }
     }

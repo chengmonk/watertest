@@ -148,8 +148,9 @@ namespace 冲水阀水力特性测试机
                         {
                             startFlag = false;
                             pushFlag = false;
-                            pushedFlag = false;
-                            systemInfo.Text = "系统信息：测试已完成！！！请及时保存数据。";
+                            pushedFlag = false;                           
+                            exit = true;
+                            
                         }
                     }
                     t = t.AddMilliseconds(1.0); 
@@ -167,10 +168,17 @@ namespace 冲水阀水力特性测试机
             }
             catch (System.Exception) { HandleError(err); }
         }
+        bool exit = false;
         public void setText(double[] data)
         {
             //textBox1.Text = waveformAiCtrl1.Features.ValueRanges.SetValue();
             //textBox1.Text += data.Length;
+            if (exit)
+            {
+                systemInfo.Text = "系统信息：测试已完成！！！请及时保存数据。";
+                hslPlay1.Text = "自动运行";
+                hslPlay1.Played = false;
+            }
             if (startFlag)
             {
                 for (int i = 0; i < data.Length; i += 2)
@@ -187,6 +195,7 @@ namespace 冲水阀水力特性测试机
                 }
                 waterHammerMax.Text = "最大水冲击力：" + maxHammer;
                 pressureMax.Text = "最大压力：" + maxPressure;
+               
             }
 
             bpqreturn.Text = Math.Round( m_dataScaled[m_dataScaled.Length - 1],2).ToString();
@@ -627,6 +636,27 @@ namespace 冲水阀水力特性测试机
                 doData[0] = set_bit(doData[0], 3, false);
                 daq.InstantDo_Write(doData);
 
+            }
+        }
+
+        private void hslPlay1_OnPlayChanged(object arg1, bool arg2)
+        {
+            if (arg2)
+            {
+                exit = false;
+                pushedFlag = false;
+                pushFlag = false;
+                dt.Clear();
+                //hslCurve1.RemoveCurve("A");
+                startFlag = true;
+                systemInfo.Text = "系统信息：";
+                pushWork.Enabled = true;//是否执行System.Timers.Timer.Elapsed事件；
+
+            }
+            else
+            {
+                startFlag = false;
+                pushedFlag = false;
             }
         }
 
