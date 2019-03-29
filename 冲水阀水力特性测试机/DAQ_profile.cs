@@ -55,12 +55,12 @@ namespace 冲水阀水力特性测试机
         public void InstantDo(System.ComponentModel.IContainer components)
         {
             this.instantDoCtrl1 = new Automation.BDaq.InstantDoCtrl(components);
-            this.instantDoCtrl1.SelectedDevice = new DeviceInformation(deviceNumber);
+            this.instantDoCtrl1.SelectedDevice = new DeviceInformation(conf.deviceDescription);
         }
         public void InstantDo()
         {
             this.instantDoCtrl1 = new Automation.BDaq.InstantDoCtrl();
-            this.instantDoCtrl1.SelectedDevice = new DeviceInformation(deviceNumber);
+            this.instantDoCtrl1.SelectedDevice = new DeviceInformation(conf.deviceDescription);
         }
         public byte InstantDi_Read()
         {
@@ -87,7 +87,7 @@ namespace 冲水阀水力特性测试机
                 portData[i] = 0;
             }
             this.instantDiCtrl1 = new Automation.BDaq.InstantDiCtrl(components);
-            this.instantDiCtrl1.SelectedDevice = new DeviceInformation(deviceNumber);
+            this.instantDiCtrl1.SelectedDevice = new DeviceInformation(conf.deviceDescription);
         }
         public void InstantDi()
         {
@@ -96,18 +96,18 @@ namespace 冲水阀水力特性测试机
                 portData[i] = 0;
             }
             this.instantDiCtrl1 = new Automation.BDaq.InstantDiCtrl();
-            this.instantDiCtrl1.SelectedDevice = new DeviceInformation(deviceNumber);
+            this.instantDiCtrl1.SelectedDevice = new DeviceInformation(conf.deviceDescription);
         }
         public void EventCounter(System.ComponentModel.IContainer components)
         {
             this.m_eventCounterCtrl = new Automation.BDaq.EventCounterCtrl(components);
-            this.m_eventCounterCtrl.SelectedDevice = new DeviceInformation(deviceNumber);
+            this.m_eventCounterCtrl.SelectedDevice = new DeviceInformation(conf.deviceDescription);
         }
 
         public void EventCounter()
         {
             this.m_eventCounterCtrl = new Automation.BDaq.EventCounterCtrl();
-            this.m_eventCounterCtrl.SelectedDevice = new DeviceInformation(deviceNumber);
+            this.m_eventCounterCtrl.SelectedDevice = new DeviceInformation(conf.deviceDescription);
         }
 
         public void EventCount_Start()

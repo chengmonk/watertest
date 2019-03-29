@@ -41,7 +41,6 @@
             this.instantDoCtrl1 = new Automation.BDaq.InstantDoCtrl(this.components);
             this.m_instantAoCtrl = new Automation.BDaq.InstantAoCtrl(this.components);
             this.instantDiCtrl1 = new Automation.BDaq.InstantDiCtrl(this.components);
-            this.instantAiCtrl1 = new Automation.BDaq.InstantAiCtrl(this.components);
             this.hslCurve1 = new HslControls.HslCurve();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.hslBlower1 = new HslControls.HslBlower();
@@ -66,6 +65,7 @@
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.hslPlay1 = new HslControls.HslPlay();
             this.systemInfo = new System.Windows.Forms.Label();
+            this.instantAiCtrl1 = new Automation.BDaq.InstantAiCtrl(this.components);
             this.statusStrip1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.sbyali)).BeginInit();
@@ -78,7 +78,7 @@
             // 
             this.hslButton3.CustomerInformation = null;
             this.hslButton3.Location = new System.Drawing.Point(240, 25);
-            this.hslButton3.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.hslButton3.Margin = new System.Windows.Forms.Padding(4);
             this.hslButton3.Name = "hslButton3";
             this.hslButton3.Size = new System.Drawing.Size(119, 51);
             this.hslButton3.TabIndex = 3;
@@ -148,10 +148,6 @@
             // 
             this.instantDiCtrl1._StateStream = ((Automation.BDaq.DeviceStateStreamer)(resources.GetObject("instantDiCtrl1._StateStream")));
             // 
-            // instantAiCtrl1
-            // 
-            this.instantAiCtrl1._StateStream = ((Automation.BDaq.DeviceStateStreamer)(resources.GetObject("instantAiCtrl1._StateStream")));
-            // 
             // hslCurve1
             // 
             this.hslCurve1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -159,7 +155,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.hslCurve1.Font = new System.Drawing.Font("黑体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.hslCurve1.Location = new System.Drawing.Point(36, 15);
-            this.hslCurve1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.hslCurve1.Margin = new System.Windows.Forms.Padding(4);
             this.hslCurve1.Name = "hslCurve1";
             this.hslCurve1.Size = new System.Drawing.Size(813, 384);
             this.hslCurve1.TabIndex = 5;
@@ -184,9 +180,9 @@
             this.groupBox1.Controls.Add(this.open);
             this.groupBox1.Font = new System.Drawing.Font("黑体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.groupBox1.Location = new System.Drawing.Point(857, 12);
-            this.groupBox1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.groupBox1.Margin = new System.Windows.Forms.Padding(4);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.groupBox1.Padding = new System.Windows.Forms.Padding(4);
             this.groupBox1.Size = new System.Drawing.Size(435, 408);
             this.groupBox1.TabIndex = 9;
             this.groupBox1.TabStop = false;
@@ -283,7 +279,7 @@
             0,
             65536});
             this.sbyali.Location = new System.Drawing.Point(87, 76);
-            this.sbyali.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.sbyali.Margin = new System.Windows.Forms.Padding(4);
             this.sbyali.Maximum = new decimal(new int[] {
             10,
             0,
@@ -312,7 +308,7 @@
             // 
             this.open.CustomerInformation = null;
             this.open.Location = new System.Drawing.Point(8, 25);
-            this.open.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.open.Margin = new System.Windows.Forms.Padding(4);
             this.open.Name = "open";
             this.open.Size = new System.Drawing.Size(197, 44);
             this.open.TabIndex = 10;
@@ -338,7 +334,7 @@
             0,
             65536});
             this.numericUpDown1.Location = new System.Drawing.Point(140, 28);
-            this.numericUpDown1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.numericUpDown1.Margin = new System.Windows.Forms.Padding(4);
             this.numericUpDown1.Maximum = new decimal(new int[] {
             10,
             0,
@@ -367,7 +363,7 @@
             // 
             this.hslButton4.CustomerInformation = null;
             this.hslButton4.Location = new System.Drawing.Point(453, 25);
-            this.hslButton4.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.hslButton4.Margin = new System.Windows.Forms.Padding(4);
             this.hslButton4.Name = "hslButton4";
             this.hslButton4.Size = new System.Drawing.Size(119, 51);
             this.hslButton4.TabIndex = 17;
@@ -462,7 +458,7 @@
             this.hslPlay1.Cursor = System.Windows.Forms.Cursors.Hand;
             this.hslPlay1.ForeColor = System.Drawing.SystemColors.Highlight;
             this.hslPlay1.Location = new System.Drawing.Point(69, 10);
-            this.hslPlay1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.hslPlay1.Margin = new System.Windows.Forms.Padding(4);
             this.hslPlay1.Name = "hslPlay1";
             this.hslPlay1.Size = new System.Drawing.Size(105, 118);
             this.hslPlay1.TabIndex = 28;
@@ -479,6 +475,10 @@
             this.systemInfo.Size = new System.Drawing.Size(82, 15);
             this.systemInfo.TabIndex = 22;
             this.systemInfo.Text = "系统信息：";
+            // 
+            // instantAiCtrl1
+            // 
+            this.instantAiCtrl1._StateStream = ((Automation.BDaq.DeviceStateStreamer)(resources.GetObject("instantAiCtrl1._StateStream")));
             // 
             // Form1
             // 
@@ -521,7 +521,6 @@
         private Automation.BDaq.InstantDoCtrl instantDoCtrl1;
         private Automation.BDaq.InstantAoCtrl m_instantAoCtrl;
         private Automation.BDaq.InstantDiCtrl instantDiCtrl1;
-        private Automation.BDaq.InstantAiCtrl instantAiCtrl1;
         private HslControls.HslCurve hslCurve1;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.NumericUpDown sbyali;
@@ -548,6 +547,7 @@
         private System.Windows.Forms.Label systemInfo;
         private HslControls.HslSwitch hslSwitch2;
         private HslControls.HslPlay hslPlay1;
+        private Automation.BDaq.InstantAiCtrl instantAiCtrl1;
     }
 }
 

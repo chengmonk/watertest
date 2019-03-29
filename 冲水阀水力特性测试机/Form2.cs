@@ -136,14 +136,14 @@ namespace 冲水阀水力特性测试机
             c = new config();
             c.channelCount = 3;
             c.convertClkRate = 1000;
-            c.deviceDescription = "DemoDevice,BID#0";
+            c.deviceDescription = "PCI-1710HG,BID#0";
             c.profilePath = "D:/demo.xml";
             c.sectionCount = 0;//The 0 means setting 'streaming' mode.
             c.sectionLength = 1000;
             c.startChannel = 0;
 
             //初始化研华板卡的功能
-            daq = new DAQ_profile(0, c);
+            daq = new DAQ_profile(1, c);
             daq.InstantAo();
             daq.InstantDi();
             daq.InstantDo();
