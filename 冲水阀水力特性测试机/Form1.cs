@@ -649,6 +649,7 @@ namespace 冲水阀水力特性测试机
                 dt.Clear();
                 //hslCurve1.RemoveCurve("A");
                 startFlag = true;
+                hslPlay1.Text = "停止";
                 systemInfo.Text = "系统信息：";
                 pushWork.Enabled = true;//是否执行System.Timers.Timer.Elapsed事件；
 
@@ -657,6 +658,7 @@ namespace 冲水阀水力特性测试机
             {
                 startFlag = false;
                 pushedFlag = false;
+                hslPlay1.Text = "自动运行";
             }
         }
 
