@@ -465,7 +465,7 @@
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:Setup"
         "ProductCode" = "8:{1B4FB289-8D16-4406-82A7-50FD3241EC14}"
-        "PackageCode" = "8:{719F2235-171D-4A98-80E5-885D3D7D8D63}"
+        "PackageCode" = "8:{6E613627-D053-4CEF-A484-C3DD22FAB9DA}"
         "UpgradeCode" = "8:{C4CA1D5A-EE3C-4EF4-8CDC-516BF6B727F6}"
         "AspNetVersion" = "8:2.0.50727.0"
         "RestartWWWService" = "11:FALSE"
@@ -587,7 +587,7 @@
         {
             "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_8CD5EED99E8A4970B71D96C8E2B7C951"
             {
-            "Name" = "8:Shortcut to 主输出 from 冲水阀水力特性测试机 (Active)"
+            "Name" = "8:冲水阀水力特性测试机"
             "Arguments" = "8:"
             "Description" = "8:"
             "ShowCmd" = "3:1"
