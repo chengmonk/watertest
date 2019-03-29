@@ -56,9 +56,12 @@ namespace 冲水阀水力特性测试机
             //通道3  变频器返回值
             //通道4  流量
             double[] data = daq.InstantAi_Read(2, 3);
+            data[2] = data[1] + Convert.ToDouble(Properties.Settings.Default.m流量);
+            data[0] += Convert.ToDouble(Properties.Settings.Default.m温度);
             if (loadDataFlag)
             {
-                l.Add(data[1]);
+                l.Add(data[2]);
+
                 //连续采样N个数据，去掉一个最大值和一个最小值然后计算N - 2个数据的算术平均值N值的选取：3~14
                 if (l.Count > 8)
                 {
@@ -137,7 +140,7 @@ namespace 冲水阀水力特性测试机
             c.channelCount = 3;
             c.convertClkRate = 1000;
             c.deviceDescription = "PCI-1710HG,BID#0";
-            c.profilePath = "D:/demo.xml";
+            //c.profilePath = "D:/demo.xml";
             c.sectionCount = 0;//The 0 means setting 'streaming' mode.
             c.sectionLength = 1000;
             c.startChannel = 0;

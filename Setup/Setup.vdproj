@@ -172,6 +172,14 @@
             "PrerequisitesLocation" = "2:1"
             "Url" = "8:"
             "ComponentsUrl" = "8:"
+                "Items"
+                {
+                    "{EDC2488A-8267-493A-A98E-7D9C3B36CDF3}:.NETFramework,Version=v4.6.1"
+                    {
+                    "Name" = "8:Microsoft .NET Framework 4.6.1 (x86 and x64)"
+                    "ProductCode" = "8:.NETFramework,Version=v4.6.1"
+                    }
+                }
             }
         }
     }
@@ -362,7 +370,7 @@
             "SourcePath" = "8:..\\..\\..\\watercube.ico"
             "TargetName" = "8:watercube.ico"
             "Tag" = "8:"
-            "Folder" = "8:_89A64F4C927645E0B15FCBC1FABA6E4D"
+            "Folder" = "8:_86D9E9FAA3D34934926E0BE2F1782A9B"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
@@ -465,7 +473,7 @@
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:Setup"
         "ProductCode" = "8:{1B4FB289-8D16-4406-82A7-50FD3241EC14}"
-        "PackageCode" = "8:{6E613627-D053-4CEF-A484-C3DD22FAB9DA}"
+        "PackageCode" = "8:{74DE7F75-4697-4027-B1F7-FED688F20293}"
         "UpgradeCode" = "8:{C4CA1D5A-EE3C-4EF4-8CDC-516BF6B727F6}"
         "AspNetVersion" = "8:2.0.50727.0"
         "RestartWWWService" = "11:FALSE"

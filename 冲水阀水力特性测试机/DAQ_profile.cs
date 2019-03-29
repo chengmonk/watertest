@@ -142,14 +142,14 @@ namespace 冲水阀水力特性测试机
         public void InstantAo()
         {
             this.m_instantAoCtrl = new Automation.BDaq.InstantAoCtrl();
-            this.m_instantAoCtrl.SelectedDevice = new DeviceInformation(deviceNumber);
+            this.m_instantAoCtrl.SelectedDevice = new DeviceInformation(conf.deviceDescription);
            // this.m_instantAoCtrl._StateStream = ((Automation.BDaq.DeviceStateStreamer)(resources.GetObject("m_instantAoCtrl._StateStream")));
         }
 
         public void InstantAo(System.ComponentModel.IContainer components)
         {
             this.m_instantAoCtrl = new Automation.BDaq.InstantAoCtrl(components);
-            this.m_instantAoCtrl.SelectedDevice = new DeviceInformation(deviceNumber);
+            this.m_instantAoCtrl.SelectedDevice = new DeviceInformation(conf.deviceDescription);
             //this.m_instantAoCtrl._StateStream = ((Automation.BDaq.DeviceStateStreamer)(resources.GetObject("m_instantAoCtrl._StateStream")));
         }
 
@@ -273,7 +273,7 @@ namespace 冲水阀水力特性测试机
         {
             this.instantAiCtrl1 = new Automation.BDaq.InstantAiCtrl();
             //this.instantAiCtrl1._StateStream = ((Automation.BDaq.DeviceStateStreamer)(resources.GetObject("instantAiCtrl1._StateStream")));
-            this.instantAiCtrl1.SelectedDevice = new DeviceInformation(deviceNumber);
+            this.instantAiCtrl1.SelectedDevice = new DeviceInformation(conf.deviceDescription);
         }
         private void HandleError(ErrorCode err)
         {
@@ -298,7 +298,7 @@ namespace 冲水阀水力特性测试机
         {
             this.instantAiCtrl1 = new Automation.BDaq.InstantAiCtrl(components);
             //this.instantAiCtrl1._StateStream = ((Automation.BDaq.DeviceStateStreamer)(resources.GetObject("instantAiCtrl1._StateStream")));
-            instantAiCtrl1.SelectedDevice = new DeviceInformation(deviceNumber);
+            instantAiCtrl1.SelectedDevice = new DeviceInformation(conf.deviceDescription);
         }
         private static void ShowErrorMessage(Exception e)
         {
