@@ -152,7 +152,7 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="HslCommunication">
-      <Version>6.0.1</Version>
+      <Version>6.0.3</Version>
     </PackageReference>
     <PackageReference Include="HslControls">
       <Version>2.0.2</Version>

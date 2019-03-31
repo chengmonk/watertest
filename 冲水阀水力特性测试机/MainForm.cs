@@ -53,5 +53,20 @@ namespace 冲水阀水力特性测试机
             System.Threading.Thread.Sleep(200);
             Show();
         }
+ 
+        private void hslButton3_Click(object sender, EventArgs e)
+        {
+            COMconfig conf;
+            conf.botelv = "9600";
+            conf.zhanhao = "1";
+            conf.shujuwei = "8";
+            conf.tingzhiwei = "1";
+            conf.dataFromZero = true;
+            conf.stringReverse = false;
+            conf.COM_Name = "COM11";
+            conf.checkInfo = 2;
+            M_485Rtu mr = new M_485Rtu(conf);
+            mr.connect();
+        }
     }
 }
