@@ -8,17 +8,29 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace 冲水阀水力特性测试机
-{
+{   
+   /// <summary>
+   /// 用于初始化串口的各种参数
+   /// </summary>
+   /// 
    public struct COMconfig
     {
-        public string botelv;//波特率
-        public string zhanhao;//站号
-        public string shujuwei;//数据位个数
-        public string tingzhiwei;//停止位个数        
-        public bool dataFromZero;//数据位从零开始读
-        public bool stringReverse;//字符串反转
-        public string COM_Name;//串口名称
-        public int checkInfo;//奇偶校验: 0:无校验 1:奇校验 2:偶校验
+        //波特率
+        public string botelv;
+        //站号
+        public string zhanhao;
+        //数据位个数
+        public string shujuwei;
+        //停止位个数 
+        public string tingzhiwei; 
+        //数据位从零开始读      
+        public bool dataFromZero;
+        //字符串反转
+        public bool stringReverse;
+        //串口名称
+        public string COM_Name;
+        //奇偶校验: 0:无校验 1:奇校验 2:偶校验
+        public int checkInfo;
         
     }
     public struct readRtuDataCMD

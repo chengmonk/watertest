@@ -499,6 +499,7 @@ namespace 冲水阀水力特性测试机
         /// <param name="data"></param>
         /// <param name="index">要设置的位， 值从低到高为 1-8</param>
         /// <param name="flag">要设置的值 true / false</param>
+        /// 
         /// <returns></returns>
         byte set_bit(byte data, int index, bool flag)
         {
