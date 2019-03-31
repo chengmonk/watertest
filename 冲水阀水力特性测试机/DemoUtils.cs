@@ -7,8 +7,9 @@ using HslCommunication;
 using System.Windows.Forms;
 namespace 冲水阀水力特性测试机
 {
-    public class ModbusAscii
+    public class DemoUtils
     {
+       
         /// <summary>
         /// 统一的读取结果的数据解析，显示
         /// </summary>
@@ -90,5 +91,13 @@ namespace 冲水阀水力特性测试机
                 MessageBox.Show("Read Failed：" + ex.Message);
             }
         }
+
+        public static readonly string IpAddressInputWrong = "IpAddress input wrong";
+        public static readonly string PortInputWrong = "Port input wrong";
+        public static readonly string SlotInputWrong = "Slot input wrong";
+        public static readonly string BaudRateInputWrong = "Baud rate input wrong";
+        public static readonly string DataBitsInputWrong = "Data bit input wrong";
+        public static readonly string StopBitInputWrong = "Stop bit input wrong";
     }
+
 }
