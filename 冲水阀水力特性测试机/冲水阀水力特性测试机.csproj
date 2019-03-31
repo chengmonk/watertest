@@ -104,6 +104,9 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Settings.cs" />
+    <EmbeddedResource Include="Com.resx">
+      <DependentUpon>Com.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Curve.resx">
       <DependentUpon>Curve.cs</DependentUpon>
     </EmbeddedResource>

@@ -16,5 +16,10 @@ namespace 冲水阀水力特性测试机
         {
             InitializeComponent();
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

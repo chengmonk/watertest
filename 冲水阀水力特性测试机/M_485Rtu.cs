@@ -8,6 +8,9 @@ namespace 冲水阀水力特性测试机
 {
     class M_485Rtu
     {
+        M_485Rtu()
+        {
 
+        }
     }
 }
