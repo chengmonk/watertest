@@ -1,4 +1,5 @@
-﻿using HslCommunication.ModBus;
+﻿using HslCommunication;
+using HslCommunication.ModBus;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,6 +21,14 @@ namespace 冲水阀水力特性测试机
         public int checkInfo;//奇偶校验: 0:无校验 1:奇校验 2:偶校验
         
     }
+    public struct readRtuDataCMD
+    {
+        public string zijidizhi;//子机地址 1B
+        public string gongnengma;//功能码 1B
+        public string adress;//寄存器起始地址 2B
+        public string readNum;//读取数量 2B
+        public string CRC;// 2B
+    }
    public class M_485Rtu
     {
         private static ModbusRtu busRtuClient = null;
@@ -29,6 +38,29 @@ namespace 冲水阀水力特性测试机
             config = c;
         }
 
+        public short bytes2Dec(byte h,byte l)
+        {
+            short s = 0;   //一个16位整形变量，初值为 0000 0000 0000 0000            
+            s = (short)(s ^ h);  //将b1赋给s的低8位
+            s = (short)(s << 8);  //s的低8位移动到高8位
+            s = (short)(s ^ l); //在b2赋给s的低8位
+            return s;
+        }
+        //报文读取
+        public string ReadFrame(string cmd)
+        {
+            string info="";
+            OperateResult<byte[]> read = busRtuClient.ReadBase(HslCommunication.Serial.SoftCRC16.CRC16(HslCommunication.BasicFramework.SoftBasic.HexStringToBytes(cmd)));
+            if (read.IsSuccess)
+            {
+                info = "Result：" + HslCommunication.BasicFramework.SoftBasic.ByteToHexString(read.Content);
+            }
+            else
+            {
+                MessageBox.Show("Read Failed：" + read.ToMessageShowString());
+            }
+            return info;
+        }
         public void disConnect()
         {
             busRtuClient.Close();

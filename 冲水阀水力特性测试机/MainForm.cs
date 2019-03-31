@@ -53,7 +53,7 @@ namespace 冲水阀水力特性测试机
             System.Threading.Thread.Sleep(200);
             Show();
         }
- 
+        M_485Rtu mr;
         private void hslButton3_Click(object sender, EventArgs e)
         {
             COMconfig conf;
@@ -64,9 +64,25 @@ namespace 冲水阀水力特性测试机
             conf.dataFromZero = true;
             conf.stringReverse = false;
             conf.COM_Name = "COM11";
-            conf.checkInfo = 2;
-            M_485Rtu mr = new M_485Rtu(conf);
+            conf.checkInfo = 0;
+          mr = new M_485Rtu(conf);
             mr.connect();
+        }
+
+        private void hslButton4_Click(object sender, EventArgs e)
+        {
+            readRtuDataCMD cmd;
+            cmd.zijidizhi = "01";
+            cmd.gongnengma = "04";
+            cmd.adress = "0001";
+
+            cmd.readNum = "0001";
+            string cm = cmd.zijidizhi + cmd.gongnengma + cmd.adress + cmd.readNum;
+            label4.Text = cm;
+            //label3.Text= mr.ReadFrame(cm);
+            byte[] b = HslCommunication.BasicFramework.SoftBasic.HexStringToBytes(mr.ReadFrame(cm));
+            //label3.Text = "长度：" + b.Length;
+            label3.Text = "长度："+mr.bytes2Dec(b[3],b[4]);
         }
     }
 }
