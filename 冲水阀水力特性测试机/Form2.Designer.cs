@@ -34,6 +34,7 @@
             this.waterFlow = new System.Windows.Forms.ToolStripStatusLabel();
             this.waterTemperature = new System.Windows.Forms.ToolStripStatusLabel();
             this.maxWaterFlow = new System.Windows.Forms.ToolStripStatusLabel();
+            this.totalFlowShow = new System.Windows.Forms.ToolStripStatusLabel();
             this.instantDoCtrl1 = new Automation.BDaq.InstantDoCtrl(this.components);
             this.m_instantAoCtrl = new Automation.BDaq.InstantAoCtrl(this.components);
             this.instantDiCtrl1 = new Automation.BDaq.InstantDiCtrl(this.components);
@@ -55,6 +56,8 @@
             this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
             this.label4 = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.qmin = new System.Windows.Forms.NumericUpDown();
+            this.label6 = new System.Windows.Forms.Label();
             this.hslSwitch2 = new HslControls.HslSwitch();
             this.qdfstatus = new System.Windows.Forms.Label();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
@@ -69,6 +72,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.sbyali)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
             this.groupBox2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.qmin)).BeginInit();
             this.groupBox3.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -78,31 +82,38 @@
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.waterFlow,
             this.waterTemperature,
-            this.maxWaterFlow});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 609);
+            this.maxWaterFlow,
+            this.totalFlowShow});
+            this.statusStrip1.Location = new System.Drawing.Point(0, 612);
             this.statusStrip1.Name = "statusStrip1";
             this.statusStrip1.Padding = new System.Windows.Forms.Padding(1, 0, 13, 0);
-            this.statusStrip1.Size = new System.Drawing.Size(1092, 25);
+            this.statusStrip1.Size = new System.Drawing.Size(1092, 22);
             this.statusStrip1.TabIndex = 1;
             this.statusStrip1.Text = "statusStrip1";
             // 
             // waterFlow
             // 
             this.waterFlow.Name = "waterFlow";
-            this.waterFlow.Size = new System.Drawing.Size(69, 20);
+            this.waterFlow.Size = new System.Drawing.Size(56, 17);
             this.waterFlow.Text = "当前流量";
             // 
             // waterTemperature
             // 
             this.waterTemperature.Name = "waterTemperature";
-            this.waterTemperature.Size = new System.Drawing.Size(39, 20);
+            this.waterTemperature.Size = new System.Drawing.Size(32, 17);
             this.waterTemperature.Text = "温度";
             // 
             // maxWaterFlow
             // 
             this.maxWaterFlow.Name = "maxWaterFlow";
-            this.maxWaterFlow.Size = new System.Drawing.Size(69, 20);
+            this.maxWaterFlow.Size = new System.Drawing.Size(56, 17);
             this.maxWaterFlow.Text = "最大流量";
+            // 
+            // totalFlowShow
+            // 
+            this.totalFlowShow.Name = "totalFlowShow";
+            this.totalFlowShow.Size = new System.Drawing.Size(56, 17);
+            this.totalFlowShow.Text = "累计流量";
             // 
             // instantDoCtrl1
             // 
@@ -139,7 +150,7 @@
             this.groupBox1.Margin = new System.Windows.Forms.Padding(4);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Padding = new System.Windows.Forms.Padding(4);
-            this.groupBox1.Size = new System.Drawing.Size(407, 403);
+            this.groupBox1.Size = new System.Drawing.Size(407, 364);
             this.groupBox1.TabIndex = 10;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "水泵控制";
@@ -182,7 +193,7 @@
             this.bpqreturn.AutoSize = true;
             this.bpqreturn.Location = new System.Drawing.Point(141, 119);
             this.bpqreturn.Name = "bpqreturn";
-            this.bpqreturn.Size = new System.Drawing.Size(31, 15);
+            this.bpqreturn.Size = new System.Drawing.Size(23, 12);
             this.bpqreturn.TabIndex = 18;
             this.bpqreturn.Text = "0.0";
             // 
@@ -192,7 +203,7 @@
             this.sbzt.Location = new System.Drawing.Point(8, 191);
             this.sbzt.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.sbzt.Name = "sbzt";
-            this.sbzt.Size = new System.Drawing.Size(119, 15);
+            this.sbzt.Size = new System.Drawing.Size(89, 12);
             this.sbzt.TabIndex = 16;
             this.sbzt.Text = "水泵当前状态：";
             // 
@@ -202,7 +213,7 @@
             this.bpqzt.Location = new System.Drawing.Point(8, 156);
             this.bpqzt.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.bpqzt.Name = "bpqzt";
-            this.bpqzt.Size = new System.Drawing.Size(135, 15);
+            this.bpqzt.Size = new System.Drawing.Size(101, 12);
             this.bpqzt.TabIndex = 15;
             this.bpqzt.Text = "变频器当前状态：";
             // 
@@ -212,7 +223,7 @@
             this.bpqfh.Location = new System.Drawing.Point(8, 119);
             this.bpqfh.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.bpqfh.Name = "bpqfh";
-            this.bpqfh.Size = new System.Drawing.Size(135, 15);
+            this.bpqfh.Size = new System.Drawing.Size(101, 12);
             this.bpqfh.TabIndex = 14;
             this.bpqfh.Text = "变频器返回数值：";
             // 
@@ -222,7 +233,7 @@
             this.label2.Location = new System.Drawing.Point(213, 84);
             this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(31, 15);
+            this.label2.Size = new System.Drawing.Size(23, 12);
             this.label2.TabIndex = 13;
             this.label2.Text = "Bar";
             // 
@@ -243,7 +254,7 @@
             0});
             this.sbyali.Name = "sbyali";
             this.sbyali.ReadOnly = true;
-            this.sbyali.Size = new System.Drawing.Size(119, 25);
+            this.sbyali.Size = new System.Drawing.Size(119, 21);
             this.sbyali.TabIndex = 12;
             this.sbyali.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.sbyali.ThousandsSeparator = true;
@@ -256,7 +267,7 @@
             this.label1.Location = new System.Drawing.Point(8, 84);
             this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(87, 15);
+            this.label1.Size = new System.Drawing.Size(65, 12);
             this.label1.TabIndex = 11;
             this.label1.Text = "水泵压力：";
             // 
@@ -288,7 +299,7 @@
             this.label5.Location = new System.Drawing.Point(8, 79);
             this.label5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(87, 15);
+            this.label5.Size = new System.Drawing.Size(65, 12);
             this.label5.TabIndex = 23;
             this.label5.Text = "工件名称：";
             // 
@@ -298,7 +309,7 @@
             this.label3.Location = new System.Drawing.Point(251, 34);
             this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(23, 15);
+            this.label3.Size = new System.Drawing.Size(17, 12);
             this.label3.TabIndex = 22;
             this.label3.Text = "秒";
             // 
@@ -319,7 +330,7 @@
             0});
             this.numericUpDown1.Name = "numericUpDown1";
             this.numericUpDown1.ReadOnly = true;
-            this.numericUpDown1.Size = new System.Drawing.Size(119, 25);
+            this.numericUpDown1.Size = new System.Drawing.Size(119, 21);
             this.numericUpDown1.TabIndex = 21;
             this.numericUpDown1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.numericUpDown1.ThousandsSeparator = true;
@@ -332,7 +343,7 @@
             this.label4.Location = new System.Drawing.Point(8, 34);
             this.label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(119, 15);
+            this.label4.Size = new System.Drawing.Size(89, 12);
             this.label4.TabIndex = 20;
             this.label4.Text = "工件保持时间：";
             // 
@@ -340,6 +351,8 @@
             // 
             this.groupBox2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox2.Controls.Add(this.qmin);
+            this.groupBox2.Controls.Add(this.label6);
             this.groupBox2.Controls.Add(this.hslSwitch2);
             this.groupBox2.Controls.Add(this.qdfstatus);
             this.groupBox2.Controls.Add(this.label4);
@@ -348,14 +361,49 @@
             this.groupBox2.Controls.Add(this.label5);
             this.groupBox2.Controls.Add(this.label3);
             this.groupBox2.Font = new System.Drawing.Font("黑体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.groupBox2.Location = new System.Drawing.Point(672, 422);
+            this.groupBox2.Location = new System.Drawing.Point(672, 383);
             this.groupBox2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.groupBox2.Size = new System.Drawing.Size(408, 182);
+            this.groupBox2.Size = new System.Drawing.Size(408, 227);
             this.groupBox2.TabIndex = 25;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "工件属性";
+            // 
+            // qmin
+            // 
+            this.qmin.DecimalPlaces = 1;
+            this.qmin.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
+            this.qmin.Location = new System.Drawing.Point(215, 188);
+            this.qmin.Margin = new System.Windows.Forms.Padding(4);
+            this.qmin.Minimum = new decimal(new int[] {
+            100,
+            0,
+            0,
+            -2147483648});
+            this.qmin.Name = "qmin";
+            this.qmin.ReadOnly = true;
+            this.qmin.Size = new System.Drawing.Size(119, 21);
+            this.qmin.TabIndex = 32;
+            this.qmin.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.qmin.ThousandsSeparator = true;
+            this.qmin.UpDownAlign = System.Windows.Forms.LeftRightAlignment.Left;
+            this.qmin.ValueChanged += new System.EventHandler(this.Qmin_ValueChanged);
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(9, 190);
+            this.label6.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(209, 12);
+            this.label6.TabIndex = 30;
+            this.label6.Text = "Qmin（绘制统计图前先设置此参数）：";
+            this.label6.Click += new System.EventHandler(this.Label6_Click);
             // 
             // hslSwitch2
             // 
@@ -375,7 +423,7 @@
             this.qdfstatus.Location = new System.Drawing.Point(9, 152);
             this.qdfstatus.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.qdfstatus.Name = "qdfstatus";
-            this.qdfstatus.Size = new System.Drawing.Size(135, 15);
+            this.qdfstatus.Size = new System.Drawing.Size(101, 12);
             this.qdfstatus.TabIndex = 25;
             this.qdfstatus.Text = "气动阀当前状态：";
             // 
@@ -467,13 +515,13 @@
             this.systemInfo.Location = new System.Drawing.Point(13, 562);
             this.systemInfo.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.systemInfo.Name = "systemInfo";
-            this.systemInfo.Size = new System.Drawing.Size(87, 15);
+            this.systemInfo.Size = new System.Drawing.Size(65, 12);
             this.systemInfo.TabIndex = 28;
             this.systemInfo.Text = "系统信息：";
             // 
             // Form2
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1092, 634);
             this.Controls.Add(this.systemInfo);
@@ -497,6 +545,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.qmin)).EndInit();
             this.groupBox3.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -538,5 +587,8 @@
         private System.Windows.Forms.Label systemInfo;
         private HslControls.HslSwitch hslSwitch2;
         private HslControls.HslPlay hslPlay1;
+        private System.Windows.Forms.ToolStripStatusLabel totalFlowShow;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.NumericUpDown qmin;
     }
 }

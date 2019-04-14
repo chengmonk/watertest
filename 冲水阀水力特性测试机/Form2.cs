@@ -1,4 +1,5 @@
-﻿using System;
+﻿using HslCommunication.ModBus;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -54,28 +55,36 @@ namespace 冲水阀水力特性测试机
             //通道1  水冲击力  waterHammer
             //通道2  温度
             //通道3  变频器返回值
-            //通道4  流量
-            double[] data = daq.InstantAi_Read(2, 3);
-            data[2] = data[1] + Convert.ToDouble(Properties.Settings.Default.m流量);
+            //modbus   流量
+            double[] data = daq.InstantAi_Read(2, 2);
+            double[] D = new double[3];
+            D[0] = data[0];
+            D[1] = data[1];
+            double flow=mr.read_float("3002");//读取3002地址的数据，单位立方米/s
+            flow = flow * 1000;//转换成L/s
+            flow = flow + Convert.ToDouble(Properties.Settings.Default.m流量);//加上误差调整
+            totalFlow = mr.read_double("3014");//单位立方米
+            totalFlow = totalFlow * 1000;//单位：L
+            data[2] = flow;
             data[0] += Convert.ToDouble(Properties.Settings.Default.m温度);
             if (loadDataFlag)
             {
                 l.Add(data[2]);
 
                 //连续采样N个数据，去掉一个最大值和一个最小值然后计算N - 2个数据的算术平均值N值的选取：3~14
-                if (l.Count > 8)
-                {
-                    double sum = 0;
-                    List<double> temp = new List<double>();
-                    for (int i = 1; i < 8; i++)
-                    {
-                        temp.Add(l[l.Count - i]);
-                        sum += l[l.Count - i];
-                    }
-                    sum = sum - temp.Max() - temp.Min();
-                    l[l.Count - 4] = (sum / 5);
-                    if (l[l.Count - 4] > maxFlow) { maxFlow = l[l.Count - 4]; }
-                }
+                //if (l.Count > 8)
+                //{
+                //    double sum = 0;
+                //    List<double> temp = new List<double>();
+                //    for (int i = 1; i < 8; i++)
+                //    {
+                //        temp.Add(l[l.Count - i]);
+                //        sum += l[l.Count - i];
+                //    }
+                //    sum = sum - temp.Max() - temp.Min();
+                //    l[l.Count - 4] = (sum / 5);
+                //    if (l[l.Count - 4] > maxFlow) { maxFlow = l[l.Count - 4]; }
+                //}
             }
             myDelegate md = new myDelegate(setText);
             // daq.EventCount_Read();
@@ -84,25 +93,44 @@ namespace 冲水阀水力特性测试机
                 this.Invoke(md, new object[] {data });
 
         }
+        public static int L6=0;
+        public static int L9 = 0;
         public void setText(double[] data)
         {            
             DateTime t = DateTime.Now;
             t.ToString("yyyy-MM-dd hh:mm:ss:fff");
                             //新建第一行，并赋值           
-            waterTemperature.Text = "温度：" +Math.Round( data[0],2);
-            waterFlow.Text = "流量：" + Math.Round( data[2],2);
-            maxWaterFlow.Text = "最大流量:" + Math.Round( maxFlow,2);
+            waterTemperature.Text = "温度：" +Math.Round( data[0],2)+"℃";
+            waterFlow.Text = "流量：" + Math.Round( data[2],2)+"L/s";
+            maxWaterFlow.Text = "最大流量:" + Math.Round( maxFlow,2)+"L/s";
+            totalFlowShow.Text = "累计流量：" + Math.Round(totalFlow, 2)  +"L";
+            if (Math.Abs(Math.Round(totalFlow, 2) - 6) < 0.1)//记录到达6l的索引
+            {
+                L6 = l.Count;
+            }
+            if (Math.Abs(Math.Round(totalFlow, 2) - 6) < 0.05)//记录到达6l的索引
+            {
+                L6 = l.Count;
+            }
+            if (Math.Abs(Math.Round(totalFlow, 2) - 9) < 0.1)//记录到达9l的索引
+            {
+                L9 = l.Count;
+            }
+            if (Math.Abs(Math.Round(totalFlow, 2) - 9) < 0.05)//记录到达9l的索引
+            {
+                L9 = l.Count;
+            }
             if (Math.Round(data[2], 2) > 0.1) pushFlag = true;
             bpqreturn.Text = Math.Round(data[1], 2).ToString();
 
-            if (l.Count > 8 && loadDataFlag)
+            if (l.Count > 0 && loadDataFlag)
             {
                 dt.Rows.Add(t.ToString("yyyy-MM-dd hh:mm:ss:fff"), Math.Round(data[0], 2), Math.Round(data[2], 2));
                 hslCurve1.AddCurveData(
                         new string[] { "A" },
                         new float[]
                         {
-                  (float) l[l.Count - 4]
+                  (float) l[l.Count - 1]
                         }
                     );
                 Console.WriteLine("pushedFlag:" + pushedFlag);
@@ -125,13 +153,27 @@ namespace 冲水阀水力特性测试机
         public const int CHANNEL_COUNT_MAX = 16;
         private double[] m_dataScaled = new double[CHANNEL_COUNT_MAX];
         static public DataTable dt;
+        static public double totalFlow=0;
         double[] aoData = new double[1];
         System.Timers.Timer monitor;
         System.Timers.Timer pushWork;
         double maxFlow = 0;
+        M_485Rtu mr;
+        COMconfig conf;
+        private ModbusRtu busRtuClient = null;
         private void Form2_Load(object sender, EventArgs e)
         {
-           
+            conf.botelv = "19200";
+            conf.zhanhao = "1";
+            conf.shujuwei = "8";
+            conf.tingzhiwei = "1";
+            conf.dataFromZero = true;
+            conf.stringReverse = false;
+            conf.COM_Name = "COM11";
+            conf.checkInfo = 2;
+            mr = new M_485Rtu(conf);
+            mr.connect();
+            
             maxFlow = -1;
             pushedFlag = false;
             pushFlag = false;
@@ -157,6 +199,7 @@ namespace 冲水阀水力特性测试机
             //sbzt.Text = "水泵当前状态：关闭";
             sbyali.Value = Properties.Settings.Default.水泵压力;
             numericUpDown1.Value = Properties.Settings.Default.保持时间;
+            qmin.Value = Properties.Settings.Default.qmin;
             doData = new byte[2] { 0x00, 0x00 };
             l = new List<double>();
             l.Clear();
@@ -517,6 +560,17 @@ namespace 冲水阀水力特性测试机
                 pushedFlag = false;
                 hslPlay1.Text = "自动运行";
             }
+        }
+
+        private void Label6_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void Qmin_ValueChanged(object sender, EventArgs e)
+        {
+            Properties.Settings.Default.qmin = qmin.Value;
+            Properties.Settings.Default.Save();
         }
     }
 }

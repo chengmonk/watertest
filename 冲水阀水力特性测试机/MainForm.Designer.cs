@@ -95,6 +95,7 @@
             this.hslButton3.Size = new System.Drawing.Size(142, 46);
             this.hslButton3.TabIndex = 2;
             this.hslButton3.Text = "打开串口11连接测试";
+            this.hslButton3.Visible = false;
             this.hslButton3.Click += new System.EventHandler(this.hslButton3_Click);
             // 
             // label1
@@ -105,6 +106,7 @@
             this.label1.Size = new System.Drawing.Size(53, 12);
             this.label1.TabIndex = 3;
             this.label1.Text = "发送指令";
+            this.label1.Visible = false;
             // 
             // label2
             // 
@@ -114,6 +116,7 @@
             this.label2.Size = new System.Drawing.Size(53, 12);
             this.label2.TabIndex = 4;
             this.label2.Text = "接收数据";
+            this.label2.Visible = false;
             // 
             // hslButton4
             // 
@@ -123,6 +126,7 @@
             this.hslButton4.Size = new System.Drawing.Size(111, 46);
             this.hslButton4.TabIndex = 5;
             this.hslButton4.Text = "读取数据测试";
+            this.hslButton4.Visible = false;
             this.hslButton4.Click += new System.EventHandler(this.hslButton4_Click);
             // 
             // label3
@@ -133,6 +137,7 @@
             this.label3.Size = new System.Drawing.Size(29, 12);
             this.label3.TabIndex = 6;
             this.label3.Text = "数据";
+            this.label3.Visible = false;
             // 
             // label4
             // 
@@ -142,6 +147,7 @@
             this.label4.Size = new System.Drawing.Size(29, 12);
             this.label4.TabIndex = 7;
             this.label4.Text = "数据";
+            this.label4.Visible = false;
             // 
             // MainForm
             // 
@@ -157,7 +163,7 @@
             this.Controls.Add(this.hslButton2);
             this.Controls.Add(this.hslButton1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "MainForm";
             this.Text = "MainForm";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainForm_FormClosing);

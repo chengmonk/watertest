@@ -49,7 +49,16 @@ namespace 冲水阀水力特性测试机
         {
             config = c;
         }
-
+        public double short2float(short res, short pointnum)
+        {
+            double ans = res;
+            while (pointnum != 0)
+            {
+                pointnum -= 1;
+                ans = ans * 0.1;
+            }
+            return ans;
+        }
         public short bytes2Dec(byte h,byte l)
         {
             short s = 0;   //一个16位整形变量，初值为 0000 0000 0000 0000            
@@ -78,8 +87,22 @@ namespace 冲水阀水力特性测试机
             busRtuClient.Close();
             MessageBox.Show("串口已关闭");
         }
+        // 读取float变量
+       public  float read_float(string adreess)
+        {
+            OperateResult<float> result = busRtuClient.ReadFloat(adreess);
+            if (result.IsSuccess) return result.Content;
+            else return (float)-999.0;
+        }
 
-       public  void connect()
+        public double read_double(string adress)
+        {
+            // 读取double变量
+            OperateResult<double> result= busRtuClient.ReadDouble(adress);
+            if (result.IsSuccess) return result.Content;
+            else return -999.0;
+        }
+        public  void connect()
         {
             if (!int.TryParse(config.botelv, out int baudRate))
             {
@@ -127,7 +150,6 @@ namespace 冲水阀水力特性测试机
                 // button2.Enabled = true;
                 // button1.Enabled = false;
                 //panel2.Enabled = true;
-
                 //userControlCurve1.ReadWriteNet = busRtuClient;
             }
             catch (Exception ex)

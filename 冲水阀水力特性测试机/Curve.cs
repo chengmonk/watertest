@@ -22,6 +22,7 @@ namespace 冲水阀水力特性测试机
 
         private void Curve_Load(object sender, EventArgs e)
         {
+            totalFlow = Form2.totalFlow;
             load_Data();
             //EN 6L流量统计图
 
@@ -38,7 +39,7 @@ namespace 冲水阀水力特性测试机
         private void load_Data()
         {
             //总流量达到6L加载数据
-            if (!(totalFlow<6)) {
+            if ((totalFlow<6)) {
 
             }
             else
@@ -49,7 +50,7 @@ namespace 冲水阀水力特性测试机
             }
         }
         //计算特征点
-        PointF Qmin = new PointF();
+        //PointF Qmin = new PointF();
         PointF Qs = new PointF();
         PointF A = new PointF();//2s以后 横轴上的点
         PointF B = new PointF();//累计流量到达6L
@@ -80,19 +81,7 @@ namespace 冲水阀水力特性测试机
 
 
 
-            // 我们假定从数据库中获取到了这些数据信息
-            float[] steps = new float[2000];
-            float[] data = new float[2000];
-            float[] press = new float[2000];
-            DateTime[] times = new DateTime[2000];
-            Random random = new Random();
-            for (int i = 0; i < data.Length; i++)
-            {
-                steps[i] = random.Next(10);
-                data[i] = Convert.ToSingle(random.NextDouble() * 40 + 100);
-                times[i] = DateTime.Now.AddSeconds(i - 2000);
-                press[i] = Convert.ToSingle(random.NextDouble() * 0.5d + 4);
-            }
+          
 
 
             DateTime start = dateTime[0];
@@ -100,21 +89,23 @@ namespace 冲水阀水力特性测试机
             TimeSpan ts = new TimeSpan(1);
             for (int i = 0; i < dt.Rows.Count; i++)
             {
-                if (dateTime[i].Second - PointA.Second==0&& dateTime[i].Millisecond - PointA.Millisecond< 100)
+                if (dateTime[i].Second - PointA.Second==0&& Math.Abs(dateTime[i].Millisecond - PointA.Millisecond)< 100)
                 {
                     A.X = i;
-
                     Console.WriteLine("A.X:" + A.X);
                     Console.WriteLine("PointA:" + PointA);                    
                     Console.WriteLine("dateTime[i]:" + dateTime[i]);
                     Console.WriteLine("i:" + i);
                     break;
                 }
+
             }
 
             A.Y = 0;
-            B.X = A.X * 2;
-            C.X = A.X * 3;
+            B.X = Form2.L6;
+            B.Y = 0;
+            C.X = Form2.L9;
+            C.Y = 0;
             E.Y = 6;
             //暂未赋值的点 ：B 、C、E
             //D
@@ -135,28 +126,7 @@ namespace 冲水阀水力特性测试机
             {
 
                 hslCurveHistory1.SetLeftCurve("流量", flow, Color.DodgerBlue, true, "{0:F1} L/s");
-                hslCurveHistory1.SetDateTimes(dateTime);
-                //hslCurveHistory1.SetLeftCurve("步序", steps);
-                //hslCurveHistory1.SetLeftCurve("温度", data, Color.DodgerBlue, true, "{0:F1} ℃");
-                //hslCurveHistory1.SetRightCurve("压力", press, Color.Tomato, true, "{0:F2} Mpa");
-                //hslCurveHistory1.SetDateTimes(times);
-                //hslCurveHistory1.AddMarkForeSection(new HslControls.HslMarkForeSection()
-                //{
-                //    StartIndex = 900,
-                //    EndIndex = 1300,
-                //    StartHeight = 0.2f,
-                //    Height = 0.8f,
-                //});
-                //hslCurveHistory1.AddMarkForeSection(new HslControls.HslMarkForeSection()
-                //{
-                //    StartIndex = 500,
-                //    EndIndex = 700,
-                //    StartHeight = 0.3f,
-                //    Height = 0.7f,
-                //    IsRenderTimeText = false,
-                //    LinePen = Pens.Orange,
-                //    MarkText = "报警区域"
-                //});
+                hslCurveHistory1.SetDateTimes(dateTime);               
 
                 // 增加一个三角形的线段标记示例 Points的每个点的X是数据索引，Y是数据值（需要选对参考坐标轴，默认为左坐标轴）                             
                 //增加EHAO矩阵

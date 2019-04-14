@@ -1,11 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.28307.421
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.28809.33
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "冲水阀水力特性测试机", "冲水阀水力特性测试机\冲水阀水力特性测试机.csproj", "{A7363BD8-B44C-4D56-9E6D-2ECC01F56952}"
 EndProject
-Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "Setup", "Setup\Setup.vdproj", "{1E101562-8DC2-4F93-ACDB-D93770306D60}"
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "Setup1", "Setup1\Setup1.vdproj", "{FF8A7221-F13D-483F-8C9A-D4502DF7CBD1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,8 +17,8 @@ Global
 		{A7363BD8-B44C-4D56-9E6D-2ECC01F56952}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A7363BD8-B44C-4D56-9E6D-2ECC01F56952}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A7363BD8-B44C-4D56-9E6D-2ECC01F56952}.Release|Any CPU.Build.0 = Release|Any CPU
-		{1E101562-8DC2-4F93-ACDB-D93770306D60}.Debug|Any CPU.ActiveCfg = Debug
-		{1E101562-8DC2-4F93-ACDB-D93770306D60}.Release|Any CPU.ActiveCfg = Release
+		{FF8A7221-F13D-483F-8C9A-D4502DF7CBD1}.Debug|Any CPU.ActiveCfg = Debug
+		{FF8A7221-F13D-483F-8C9A-D4502DF7CBD1}.Release|Any CPU.ActiveCfg = Release
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
