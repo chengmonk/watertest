@@ -557,6 +557,8 @@ namespace 冲水阀水力特性测试机
             if (arg2)
             {
                 pushedFlag = false;
+                first6l = true;
+                first9l = true;
                 pushFlag = false;
                 loadDataFlag = true;
                 mr.write_coil("9", true);
