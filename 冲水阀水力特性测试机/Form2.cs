@@ -23,6 +23,7 @@ namespace 冲水阀水力特性测试机
         bool loadDataFlag = false;
         bool pushedFlag = false;
         bool pushFlag = false;
+        double FLOW=0;
         private void hslButton1_Click(object sender, EventArgs e)
         {
             loadDataFlag = true;
@@ -36,9 +37,10 @@ namespace 冲水阀水力特性测试机
             doData[0] = set_bit(doData[0], 3, true);
             daq.InstantDo_Write(doData);
             //System.Console.WriteLine("push:" + doData[0]);
-            for (; true;)
+            for (; true;)//流量大于某个数值以后开始计时
             {
-                if (pushFlag) break;
+                if (FLOW > 0.1) {
+                    break; }
             }
             double t = 1000 * (double)numericUpDown1.Value;
             System.Threading.Thread.Sleep((int)t);//
@@ -66,11 +68,13 @@ namespace 冲水阀水力特性测试机
             totalFlow = mr.read_double("3014");//单位立方米
             totalFlow = totalFlow * 1000;//单位：L
             data[2] = flow;
-            data[0] += Convert.ToDouble(Properties.Settings.Default.m温度);
+            FLOW = flow;
+            data[0] =data[0]*10+ Convert.ToDouble(Properties.Settings.Default.m温度);
             if (loadDataFlag)
             {
-                l.Add(data[2]);
 
+                l.Add(data[2]);
+                maxFlow = l.Max();
                 //连续采样N个数据，去掉一个最大值和一个最小值然后计算N - 2个数据的算术平均值N值的选取：3~14
                 //if (l.Count > 8)
                 //{
@@ -95,6 +99,8 @@ namespace 冲水阀水力特性测试机
         }
         public static int L6=0;
         public static int L9 = 0;
+        bool first6l = true;
+        bool first9l = true;
         public void setText(double[] data)
         {            
             DateTime t = DateTime.Now;
@@ -104,23 +110,20 @@ namespace 冲水阀水力特性测试机
             waterFlow.Text = "流量：" + Math.Round( data[2],2)+"L/s";
             maxWaterFlow.Text = "最大流量:" + Math.Round( maxFlow,2)+"L/s";
             totalFlowShow.Text = "累计流量：" + Math.Round(totalFlow, 2)  +"L";
-            if (Math.Abs(Math.Round(totalFlow, 2) - 6) < 0.1)//记录到达6l的索引
+            if (Math.Abs(Math.Round(totalFlow, 2) - 6) < 0.1&&first6l)//记录到达6l的索引
             {
                 L6 = l.Count;
+                first6l = false;
             }
-            if (Math.Abs(Math.Round(totalFlow, 2) - 6) < 0.05)//记录到达6l的索引
-            {
-                L6 = l.Count;
-            }
-            if (Math.Abs(Math.Round(totalFlow, 2) - 9) < 0.1)//记录到达9l的索引
+          
+            if (Math.Abs(Math.Round(totalFlow, 2) - 9) < 0.1&&first9l)//记录到达9l的索引
             {
                 L9 = l.Count;
+                first9l = false;
             }
-            if (Math.Abs(Math.Round(totalFlow, 2) - 9) < 0.05)//记录到达9l的索引
-            {
-                L9 = l.Count;
-            }
+          
             if (Math.Round(data[2], 2) > 0.1) pushFlag = true;
+
             bpqreturn.Text = Math.Round(data[1], 2).ToString();
 
             if (l.Count > 0 && loadDataFlag)
@@ -163,6 +166,8 @@ namespace 冲水阀水力特性测试机
         private ModbusRtu busRtuClient = null;
         private void Form2_Load(object sender, EventArgs e)
         {
+            first6l = true;
+            first9l = true;
             conf.botelv = "19200";
             conf.zhanhao = "1";
             conf.shujuwei = "8";
@@ -328,6 +333,10 @@ namespace 冲水阀水力特性测试机
            
             if (MessageBox.Show("关闭窗体后，程序会退出！！", "提示！！", MessageBoxButtons.YesNo) == DialogResult.Yes)
             {
+                doData[0] = set_bit(doData[0], 1, false);
+                doData[0] = set_bit(doData[0], 2, false);
+                doData[0] = set_bit(doData[0], 3, false);
+                daq.InstantDo_Write(doData);
                 e.Cancel = false;
                 System.Environment.Exit(0);
                 
@@ -550,6 +559,7 @@ namespace 冲水阀水力特性测试机
                 pushedFlag = false;
                 pushFlag = false;
                 loadDataFlag = true;
+                mr.write_coil("9", true);
                 hslPlay1.Text = "停止";
                 systemInfo.Text = "系统信息：";
                 pushWork.Enabled = true;//是否执行System.Timers.Timer.Elapsed事件；

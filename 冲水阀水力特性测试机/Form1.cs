@@ -136,15 +136,17 @@ namespace 冲水阀水力特性测试机
                     if (startFlag)
                     {
                         dt.Rows.Add(t.ToString("yyyy-MM-dd hh:mm:ss:fff"),
-                            Math.Round(m_dataScaled[i], 2),
-                            Math.Round(m_dataScaled[i + 1], 2),
-                            Math.Round(m_dataScaled[i + 2], 2));
+                            Math.Round(m_dataScaled[i] + (double)Properties.Settings.Default.m压力, 2),
+                            Math.Round(m_dataScaled[i + 1]+ (double)Properties.Settings.Default.m冲击力, 2),
+                            Math.Round(m_dataScaled[i + 2]+ (double)Properties.Settings.Default.m温度, 2));                       
+                        m_dataScaled[i] += (double)Properties.Settings.Default.m压力;
+                        m_dataScaled[i + 1] += (double)Properties.Settings.Default.m冲击力;
+                        m_dataScaled[i + 2] += (double)Properties.Settings.Default.m温度;
                         if (Math.Round(m_dataScaled[i], 2) > 0.1)//当压力大于某个数值开始 计按下工件的延时
                             pushFlag = true;
-                    
-                    if(maxPressure < Math.Round(m_dataScaled[i], 2)) { maxPressure = Math.Round(m_dataScaled[i], 2); }
-                    if(maxHammer< Math.Round(m_dataScaled[i + 1], 2)) { maxHammer = Math.Round(m_dataScaled[i + 1], 2); }
-                    if(pushedFlag&& Math.Round(m_dataScaled[i], 2)<=0)//当压力小于等于某个数值，停止向缓冲区写数据
+                    if (maxPressure < Math.Round(m_dataScaled[i] , 2)) { maxPressure = Math.Round(m_dataScaled[i] , 2); }
+                    if(maxHammer < Math.Round(m_dataScaled[i + 1] , 2)) { maxHammer = Math.Round(m_dataScaled[i + 1] , 2); }
+                    if(pushedFlag && Math.Round(m_dataScaled[i] , 2) <= 0)//当压力小于等于某个数值，停止向缓冲区写数据
                         {
                             startFlag = false;
                             pushFlag = false;
@@ -181,7 +183,7 @@ namespace 冲水阀水力特性测试机
             }
             if (startFlag)
             {
-                for (int i = 0; i < data.Length; i += 2)
+                for (int i = 0; i < data.Length; i += 4)
                 {
 
                     hslCurve1.AddCurveData(
@@ -199,9 +201,9 @@ namespace 冲水阀水力特性测试机
             }
 
             bpqreturn.Text = Math.Round( m_dataScaled[m_dataScaled.Length - 1],2).ToString();
-            waterHammer.Text = "水冲击力：" + Math.Round(data[data.Length - 1],2)+" N";
-            waterPresuer.Text = "压力：" + Math.Round( data[data.Length - 2],2)+" Bar";
-            waterTemperature.Text = "温度：" +Math.Round( data[data.Length - 3],2)+" ℃";
+            waterHammer.Text = "水冲击力：" + Math.Round(data[data.Length - 3], 2)+" N";
+            waterPresuer.Text = "压力：" + Math.Round( data[data.Length - 4], 2)+" Bar";
+            waterTemperature.Text = "温度：" +Math.Round( data[data.Length - 2],2)*10+" ℃";
            
         }
         private void waveformAiCtrl1_CacheOverflow(object sender, BfdAiEventArgs e)
@@ -460,7 +462,10 @@ namespace 冲水阀水力特性测试机
             
             if (MessageBox.Show("关闭窗体后，程序会退出！！", "提示！！", MessageBoxButtons.YesNo) == DialogResult.Yes)
             {
-                
+                doData[0] = set_bit(doData[0], 1, false);
+                doData[0] = set_bit(doData[0], 2, false);
+                doData[0] = set_bit(doData[0], 3, false);
+                daq.InstantDo_Write(doData);
                 e.Cancel = false;
                 System.Environment.Exit(0);
             }
@@ -661,6 +666,11 @@ namespace 冲水阀水力特性测试机
                 pushedFlag = false;
                 hslPlay1.Text = "自动运行";
             }
+        }
+
+        private void HslBlower1_Load(object sender, EventArgs e)
+        {
+
         }
 
         private void workName_TextChanged(object sender, EventArgs e)

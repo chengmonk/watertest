@@ -87,6 +87,11 @@ namespace 冲水阀水力特性测试机
             busRtuClient.Close();
             MessageBox.Show("串口已关闭");
         }
+        public void write_coil(string adreess,bool val)
+        {
+            OperateResult result= busRtuClient.WriteCoil(adreess, val);
+             if (!result.IsSuccess) MessageBox.Show("线圈写入失败"); 
+        }
         // 读取float变量
        public  float read_float(string adreess)
         {

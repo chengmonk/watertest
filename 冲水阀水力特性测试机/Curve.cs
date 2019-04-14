@@ -23,6 +23,7 @@ namespace 冲水阀水力特性测试机
         private void Curve_Load(object sender, EventArgs e)
         {
             totalFlow = Form2.totalFlow;
+            MessageBox.Show("累计流量："+totalFlow);
             load_Data();
             //EN 6L流量统计图
 
@@ -102,13 +103,19 @@ namespace 冲水阀水力特性测试机
             }
 
             A.Y = 0;
+
             B.X = Form2.L6;
             B.Y = 0;
+
             C.X = Form2.L9;
             C.Y = 0;
-            E.Y = 6;
+
+            E.X = 0;
+            E.Y = (float)Properties.Settings.Default.qmin;
+
             //暂未赋值的点 ：B 、C、E
             //D
+
             D.X = 0;
             D.Y = (float)0.85 * E.Y;
             //H 
@@ -191,7 +198,7 @@ namespace 冲水阀水力特性测试机
                 hslCurveHistory1.RenderCurveUI();
                 Console.WriteLine("AY:" + A.Y + ":" + A.X);
 
-                if (totalFlow <= 9)//总流量达到9L加载数据
+                if (totalFlow >= 9)//总流量达到9L加载数据
                 { 
                     //9L 流量图
                     hslCurveHistory2.SetLeftCurve("温度", flow, Color.DodgerBlue, true, "{0:F1} ℃");
