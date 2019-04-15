@@ -462,10 +462,7 @@ namespace 冲水阀水力特性测试机
             
             if (MessageBox.Show("关闭窗体后，程序会退出！！", "提示！！", MessageBoxButtons.YesNo) == DialogResult.Yes)
             {
-                doData[0] = set_bit(doData[0], 1, false);
-                doData[0] = set_bit(doData[0], 2, false);
-                doData[0] = set_bit(doData[0], 3, false);
-                daq.InstantDo_Write(doData);
+              
                 e.Cancel = false;
                 System.Environment.Exit(0);
             }
