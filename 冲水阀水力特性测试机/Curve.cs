@@ -23,7 +23,7 @@ namespace 冲水阀水力特性测试机
         private void Curve_Load(object sender, EventArgs e)
         {
             totalFlow = Form2.totalFlow;
-            MessageBox.Show("累计流量："+totalFlow);
+            //MessageBox.Show("累计流量："+totalFlow);
             load_Data();
             //EN 6L流量统计图
 

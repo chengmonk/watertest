@@ -143,6 +143,7 @@ namespace 冲水阀水力特性测试机
                     pushFlag = false;
                     pushedFlag = false;
                     hslPlay1.Text = "自动运行";
+                    mr.write_coil("10", true);//停止累计流量
                     hslPlay1.Played = false;
                     systemInfo.Text = "系统信息：测试已完成！！！请及时保存数据。";
                     
@@ -178,7 +179,7 @@ namespace 冲水阀水力特性测试机
             conf.checkInfo = 2;
             mr = new M_485Rtu(conf);
             mr.connect();
-            
+            mr.write_coil("10", true);//停止累计流量
             maxFlow = -1;
             pushedFlag = false;
             pushFlag = false;
@@ -562,6 +563,7 @@ namespace 冲水阀水力特性测试机
                 pushFlag = false;
                 loadDataFlag = true;
                 mr.write_coil("9", true);
+                mr.write_coil("10", false);//开始累计流量
                 hslPlay1.Text = "停止";
                 systemInfo.Text = "系统信息：";
                 pushWork.Enabled = true;//是否执行System.Timers.Timer.Elapsed事件；
@@ -569,6 +571,7 @@ namespace 冲水阀水力特性测试机
             else
             {
                 loadDataFlag = false;
+                mr.write_coil("10", true);//停止累计流量
                 pushedFlag = false;
                 hslPlay1.Text = "自动运行";
             }
