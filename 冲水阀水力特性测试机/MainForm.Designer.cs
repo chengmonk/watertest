@@ -50,9 +50,11 @@
             // hslButton1
             // 
             this.hslButton1.CustomerInformation = null;
-            this.hslButton1.Location = new System.Drawing.Point(72, 42);
+            this.hslButton1.Font = new System.Drawing.Font("黑体", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.hslButton1.ForeColor = System.Drawing.Color.Black;
+            this.hslButton1.Location = new System.Drawing.Point(49, 42);
             this.hslButton1.Name = "hslButton1";
-            this.hslButton1.Size = new System.Drawing.Size(114, 46);
+            this.hslButton1.Size = new System.Drawing.Size(175, 90);
             this.hslButton1.TabIndex = 0;
             this.hslButton1.Text = "压力特性测试";
             this.hslButton1.Click += new System.EventHandler(this.hslButton1_Click);
@@ -60,9 +62,11 @@
             // hslButton2
             // 
             this.hslButton2.CustomerInformation = null;
-            this.hslButton2.Location = new System.Drawing.Point(346, 42);
+            this.hslButton2.Font = new System.Drawing.Font("黑体", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.hslButton2.ForeColor = System.Drawing.Color.Black;
+            this.hslButton2.Location = new System.Drawing.Point(310, 42);
             this.hslButton2.Name = "hslButton2";
-            this.hslButton2.Size = new System.Drawing.Size(114, 46);
+            this.hslButton2.Size = new System.Drawing.Size(175, 90);
             this.hslButton2.TabIndex = 1;
             this.hslButton2.Text = "流量特性测试";
             this.hslButton2.Click += new System.EventHandler(this.hslButton2_Click);
@@ -153,7 +157,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(616, 298);
+            this.ClientSize = new System.Drawing.Size(545, 170);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.hslButton4);
