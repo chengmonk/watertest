@@ -350,7 +350,8 @@ namespace 冲水阀水力特性测试机
                 monitor.Dispose();
                 if(pushWork.Enabled)
                 pushWork.Dispose();
-                e.Cancel = false;
+
+                //e.Cancel = false;
                 System.Environment.Exit(0);
                 //e.Cancel = true;
             }
@@ -559,17 +560,25 @@ namespace 冲水阀水力特性测试机
         {
             if (arg2)
             {
-                pushedFlag = false;
-                first6l = true;
-                first9l = true;
-                pushFlag = false;
-                loadDataFlag = true;
-                mr.write_coil("9", true);
-                mr.write_coil("10", false);//开始累计流量
-                hslPlay1.Text = "停止";
-                systemInfo.Text = "系统信息：";
-                pushWork.Enabled = true;//是否执行System.Timers.Timer.Elapsed事件；
-            }
+                if (open.Text == "关闭水泵")
+                {
+                    pushedFlag = false;
+                    first6l = true;
+                    first9l = true;
+                    pushFlag = false;
+                    loadDataFlag = true;
+                    mr.write_coil("9", true);
+                    mr.write_coil("10", false);//开始累计流量
+                    hslPlay1.Text = "停止";
+                    systemInfo.Text = "系统信息：";
+                    pushWork.Enabled = true;//是否执行System.Timers.Timer.Elapsed事件；
+                }
+                else
+                {
+                    MessageBox.Show("请先打开水泵再点击自动运行！！！");
+                    hslPlay1.Played = false;
+                }
+                }
             else
             {
                 loadDataFlag = false;

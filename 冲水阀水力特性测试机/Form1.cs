@@ -470,7 +470,7 @@ namespace 冲水阀水力特性测试机
                     monitor.Dispose();
                 if (pushWork.Enabled)
                     pushWork.Dispose();
-                e.Cancel = false;
+                //e.Cancel = false;
                 System.Environment.Exit(0);
                 //e.Cancel = true;
             }
@@ -647,6 +647,7 @@ namespace 冲水阀水力特性测试机
         {
             if (arg2)
             {
+                if(open.Text == "关闭水泵") { 
                 exit = false;
                 pushedFlag = false;
                 pushFlag = false;
@@ -656,6 +657,12 @@ namespace 冲水阀水力特性测试机
                 hslPlay1.Text = "停止";
                 systemInfo.Text = "系统信息：";
                 pushWork.Enabled = true;//是否执行System.Timers.Timer.Elapsed事件；
+                }
+                else
+                {
+                    MessageBox.Show("请先打开水泵再点击自动运行！！！");
+                    hslPlay1.Played = false;
+                }
 
             }
             else
