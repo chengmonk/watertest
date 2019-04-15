@@ -36,15 +36,17 @@ namespace 冲水阀水力特性测试机
         {
             doData[0] = set_bit(doData[0], 3, true);
             daq.InstantDo_Write(doData);
+
             //System.Console.WriteLine("push:" + doData[0]);
-            //for (; true;)//流量大于某个数值以后开始计时
-            //{
-            //    if (FLOW>0.05)
-            //    {
-            //        MessageBox.Show("pushflag:true");
-            //        break;
-            //    }
-            //}
+           while(true)//流量大于某个数值以后开始计时
+            {
+                if (FLOW > 0.05)
+                {
+                    
+                    break;
+                }
+                System.Threading.Thread.Sleep((int)50);//
+            }
             double t = 1000 * (double)numericUpDown1.Value;
             System.Threading.Thread.Sleep((int)t);//
             doData[0] = set_bit(doData[0], 3, false);
@@ -342,10 +344,16 @@ namespace 冲水阀水力特性测试机
             
            
             if (MessageBox.Show("关闭窗体后，程序会退出！！", "提示！！", MessageBoxButtons.YesNo) == DialogResult.Yes)
-            {               
+            {
                 e.Cancel = false;
                 System.Environment.Exit(0);
-                
+                //if (t.Enabled)
+                //    t.Dispose();
+                //if (monitor.Enabled)
+                //    monitor.Dispose();
+                //if (pushWork.Enabled)
+                //    pushWork.Dispose();
+
             }
             else
             {
@@ -591,6 +599,11 @@ namespace 冲水阀水力特性测试机
         {
             Properties.Settings.Default.qmin = qmin.Value;
             Properties.Settings.Default.Save();
+        }
+
+        private void Form2_FormClosed(object sender, FormClosedEventArgs e)
+        {
+
         }
     }
 }

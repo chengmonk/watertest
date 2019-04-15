@@ -16,7 +16,7 @@ namespace 冲水阀水力特性测试机
         {
            if(HslControls.Authorization.SetAuthorizationCode("5d40b3d1-71c1-4182-9697-4a4f063dfcf9"))
             {
-                MessageBox.Show("系统已激活！");
+               
             }
 
             Application.EnableVisualStyles();

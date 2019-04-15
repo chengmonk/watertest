@@ -35,6 +35,7 @@ namespace 冲水阀水力特性测试机
             for (; true;)
             {
                 if (pushFlag) break;
+                System.Threading.Thread.Sleep((int)50);//
             }
             double t= 1000 * (double)numericUpDown1.Value;
             System.Threading.Thread.Sleep((int)t);//
@@ -462,15 +463,23 @@ namespace 冲水阀水力特性测试机
             
             if (MessageBox.Show("关闭窗体后，程序会退出！！", "提示！！", MessageBoxButtons.YesNo) == DialogResult.Yes)
             {
-              
+
                 e.Cancel = false;
                 System.Environment.Exit(0);
+               
+                //waveformAiCtrl1_Stop();
+                //if(monitor.Enabled)
+                //monitor.Dispose();
+                //if(pushWork.Enabled)
+                //pushWork.Dispose();
             }
             else
             {
                 waveformAiCtrl1_Stop();
-                monitor.Dispose();
-                pushWork.Dispose();
+                if (monitor.Enabled)
+                    monitor.Dispose();
+                if (pushWork.Enabled)
+                    pushWork.Dispose();
                 //e.Cancel = true;
             }
         }

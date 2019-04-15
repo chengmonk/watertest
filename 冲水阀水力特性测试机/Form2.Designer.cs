@@ -536,6 +536,7 @@
             this.Name = "Form2";
             this.Text = "流量特性测试";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form2_FormClosing);
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Form2_FormClosed);
             this.Load += new System.EventHandler(this.Form2_Load);
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();

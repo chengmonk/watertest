@@ -33,24 +33,28 @@ namespace 冲水阀水力特性测试机
         private void hslButton1_Click(object sender, EventArgs e)
         {
             Hide();
-            using (Form1 f1 = new Form1())
             {
-                f1.ShowDialog();
+                using (Form1 f1 = new Form1())
+                {
+                    f1.ShowDialog();
+                }
+                System.Threading.Thread.Sleep(100);
             }
-            System.Threading.Thread.Sleep(200);
             Show();
         }
 
         private void hslButton2_Click(object sender, EventArgs e)
         {
-            
-           
+
+
             Hide();
-            using (Form2 f2 = new Form2())
             {
-                f2.ShowDialog();
+                using (Form2 f2 = new Form2())
+                {
+                    f2.ShowDialog();
+                }
             }
-            System.Threading.Thread.Sleep(200);
+            System.Threading.Thread.Sleep(100);
             Show();
         }
         M_485Rtu mr;
@@ -83,6 +87,11 @@ namespace 冲水阀水力特性测试机
             byte[] b = HslCommunication.BasicFramework.SoftBasic.HexStringToBytes(mr.ReadFrame(cm));
             //label3.Text = "长度：" + b.Length;
             label3.Text = "长度："+mr.bytes2Dec(b[3],b[4]);
+        }
+
+        private void MainForm_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }
