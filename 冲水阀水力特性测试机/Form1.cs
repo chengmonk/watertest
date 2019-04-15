@@ -461,25 +461,17 @@ namespace 冲水阀水力特性测试机
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
             
-            if (MessageBox.Show("关闭窗体后，程序会退出！！", "提示！！", MessageBoxButtons.YesNo) == DialogResult.Yes)
+            
             {
-
-                e.Cancel = false;
-                System.Environment.Exit(0);
-               
-                //waveformAiCtrl1_Stop();
-                //if(monitor.Enabled)
-                //monitor.Dispose();
-                //if(pushWork.Enabled)
-                //pushWork.Dispose();
-            }
-            else
-            {
+                doData = new byte[2] { 0x00, 0x00 };
+                daq.InstantDo_Write(doData);
                 waveformAiCtrl1_Stop();
                 if (monitor.Enabled)
                     monitor.Dispose();
                 if (pushWork.Enabled)
                     pushWork.Dispose();
+                e.Cancel = false;
+                System.Environment.Exit(0);
                 //e.Cancel = true;
             }
         }
