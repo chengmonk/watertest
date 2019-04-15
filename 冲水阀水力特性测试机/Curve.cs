@@ -201,7 +201,7 @@ namespace 冲水阀水力特性测试机
                 if (totalFlow >= 9)//总流量达到9L加载数据
                 { 
                     //9L 流量图
-                    hslCurveHistory2.SetLeftCurve("温度", flow, Color.DodgerBlue, true, "{0:F1} ℃");
+                    hslCurveHistory2.SetLeftCurve("流量", flow, Color.DodgerBlue, true, "{0:F1} L/s");
                 hslCurveHistory2.SetDateTimes(dateTime);
 
                 // 增加一个三角形的线段标记示例 Points的每个点的X是数据索引，Y是数据值（需要选对参考坐标轴，默认为左坐标轴）                             

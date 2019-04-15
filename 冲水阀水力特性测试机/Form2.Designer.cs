@@ -225,7 +225,7 @@
             this.bpqfh.Name = "bpqfh";
             this.bpqfh.Size = new System.Drawing.Size(101, 12);
             this.bpqfh.TabIndex = 14;
-            this.bpqfh.Text = "变频器返回数值：";
+            this.bpqfh.Text = "变频器输出频率：";
             // 
             // label2
             // 

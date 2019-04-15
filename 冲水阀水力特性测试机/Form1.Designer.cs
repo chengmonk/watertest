@@ -196,7 +196,7 @@
             this.hslBlower1.Color8 = System.Drawing.Color.FromArgb(((int)(((byte)(176)))), ((int)(((byte)(182)))), ((int)(((byte)(189)))));
             this.hslBlower1.Cursor = System.Windows.Forms.Cursors.Hand;
             this.hslBlower1.Location = new System.Drawing.Point(116, 142);
-            this.hslBlower1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.hslBlower1.Margin = new System.Windows.Forms.Padding(2);
             this.hslBlower1.Name = "hslBlower1";
             this.hslBlower1.Size = new System.Drawing.Size(106, 126);
             this.hslBlower1.TabIndex = 22;
@@ -208,7 +208,7 @@
             // 
             this.hslSwitch1.Cursor = System.Windows.Forms.Cursors.Hand;
             this.hslSwitch1.Location = new System.Drawing.Point(217, 19);
-            this.hslSwitch1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.hslSwitch1.Margin = new System.Windows.Forms.Padding(2);
             this.hslSwitch1.Name = "hslSwitch1";
             this.hslSwitch1.Size = new System.Drawing.Size(94, 106);
             this.hslSwitch1.SwitchBackground = System.Drawing.Color.Gray;
@@ -253,7 +253,7 @@
             this.bpqfh.Name = "bpqfh";
             this.bpqfh.Size = new System.Drawing.Size(101, 12);
             this.bpqfh.TabIndex = 14;
-            this.bpqfh.Text = "变频器返回数值：";
+            this.bpqfh.Text = "变频器输出频率：";
             // 
             // label2
             // 
@@ -369,7 +369,7 @@
             // workName
             // 
             this.workName.Location = new System.Drawing.Point(94, 58);
-            this.workName.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.workName.Margin = new System.Windows.Forms.Padding(2);
             this.workName.Multiline = true;
             this.workName.Name = "workName";
             this.workName.ScrollBars = System.Windows.Forms.ScrollBars.Both;
@@ -390,9 +390,9 @@
             this.groupBox2.Controls.Add(this.label3);
             this.groupBox2.Font = new System.Drawing.Font("黑体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.groupBox2.Location = new System.Drawing.Point(643, 344);
-            this.groupBox2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox2.Margin = new System.Windows.Forms.Padding(2);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox2.Padding = new System.Windows.Forms.Padding(2);
             this.groupBox2.Size = new System.Drawing.Size(326, 153);
             this.groupBox2.TabIndex = 20;
             this.groupBox2.TabStop = false;
@@ -402,7 +402,7 @@
             // 
             this.hslSwitch2.Cursor = System.Windows.Forms.Cursors.Hand;
             this.hslSwitch2.Location = new System.Drawing.Point(236, 22);
-            this.hslSwitch2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.hslSwitch2.Margin = new System.Windows.Forms.Padding(2);
             this.hslSwitch2.Name = "hslSwitch2";
             this.hslSwitch2.Size = new System.Drawing.Size(76, 87);
             this.hslSwitch2.SwitchForeground = System.Drawing.Color.FromArgb(((int)(((byte)(36)))), ((int)(((byte)(36)))), ((int)(((byte)(36)))));
@@ -429,9 +429,9 @@
             this.groupBox3.Controls.Add(this.hslButton3);
             this.groupBox3.Font = new System.Drawing.Font("黑体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.groupBox3.Location = new System.Drawing.Point(27, 324);
-            this.groupBox3.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox3.Margin = new System.Windows.Forms.Padding(2);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox3.Padding = new System.Windows.Forms.Padding(2);
             this.groupBox3.Size = new System.Drawing.Size(471, 103);
             this.groupBox3.TabIndex = 21;
             this.groupBox3.TabStop = false;
@@ -475,7 +475,7 @@
             this.Controls.Add(this.hslCurve1);
             this.Controls.Add(this.statusStrip1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "Form1";
             this.Text = "压力特性测试";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);

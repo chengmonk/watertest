@@ -142,11 +142,11 @@ namespace 冲水阀水力特性测试机
                         m_dataScaled[i] += (double)Properties.Settings.Default.m压力;
                         m_dataScaled[i + 1] += (double)Properties.Settings.Default.m冲击力;
                         m_dataScaled[i + 2] += (double)Properties.Settings.Default.m温度;
-                        if (Math.Round(m_dataScaled[i], 2) > 0.1)//当压力大于某个数值开始 计按下工件的延时
+                        if (Math.Round(m_dataScaled[i], 2) > 0.05)//当压力大于某个数值开始 计按下工件的延时
                             pushFlag = true;
                     if (maxPressure < Math.Round(m_dataScaled[i] , 2)) { maxPressure = Math.Round(m_dataScaled[i] , 2); }
                     if(maxHammer < Math.Round(m_dataScaled[i + 1] , 2)) { maxHammer = Math.Round(m_dataScaled[i + 1] , 2); }
-                    if(pushedFlag && Math.Round(m_dataScaled[i] , 2) <= 0)//当压力小于等于某个数值，停止向缓冲区写数据
+                    if(pushedFlag && Math.Round(m_dataScaled[i] , 2) <= 0.1)//当压力小于等于某个数值，停止向缓冲区写数据
                         {
                             startFlag = false;
                             pushFlag = false;
@@ -200,7 +200,7 @@ namespace 冲水阀水力特性测试机
                
             }
 
-            bpqreturn.Text = Math.Round( m_dataScaled[m_dataScaled.Length - 1],2).ToString();
+            bpqreturn.Text = Math.Round( m_dataScaled[m_dataScaled.Length - 1]*5,2).ToString();
             waterHammer.Text = "水冲击力：" + Math.Round(data[data.Length - 3], 2)+" N";
             waterPresuer.Text = "压力：" + Math.Round( data[data.Length - 4], 2)+" Bar";
             waterTemperature.Text = "温度：" +Math.Round( data[data.Length - 2],2)*10+" ℃";
@@ -346,9 +346,9 @@ namespace 冲水阀水力特性测试机
             daq.InstantAo();
             daq.InstantDi();
             daq.InstantDo();
-            doData = new byte[2] { 0x00,0x00};
-            
-            
+            doData = new byte[2] { 0x00,0x00};            
+            daq.InstantDo_Write(doData);
+
             bpqzt.Text = "变频器当前状态：变频";
             sbzt.Text = "水泵当前状态：";
             sbyali.Value = Properties.Settings.Default.水泵压力;
@@ -587,7 +587,7 @@ namespace 冲水阀水力特性测试机
                 doData[0] = set_bit(doData[0], 2, true);
                 daq.InstantDo_Write(doData);
 
-                aoData[0] = Convert.ToDouble(bpqreturn.Text);
+                aoData[0] = Convert.ToDouble(bpqreturn.Text)/5;
                 daq.InstantAo_Write(aoData);
             }
             else//变频

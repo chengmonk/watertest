@@ -37,11 +37,14 @@ namespace 冲水阀水力特性测试机
             doData[0] = set_bit(doData[0], 3, true);
             daq.InstantDo_Write(doData);
             //System.Console.WriteLine("push:" + doData[0]);
-            for (; true;)//流量大于某个数值以后开始计时
-            {
-                if (FLOW > 0.1) {
-                    break; }
-            }
+            //for (; true;)//流量大于某个数值以后开始计时
+            //{
+            //    if (FLOW>0.05)
+            //    {
+            //        MessageBox.Show("pushflag:true");
+            //        break;
+            //    }
+            //}
             double t = 1000 * (double)numericUpDown1.Value;
             System.Threading.Thread.Sleep((int)t);//
             doData[0] = set_bit(doData[0], 3, false);
@@ -110,24 +113,29 @@ namespace 冲水阀水力特性测试机
             waterFlow.Text = "流量：" + Math.Round( data[2],2)+"L/s";
             maxWaterFlow.Text = "最大流量:" + Math.Round( maxFlow,2)+"L/s";
             totalFlowShow.Text = "累计流量：" + Math.Round(totalFlow, 2)  +"L";
-            if (Math.Abs(Math.Round(totalFlow, 2) - 6) < 0.1&&first6l)//记录到达6l的索引
-            {
-                L6 = l.Count;
-                first6l = false;
-            }
+           
           
-            if (Math.Abs(Math.Round(totalFlow, 2) - 9) < 0.1&&first9l)//记录到达9l的索引
-            {
-                L9 = l.Count;
-                first9l = false;
+            
+            bpqreturn.Text = Math.Round(data[1]*5, 2).ToString();
+            if (Math.Round(data[2], 2) > 0.01) {
+                pushFlag = true;
+               
             }
-          
-            if (Math.Round(data[2], 2) > 0.1) pushFlag = true;
-
-            bpqreturn.Text = Math.Round(data[1], 2).ToString();
-
-            if (l.Count > 0 && loadDataFlag)
+            if ( loadDataFlag)
             {
+                if (Math.Abs(Math.Round(totalFlow, 2) - 6) < 1 && first6l)//记录到达6l的索引
+                {
+                    L6 = l.Count;
+                    first6l = false;
+                }
+
+                if (Math.Abs(Math.Round(totalFlow, 2) - 9) < 1 && first9l)//记录到达9l的索引
+                {
+                    L9 = l.Count;
+                    first9l = false;
+                }
+                
+
                 dt.Rows.Add(t.ToString("yyyy-MM-dd hh:mm:ss:fff"), Math.Round(data[0], 2), Math.Round(data[2], 2));
                 hslCurve1.AddCurveData(
                         new string[] { "A" },
@@ -194,11 +202,12 @@ namespace 冲水阀水力特性测试机
             c.startChannel = 0;
 
             //初始化研华板卡的功能
-            daq = new DAQ_profile(1, c);
+            daq = new DAQ_profile(0, c);
             daq.InstantAo();
             daq.InstantDi();
             daq.InstantDo();
-            
+            doData = new byte[2] { 0x00, 0x00 };
+            daq.InstantDo_Write(doData);
             //dp.Enabled = true;
             //bp.Enabled = false;
             bpqzt.Text = "变频器当前状态：变频";
@@ -229,7 +238,7 @@ namespace 冲水阀水力特性测试机
             monitor.AutoReset = true;//设置是执行一次（false）还是一直执行(true)；
             monitor.Enabled = true;//是否执行System.Timers.Timer.Elapsed事件； 
 
-            pushWork = new System.Timers.Timer(1);
+            pushWork = new System.Timers.Timer(10);
             pushWork.Elapsed += new System.Timers.ElapsedEventHandler(pushWorkThread);//到达时间的时候执行事件； 
             pushWork.AutoReset = false;//设置是执行一次（false）还是一直执行(true)；
             daq.InstantAi();
@@ -333,8 +342,7 @@ namespace 冲水阀水力特性测试机
             
            
             if (MessageBox.Show("关闭窗体后，程序会退出！！", "提示！！", MessageBoxButtons.YesNo) == DialogResult.Yes)
-            {
-               
+            {               
                 e.Cancel = false;
                 System.Environment.Exit(0);
                 
@@ -495,7 +503,7 @@ namespace 冲水阀水力特性测试机
                 doData[0] = set_bit(doData[0], 2, true);
                 daq.InstantDo_Write(doData);
 
-                aoData[0] = Convert.ToDouble(bpqreturn.Text);
+                aoData[0] = Convert.ToDouble(bpqreturn.Text)/5;
                 daq.InstantAo_Write(aoData);
             }
             else//变频
