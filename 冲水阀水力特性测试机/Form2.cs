@@ -148,6 +148,7 @@ namespace 冲水阀水力特性测试机
                             (float) l[l.Count - 1],(float)Math.Round( data[0],2)
                         }
                     );
+                    
                 }
                 Console.WriteLine("pushedFlag:" + pushedFlag);
                 if (l[l.Count - 1] < (double) stopThreshold.Value && pushedFlag)//小于阈值停止记录
@@ -630,6 +631,20 @@ namespace 冲水阀水力特性测试机
         private void Label13_Click(object sender, EventArgs e)
         {
 
+        }
+        bool flowisVisiable = true;
+        private void HslButton1_Click_1(object sender, EventArgs e)
+        {
+            // 隐藏曲线
+            flowisVisiable = !flowisVisiable;
+            hslCurve1.SetCurveVisible(new string[] { "流量" }, flowisVisiable);
+        }
+        bool tempisVisiable = true;
+        private void HslButton3_Click_1(object sender, EventArgs e)
+        {
+            // 隐藏曲线
+            tempisVisiable = !tempisVisiable;
+            hslCurve1.SetCurveVisible(new string[] { "温度" }, tempisVisiable);
         }
     }
 }

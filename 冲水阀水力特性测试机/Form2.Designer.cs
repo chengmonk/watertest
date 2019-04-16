@@ -62,6 +62,8 @@
             this.hslSwitch2 = new HslControls.HslSwitch();
             this.qdfstatus = new System.Windows.Forms.Label();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.hslButton3 = new HslControls.HslButton();
+            this.hslButton1 = new HslControls.HslButton();
             this.hslPlay1 = new HslControls.HslPlay();
             this.hslButton5 = new HslControls.HslButton();
             this.hslButton2 = new HslControls.HslButton();
@@ -69,11 +71,11 @@
             this.hslCurve1 = new HslControls.HslCurve();
             this.systemInfo = new System.Windows.Forms.Label();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
-            this.waterFlow = new System.Windows.Forms.Label();
-            this.maxWaterFlow = new System.Windows.Forms.Label();
-            this.totalFlowShow = new System.Windows.Forms.Label();
-            this.waterTemperature = new System.Windows.Forms.Label();
             this.label15 = new System.Windows.Forms.Label();
+            this.waterTemperature = new System.Windows.Forms.Label();
+            this.totalFlowShow = new System.Windows.Forms.Label();
+            this.maxWaterFlow = new System.Windows.Forms.Label();
+            this.waterFlow = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.sbyali)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
@@ -485,6 +487,8 @@
             // groupBox3
             // 
             this.groupBox3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.groupBox3.Controls.Add(this.hslButton3);
+            this.groupBox3.Controls.Add(this.hslButton1);
             this.groupBox3.Controls.Add(this.hslPlay1);
             this.groupBox3.Controls.Add(this.hslButton5);
             this.groupBox3.Controls.Add(this.hslButton2);
@@ -498,6 +502,28 @@
             this.groupBox3.TabIndex = 27;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "操作区";
+            // 
+            // hslButton3
+            // 
+            this.hslButton3.CustomerInformation = null;
+            this.hslButton3.Location = new System.Drawing.Point(147, 56);
+            this.hslButton3.Margin = new System.Windows.Forms.Padding(4);
+            this.hslButton3.Name = "hslButton3";
+            this.hslButton3.Size = new System.Drawing.Size(120, 31);
+            this.hslButton3.TabIndex = 29;
+            this.hslButton3.Text = "隐藏温度曲线";
+            this.hslButton3.Click += new System.EventHandler(this.HslButton3_Click_1);
+            // 
+            // hslButton1
+            // 
+            this.hslButton1.CustomerInformation = null;
+            this.hslButton1.Location = new System.Drawing.Point(147, 17);
+            this.hslButton1.Margin = new System.Windows.Forms.Padding(4);
+            this.hslButton1.Name = "hslButton1";
+            this.hslButton1.Size = new System.Drawing.Size(120, 31);
+            this.hslButton1.TabIndex = 28;
+            this.hslButton1.Text = "隐藏流量曲线";
+            this.hslButton1.Click += new System.EventHandler(this.HslButton1_Click_1);
             // 
             // hslPlay1
             // 
@@ -585,38 +611,19 @@
             this.groupBox4.Controls.Add(this.waterFlow);
             this.groupBox4.Location = new System.Drawing.Point(285, 393);
             this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(455, 257);
+            this.groupBox4.Size = new System.Drawing.Size(427, 257);
             this.groupBox4.TabIndex = 29;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "仪表状态";
             // 
-            // waterFlow
+            // label15
             // 
-            this.waterFlow.AutoSize = true;
-            this.waterFlow.Location = new System.Drawing.Point(36, 32);
-            this.waterFlow.Name = "waterFlow";
-            this.waterFlow.Size = new System.Drawing.Size(71, 15);
-            this.waterFlow.TabIndex = 0;
-            this.waterFlow.Text = "当前流量";
-            // 
-            // maxWaterFlow
-            // 
-            this.maxWaterFlow.AutoSize = true;
-            this.maxWaterFlow.Location = new System.Drawing.Point(36, 69);
-            this.maxWaterFlow.Name = "maxWaterFlow";
-            this.maxWaterFlow.Size = new System.Drawing.Size(71, 15);
-            this.maxWaterFlow.TabIndex = 1;
-            this.maxWaterFlow.Text = "最大流量";
-            // 
-            // totalFlowShow
-            // 
-            this.totalFlowShow.AutoSize = true;
-            this.totalFlowShow.Location = new System.Drawing.Point(36, 106);
-            this.totalFlowShow.Name = "totalFlowShow";
-            this.totalFlowShow.Size = new System.Drawing.Size(71, 15);
-            this.totalFlowShow.TabIndex = 2;
-            this.totalFlowShow.Text = "累计流量";
-            this.totalFlowShow.Click += new System.EventHandler(this.Label13_Click);
+            this.label15.AutoSize = true;
+            this.label15.Location = new System.Drawing.Point(36, 180);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(55, 15);
+            this.label15.TabIndex = 4;
+            this.label15.Text = "压力值";
             // 
             // waterTemperature
             // 
@@ -628,14 +635,33 @@
             this.waterTemperature.Text = "温度";
             this.waterTemperature.Click += new System.EventHandler(this.Label14_Click);
             // 
-            // label15
+            // totalFlowShow
             // 
-            this.label15.AutoSize = true;
-            this.label15.Location = new System.Drawing.Point(36, 180);
-            this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(55, 15);
-            this.label15.TabIndex = 4;
-            this.label15.Text = "压力值";
+            this.totalFlowShow.AutoSize = true;
+            this.totalFlowShow.Location = new System.Drawing.Point(36, 106);
+            this.totalFlowShow.Name = "totalFlowShow";
+            this.totalFlowShow.Size = new System.Drawing.Size(71, 15);
+            this.totalFlowShow.TabIndex = 2;
+            this.totalFlowShow.Text = "累计流量";
+            this.totalFlowShow.Click += new System.EventHandler(this.Label13_Click);
+            // 
+            // maxWaterFlow
+            // 
+            this.maxWaterFlow.AutoSize = true;
+            this.maxWaterFlow.Location = new System.Drawing.Point(36, 69);
+            this.maxWaterFlow.Name = "maxWaterFlow";
+            this.maxWaterFlow.Size = new System.Drawing.Size(71, 15);
+            this.maxWaterFlow.TabIndex = 1;
+            this.maxWaterFlow.Text = "最大流量";
+            // 
+            // waterFlow
+            // 
+            this.waterFlow.AutoSize = true;
+            this.waterFlow.Location = new System.Drawing.Point(36, 32);
+            this.waterFlow.Name = "waterFlow";
+            this.waterFlow.Size = new System.Drawing.Size(71, 15);
+            this.waterFlow.TabIndex = 0;
+            this.waterFlow.Text = "当前流量";
             // 
             // Form2
             // 
@@ -718,5 +744,7 @@
         private System.Windows.Forms.Label maxWaterFlow;
         private System.Windows.Forms.Label waterFlow;
         private System.Windows.Forms.Label label15;
+        private HslControls.HslButton hslButton3;
+        private HslControls.HslButton hslButton1;
     }
 }
