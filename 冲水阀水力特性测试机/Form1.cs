@@ -188,7 +188,7 @@ namespace 冲水阀水力特性测试机
                 {
 
                     hslCurve1.AddCurveData(
-                        new string[] { "A", "B" },
+                        new string[] { "压力", "冲击力" },
                         new float[]
                         {
                    (float)data[i],
@@ -690,6 +690,20 @@ namespace 冲水阀水力特性测试机
         {
             Properties.Settings.Default.停止阈值 = startThreshold.Value;
             Properties.Settings.Default.Save();
+        }
+        bool pressureisVisiable = true;
+        private void HslButton1_Click_1(object sender, EventArgs e)
+        {
+            // 隐藏曲线
+            pressureisVisiable = !pressureisVisiable;
+            hslCurve1.SetCurveVisible(new string[] { "压力" }, pressureisVisiable);
+        }
+        bool hummerisVisiable = true;
+        private void HslButton2_Click_1(object sender, EventArgs e)
+        {
+            // 隐藏曲线
+            hummerisVisiable = !hummerisVisiable;
+            hslCurve1.SetCurveVisible(new string[] { "压力" }, hummerisVisiable);
         }
 
         private void workName_TextChanged(object sender, EventArgs e)

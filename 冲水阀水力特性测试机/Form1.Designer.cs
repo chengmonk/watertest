@@ -31,13 +31,6 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.hslButton3 = new HslControls.HslButton();
-            this.statusStrip1 = new System.Windows.Forms.StatusStrip();
-            this.waterPresuer = new System.Windows.Forms.ToolStripStatusLabel();
-            this.waterHammer = new System.Windows.Forms.ToolStripStatusLabel();
-            this.waterFlow = new System.Windows.Forms.ToolStripStatusLabel();
-            this.waterTemperature = new System.Windows.Forms.ToolStripStatusLabel();
-            this.pressureMax = new System.Windows.Forms.ToolStripStatusLabel();
-            this.waterHammerMax = new System.Windows.Forms.ToolStripStatusLabel();
             this.instantDoCtrl1 = new Automation.BDaq.InstantDoCtrl(this.components);
             this.m_instantAoCtrl = new Automation.BDaq.InstantAoCtrl(this.components);
             this.instantDiCtrl1 = new Automation.BDaq.InstantDiCtrl(this.components);
@@ -69,10 +62,17 @@
             this.hslSwitch2 = new HslControls.HslSwitch();
             this.qdfstatus = new System.Windows.Forms.Label();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.hslButton2 = new HslControls.HslButton();
+            this.hslButton1 = new HslControls.HslButton();
             this.hslPlay1 = new HslControls.HslPlay();
             this.systemInfo = new System.Windows.Forms.Label();
             this.instantAiCtrl1 = new Automation.BDaq.InstantAiCtrl(this.components);
-            this.statusStrip1.SuspendLayout();
+            this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.waterTemperature = new System.Windows.Forms.Label();
+            this.waterPresuer = new System.Windows.Forms.Label();
+            this.waterHammer = new System.Windows.Forms.Label();
+            this.pressureMax = new System.Windows.Forms.Label();
+            this.waterHammerMax = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.sbyali)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
@@ -80,68 +80,19 @@
             ((System.ComponentModel.ISupportInitialize)(this.stopThreshold)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.startThreshold)).BeginInit();
             this.groupBox3.SuspendLayout();
+            this.groupBox4.SuspendLayout();
             this.SuspendLayout();
             // 
             // hslButton3
             // 
             this.hslButton3.CustomerInformation = null;
-            this.hslButton3.Location = new System.Drawing.Point(180, 20);
+            this.hslButton3.Location = new System.Drawing.Point(35, 137);
+            this.hslButton3.Margin = new System.Windows.Forms.Padding(4);
             this.hslButton3.Name = "hslButton3";
-            this.hslButton3.Size = new System.Drawing.Size(89, 41);
+            this.hslButton3.Size = new System.Drawing.Size(90, 37);
             this.hslButton3.TabIndex = 3;
             this.hslButton3.Text = "保存数据";
             this.hslButton3.Click += new System.EventHandler(this.hslButton3_Click);
-            // 
-            // statusStrip1
-            // 
-            this.statusStrip1.Font = new System.Drawing.Font("黑体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.statusStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
-            this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.waterPresuer,
-            this.waterHammer,
-            this.waterFlow,
-            this.waterTemperature,
-            this.pressureMax,
-            this.waterHammerMax});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 497);
-            this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Padding = new System.Windows.Forms.Padding(1, 0, 10, 0);
-            this.statusStrip1.Size = new System.Drawing.Size(979, 22);
-            this.statusStrip1.TabIndex = 4;
-            this.statusStrip1.Text = "statusStrip1";
-            // 
-            // waterPresuer
-            // 
-            this.waterPresuer.Name = "waterPresuer";
-            this.waterPresuer.Size = new System.Drawing.Size(0, 17);
-            // 
-            // waterHammer
-            // 
-            this.waterHammer.Name = "waterHammer";
-            this.waterHammer.Size = new System.Drawing.Size(0, 17);
-            // 
-            // waterFlow
-            // 
-            this.waterFlow.Name = "waterFlow";
-            this.waterFlow.Size = new System.Drawing.Size(0, 17);
-            // 
-            // waterTemperature
-            // 
-            this.waterTemperature.Name = "waterTemperature";
-            this.waterTemperature.Size = new System.Drawing.Size(131, 17);
-            this.waterTemperature.Text = "toolStripStatusLabel1";
-            // 
-            // pressureMax
-            // 
-            this.pressureMax.Name = "pressureMax";
-            this.pressureMax.Size = new System.Drawing.Size(29, 17);
-            this.pressureMax.Text = "压力";
-            // 
-            // waterHammerMax
-            // 
-            this.waterHammerMax.Name = "waterHammerMax";
-            this.waterHammerMax.Size = new System.Drawing.Size(41, 17);
-            this.waterHammerMax.Text = "冲击力";
             // 
             // instantDoCtrl1
             // 
@@ -161,9 +112,10 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.hslCurve1.Font = new System.Drawing.Font("黑体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.hslCurve1.Location = new System.Drawing.Point(27, 12);
+            this.hslCurve1.Location = new System.Drawing.Point(36, 15);
+            this.hslCurve1.Margin = new System.Windows.Forms.Padding(4);
             this.hslCurve1.Name = "hslCurve1";
-            this.hslCurve1.Size = new System.Drawing.Size(610, 307);
+            this.hslCurve1.Size = new System.Drawing.Size(813, 413);
             this.hslCurve1.TabIndex = 5;
             this.hslCurve1.ValueMaxLeft = 10F;
             this.hslCurve1.ValueMaxRight = 10F;
@@ -185,9 +137,11 @@
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Controls.Add(this.open);
             this.groupBox1.Font = new System.Drawing.Font("黑体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.groupBox1.Location = new System.Drawing.Point(643, 10);
+            this.groupBox1.Location = new System.Drawing.Point(857, 12);
+            this.groupBox1.Margin = new System.Windows.Forms.Padding(4);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(326, 272);
+            this.groupBox1.Padding = new System.Windows.Forms.Padding(4);
+            this.groupBox1.Size = new System.Drawing.Size(435, 533);
             this.groupBox1.TabIndex = 9;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "水泵控制";
@@ -203,10 +157,10 @@
             this.hslBlower1.Color7 = System.Drawing.Color.FromArgb(((int)(((byte)(158)))), ((int)(((byte)(165)))), ((int)(((byte)(173)))));
             this.hslBlower1.Color8 = System.Drawing.Color.FromArgb(((int)(((byte)(176)))), ((int)(((byte)(182)))), ((int)(((byte)(189)))));
             this.hslBlower1.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.hslBlower1.Location = new System.Drawing.Point(116, 142);
-            this.hslBlower1.Margin = new System.Windows.Forms.Padding(2);
+            this.hslBlower1.Location = new System.Drawing.Point(155, 178);
+            this.hslBlower1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.hslBlower1.Name = "hslBlower1";
-            this.hslBlower1.Size = new System.Drawing.Size(106, 126);
+            this.hslBlower1.Size = new System.Drawing.Size(141, 158);
             this.hslBlower1.TabIndex = 22;
             this.hslBlower1.Text = "关闭";
             this.hslBlower1.Load += new System.EventHandler(this.HslBlower1_Load);
@@ -215,10 +169,10 @@
             // hslSwitch1
             // 
             this.hslSwitch1.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.hslSwitch1.Location = new System.Drawing.Point(217, 19);
-            this.hslSwitch1.Margin = new System.Windows.Forms.Padding(2);
+            this.hslSwitch1.Location = new System.Drawing.Point(289, 24);
+            this.hslSwitch1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.hslSwitch1.Name = "hslSwitch1";
-            this.hslSwitch1.Size = new System.Drawing.Size(94, 106);
+            this.hslSwitch1.Size = new System.Drawing.Size(125, 132);
             this.hslSwitch1.SwitchBackground = System.Drawing.Color.Gray;
             this.hslSwitch1.SwitchForeground = System.Drawing.Color.Black;
             this.hslSwitch1.SwitchStatusDescription = "变频;定频";
@@ -229,46 +183,49 @@
             // bpqreturn
             // 
             this.bpqreturn.AutoSize = true;
-            this.bpqreturn.Location = new System.Drawing.Point(98, 95);
-            this.bpqreturn.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.bpqreturn.Location = new System.Drawing.Point(131, 119);
             this.bpqreturn.Name = "bpqreturn";
-            this.bpqreturn.Size = new System.Drawing.Size(23, 12);
+            this.bpqreturn.Size = new System.Drawing.Size(31, 15);
             this.bpqreturn.TabIndex = 17;
             this.bpqreturn.Text = "0.0";
             // 
             // sbzt
             // 
             this.sbzt.AutoSize = true;
-            this.sbzt.Location = new System.Drawing.Point(6, 153);
+            this.sbzt.Location = new System.Drawing.Point(8, 191);
+            this.sbzt.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.sbzt.Name = "sbzt";
-            this.sbzt.Size = new System.Drawing.Size(89, 12);
+            this.sbzt.Size = new System.Drawing.Size(119, 15);
             this.sbzt.TabIndex = 16;
             this.sbzt.Text = "水泵当前状态：";
             // 
             // bpqzt
             // 
             this.bpqzt.AutoSize = true;
-            this.bpqzt.Location = new System.Drawing.Point(6, 125);
+            this.bpqzt.Location = new System.Drawing.Point(8, 156);
+            this.bpqzt.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.bpqzt.Name = "bpqzt";
-            this.bpqzt.Size = new System.Drawing.Size(101, 12);
+            this.bpqzt.Size = new System.Drawing.Size(135, 15);
             this.bpqzt.TabIndex = 15;
             this.bpqzt.Text = "变频器当前状态：";
             // 
             // bpqfh
             // 
             this.bpqfh.AutoSize = true;
-            this.bpqfh.Location = new System.Drawing.Point(6, 95);
+            this.bpqfh.Location = new System.Drawing.Point(8, 119);
+            this.bpqfh.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.bpqfh.Name = "bpqfh";
-            this.bpqfh.Size = new System.Drawing.Size(101, 12);
+            this.bpqfh.Size = new System.Drawing.Size(135, 15);
             this.bpqfh.TabIndex = 14;
             this.bpqfh.Text = "变频器输出频率：";
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(160, 67);
+            this.label2.Location = new System.Drawing.Point(213, 84);
+            this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(23, 12);
+            this.label2.Size = new System.Drawing.Size(31, 15);
             this.label2.TabIndex = 13;
             this.label2.Text = "Bar";
             // 
@@ -280,14 +237,15 @@
             0,
             0,
             65536});
-            this.sbyali.Location = new System.Drawing.Point(65, 61);
+            this.sbyali.Location = new System.Drawing.Point(87, 76);
+            this.sbyali.Margin = new System.Windows.Forms.Padding(4);
             this.sbyali.Maximum = new decimal(new int[] {
             10,
             0,
             0,
             0});
             this.sbyali.Name = "sbyali";
-            this.sbyali.Size = new System.Drawing.Size(89, 21);
+            this.sbyali.Size = new System.Drawing.Size(119, 25);
             this.sbyali.TabIndex = 12;
             this.sbyali.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.sbyali.ThousandsSeparator = true;
@@ -297,18 +255,20 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(6, 67);
+            this.label1.Location = new System.Drawing.Point(8, 84);
+            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(65, 12);
+            this.label1.Size = new System.Drawing.Size(87, 15);
             this.label1.TabIndex = 11;
             this.label1.Text = "水泵压力：";
             // 
             // open
             // 
             this.open.CustomerInformation = null;
-            this.open.Location = new System.Drawing.Point(6, 20);
+            this.open.Location = new System.Drawing.Point(8, 25);
+            this.open.Margin = new System.Windows.Forms.Padding(4);
             this.open.Name = "open";
-            this.open.Size = new System.Drawing.Size(148, 35);
+            this.open.Size = new System.Drawing.Size(197, 44);
             this.open.TabIndex = 10;
             this.open.Text = "打开水泵";
             this.open.Click += new System.EventHandler(this.hslButton4_Click_1);
@@ -316,9 +276,10 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(194, 26);
+            this.label3.Location = new System.Drawing.Point(259, 32);
+            this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(17, 12);
+            this.label3.Size = new System.Drawing.Size(23, 15);
             this.label3.TabIndex = 16;
             this.label3.Text = "秒";
             // 
@@ -330,14 +291,15 @@
             0,
             0,
             65536});
-            this.numericUpDown1.Location = new System.Drawing.Point(105, 22);
+            this.numericUpDown1.Location = new System.Drawing.Point(140, 28);
+            this.numericUpDown1.Margin = new System.Windows.Forms.Padding(4);
             this.numericUpDown1.Maximum = new decimal(new int[] {
             10000000,
             0,
             0,
             0});
             this.numericUpDown1.Name = "numericUpDown1";
-            this.numericUpDown1.Size = new System.Drawing.Size(89, 21);
+            this.numericUpDown1.Size = new System.Drawing.Size(119, 25);
             this.numericUpDown1.TabIndex = 15;
             this.numericUpDown1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.numericUpDown1.ThousandsSeparator = true;
@@ -347,18 +309,20 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(15, 24);
+            this.label4.Location = new System.Drawing.Point(20, 30);
+            this.label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(89, 12);
+            this.label4.Size = new System.Drawing.Size(119, 15);
             this.label4.TabIndex = 14;
             this.label4.Text = "工件保持时间：";
             // 
             // hslButton4
             // 
             this.hslButton4.CustomerInformation = null;
-            this.hslButton4.Location = new System.Drawing.Point(340, 20);
+            this.hslButton4.Location = new System.Drawing.Point(35, 201);
+            this.hslButton4.Margin = new System.Windows.Forms.Padding(4);
             this.hslButton4.Name = "hslButton4";
-            this.hslButton4.Size = new System.Drawing.Size(89, 41);
+            this.hslButton4.Size = new System.Drawing.Size(90, 32);
             this.hslButton4.TabIndex = 17;
             this.hslButton4.Text = "误差修正";
             this.hslButton4.Click += new System.EventHandler(this.hslButton4_Click_2);
@@ -366,20 +330,21 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(15, 60);
+            this.label5.Location = new System.Drawing.Point(20, 75);
+            this.label5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(65, 12);
+            this.label5.Size = new System.Drawing.Size(87, 15);
             this.label5.TabIndex = 18;
             this.label5.Text = "工件名称：";
             // 
             // workName
             // 
-            this.workName.Location = new System.Drawing.Point(94, 58);
-            this.workName.Margin = new System.Windows.Forms.Padding(2);
+            this.workName.Location = new System.Drawing.Point(125, 72);
+            this.workName.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.workName.Multiline = true;
             this.workName.Name = "workName";
             this.workName.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.workName.Size = new System.Drawing.Size(117, 55);
+            this.workName.Size = new System.Drawing.Size(155, 68);
             this.workName.TabIndex = 19;
             this.workName.Text = "冲水阀";
             this.workName.TextChanged += new System.EventHandler(this.workName_TextChanged);
@@ -401,11 +366,11 @@
             this.groupBox2.Controls.Add(this.numericUpDown1);
             this.groupBox2.Controls.Add(this.label3);
             this.groupBox2.Font = new System.Drawing.Font("黑体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.groupBox2.Location = new System.Drawing.Point(642, 282);
-            this.groupBox2.Margin = new System.Windows.Forms.Padding(2);
+            this.groupBox2.Location = new System.Drawing.Point(856, 545);
+            this.groupBox2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Padding = new System.Windows.Forms.Padding(2);
-            this.groupBox2.Size = new System.Drawing.Size(326, 213);
+            this.groupBox2.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.groupBox2.Size = new System.Drawing.Size(435, 266);
             this.groupBox2.TabIndex = 20;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "工件属性";
@@ -413,9 +378,10 @@
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(16, 186);
+            this.label8.Location = new System.Drawing.Point(21, 232);
+            this.label8.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(89, 12);
+            this.label8.Size = new System.Drawing.Size(119, 15);
             this.label8.TabIndex = 34;
             this.label8.Text = "停止采集阈值：";
             // 
@@ -427,14 +393,15 @@
             0,
             0,
             131072});
-            this.stopThreshold.Location = new System.Drawing.Point(106, 184);
+            this.stopThreshold.Location = new System.Drawing.Point(141, 230);
+            this.stopThreshold.Margin = new System.Windows.Forms.Padding(4);
             this.stopThreshold.Minimum = new decimal(new int[] {
             100,
             0,
             0,
             -2147483648});
             this.stopThreshold.Name = "stopThreshold";
-            this.stopThreshold.Size = new System.Drawing.Size(61, 21);
+            this.stopThreshold.Size = new System.Drawing.Size(81, 25);
             this.stopThreshold.TabIndex = 35;
             this.stopThreshold.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.stopThreshold.ThousandsSeparator = true;
@@ -445,18 +412,20 @@
             // 
             this.label9.AutoSize = true;
             this.label9.Font = new System.Drawing.Font("黑体", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label9.Location = new System.Drawing.Point(173, 186);
+            this.label9.Location = new System.Drawing.Point(231, 232);
+            this.label9.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(137, 11);
+            this.label9.Size = new System.Drawing.Size(161, 14);
             this.label9.TabIndex = 36;
             this.label9.Text = "压力小于这个值停止采集";
             // 
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(17, 155);
+            this.label6.Location = new System.Drawing.Point(23, 194);
+            this.label6.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(89, 12);
+            this.label6.Size = new System.Drawing.Size(119, 15);
             this.label6.TabIndex = 31;
             this.label6.Text = "开始计时阈值：";
             // 
@@ -468,14 +437,15 @@
             0,
             0,
             131072});
-            this.startThreshold.Location = new System.Drawing.Point(107, 153);
+            this.startThreshold.Location = new System.Drawing.Point(143, 191);
+            this.startThreshold.Margin = new System.Windows.Forms.Padding(4);
             this.startThreshold.Minimum = new decimal(new int[] {
             100,
             0,
             0,
             -2147483648});
             this.startThreshold.Name = "startThreshold";
-            this.startThreshold.Size = new System.Drawing.Size(61, 21);
+            this.startThreshold.Size = new System.Drawing.Size(81, 25);
             this.startThreshold.TabIndex = 32;
             this.startThreshold.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.startThreshold.ThousandsSeparator = true;
@@ -486,19 +456,20 @@
             // 
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("黑体", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label7.Location = new System.Drawing.Point(174, 155);
+            this.label7.Location = new System.Drawing.Point(232, 194);
+            this.label7.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(137, 11);
+            this.label7.Size = new System.Drawing.Size(161, 14);
             this.label7.TabIndex = 33;
             this.label7.Text = "压力大于这个值开始计时";
             // 
             // hslSwitch2
             // 
             this.hslSwitch2.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.hslSwitch2.Location = new System.Drawing.Point(236, 22);
-            this.hslSwitch2.Margin = new System.Windows.Forms.Padding(2);
+            this.hslSwitch2.Location = new System.Drawing.Point(315, 28);
+            this.hslSwitch2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.hslSwitch2.Name = "hslSwitch2";
-            this.hslSwitch2.Size = new System.Drawing.Size(76, 87);
+            this.hslSwitch2.Size = new System.Drawing.Size(101, 109);
             this.hslSwitch2.SwitchForeground = System.Drawing.Color.FromArgb(((int)(((byte)(36)))), ((int)(((byte)(36)))), ((int)(((byte)(36)))));
             this.hslSwitch2.SwitchStatusDescription = "抬起;按下";
             this.hslSwitch2.TabIndex = 30;
@@ -508,9 +479,10 @@
             // qdfstatus
             // 
             this.qdfstatus.AutoSize = true;
-            this.qdfstatus.Location = new System.Drawing.Point(15, 130);
+            this.qdfstatus.Location = new System.Drawing.Point(20, 162);
+            this.qdfstatus.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.qdfstatus.Name = "qdfstatus";
-            this.qdfstatus.Size = new System.Drawing.Size(101, 12);
+            this.qdfstatus.Size = new System.Drawing.Size(135, 15);
             this.qdfstatus.TabIndex = 20;
             this.qdfstatus.Text = "气动阀当前状态：";
             // 
@@ -518,27 +490,52 @@
             // 
             this.groupBox3.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox3.Controls.Add(this.hslButton2);
+            this.groupBox3.Controls.Add(this.hslButton1);
             this.groupBox3.Controls.Add(this.hslPlay1);
             this.groupBox3.Controls.Add(this.hslButton4);
             this.groupBox3.Controls.Add(this.hslButton3);
             this.groupBox3.Font = new System.Drawing.Font("黑体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.groupBox3.Location = new System.Drawing.Point(27, 324);
-            this.groupBox3.Margin = new System.Windows.Forms.Padding(2);
+            this.groupBox3.Location = new System.Drawing.Point(12, 416);
+            this.groupBox3.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Padding = new System.Windows.Forms.Padding(2);
-            this.groupBox3.Size = new System.Drawing.Size(471, 103);
+            this.groupBox3.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.groupBox3.Size = new System.Drawing.Size(301, 306);
             this.groupBox3.TabIndex = 21;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "操作区";
+            // 
+            // hslButton2
+            // 
+            this.hslButton2.CustomerInformation = null;
+            this.hslButton2.Location = new System.Drawing.Point(178, 129);
+            this.hslButton2.Margin = new System.Windows.Forms.Padding(4);
+            this.hslButton2.Name = "hslButton2";
+            this.hslButton2.Size = new System.Drawing.Size(116, 37);
+            this.hslButton2.TabIndex = 30;
+            this.hslButton2.Text = "隐藏冲击力曲线";
+            this.hslButton2.Click += new System.EventHandler(this.HslButton2_Click_1);
+            // 
+            // hslButton1
+            // 
+            this.hslButton1.CustomerInformation = null;
+            this.hslButton1.Location = new System.Drawing.Point(178, 68);
+            this.hslButton1.Margin = new System.Windows.Forms.Padding(4);
+            this.hslButton1.Name = "hslButton1";
+            this.hslButton1.Size = new System.Drawing.Size(116, 37);
+            this.hslButton1.TabIndex = 29;
+            this.hslButton1.Text = "隐藏压力曲线";
+            this.hslButton1.Click += new System.EventHandler(this.HslButton1_Click_1);
             // 
             // hslPlay1
             // 
             this.hslPlay1.ActiveColor = System.Drawing.Color.Red;
             this.hslPlay1.Cursor = System.Windows.Forms.Cursors.Hand;
             this.hslPlay1.ForeColor = System.Drawing.SystemColors.Highlight;
-            this.hslPlay1.Location = new System.Drawing.Point(52, 8);
+            this.hslPlay1.Location = new System.Drawing.Point(35, 20);
+            this.hslPlay1.Margin = new System.Windows.Forms.Padding(4);
             this.hslPlay1.Name = "hslPlay1";
-            this.hslPlay1.Size = new System.Drawing.Size(79, 94);
+            this.hslPlay1.Size = new System.Drawing.Size(79, 109);
             this.hslPlay1.TabIndex = 28;
             this.hslPlay1.Text = "自动运行";
             this.hslPlay1.OnPlayChanged += new System.Action<object, bool>(this.hslPlay1_OnPlayChanged);
@@ -547,9 +544,10 @@
             // 
             this.systemInfo.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.systemInfo.AutoSize = true;
-            this.systemInfo.Location = new System.Drawing.Point(33, 429);
+            this.systemInfo.Location = new System.Drawing.Point(44, 729);
+            this.systemInfo.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.systemInfo.Name = "systemInfo";
-            this.systemInfo.Size = new System.Drawing.Size(65, 12);
+            this.systemInfo.Size = new System.Drawing.Size(82, 15);
             this.systemInfo.TabIndex = 22;
             this.systemInfo.Text = "系统信息：";
             // 
@@ -557,25 +555,92 @@
             // 
             this.instantAiCtrl1._StateStream = ((Automation.BDaq.DeviceStateStreamer)(resources.GetObject("instantAiCtrl1._StateStream")));
             // 
+            // groupBox4
+            // 
+            this.groupBox4.Controls.Add(this.waterHammerMax);
+            this.groupBox4.Controls.Add(this.pressureMax);
+            this.groupBox4.Controls.Add(this.waterHammer);
+            this.groupBox4.Controls.Add(this.waterPresuer);
+            this.groupBox4.Controls.Add(this.waterTemperature);
+            this.groupBox4.Location = new System.Drawing.Point(319, 416);
+            this.groupBox4.Name = "groupBox4";
+            this.groupBox4.Size = new System.Drawing.Size(492, 306);
+            this.groupBox4.TabIndex = 23;
+            this.groupBox4.TabStop = false;
+            this.groupBox4.Text = "仪表显示";
+            // 
+            // waterTemperature
+            // 
+            this.waterTemperature.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.waterTemperature.AutoSize = true;
+            this.waterTemperature.Location = new System.Drawing.Point(32, 151);
+            this.waterTemperature.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.waterTemperature.Name = "waterTemperature";
+            this.waterTemperature.Size = new System.Drawing.Size(52, 15);
+            this.waterTemperature.TabIndex = 23;
+            this.waterTemperature.Text = "温度：";
+            // 
+            // waterPresuer
+            // 
+            this.waterPresuer.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.waterPresuer.AutoSize = true;
+            this.waterPresuer.Location = new System.Drawing.Point(32, 42);
+            this.waterPresuer.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.waterPresuer.Name = "waterPresuer";
+            this.waterPresuer.Size = new System.Drawing.Size(52, 15);
+            this.waterPresuer.TabIndex = 24;
+            this.waterPresuer.Text = "压力：";
+            // 
+            // waterHammer
+            // 
+            this.waterHammer.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.waterHammer.AutoSize = true;
+            this.waterHammer.Location = new System.Drawing.Point(32, 100);
+            this.waterHammer.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.waterHammer.Name = "waterHammer";
+            this.waterHammer.Size = new System.Drawing.Size(67, 15);
+            this.waterHammer.TabIndex = 25;
+            this.waterHammer.Text = "冲击力：";
+            // 
+            // pressureMax
+            // 
+            this.pressureMax.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.pressureMax.AutoSize = true;
+            this.pressureMax.Location = new System.Drawing.Point(32, 201);
+            this.pressureMax.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.pressureMax.Name = "pressureMax";
+            this.pressureMax.Size = new System.Drawing.Size(82, 15);
+            this.pressureMax.TabIndex = 26;
+            this.pressureMax.Text = "最大压力：";
+            // 
+            // waterHammerMax
+            // 
+            this.waterHammerMax.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.waterHammerMax.AutoSize = true;
+            this.waterHammerMax.Location = new System.Drawing.Point(32, 251);
+            this.waterHammerMax.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.waterHammerMax.Name = "waterHammerMax";
+            this.waterHammerMax.Size = new System.Drawing.Size(97, 15);
+            this.waterHammerMax.TabIndex = 27;
+            this.waterHammerMax.Text = "最大冲击力：";
+            // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(979, 519);
+            this.ClientSize = new System.Drawing.Size(1305, 842);
+            this.Controls.Add(this.groupBox4);
             this.Controls.Add(this.systemInfo);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.hslCurve1);
-            this.Controls.Add(this.statusStrip1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Margin = new System.Windows.Forms.Padding(2);
+            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "Form1";
             this.Text = "压力特性测试";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
             this.Load += new System.EventHandler(this.Form1_Load);
-            this.statusStrip1.ResumeLayout(false);
-            this.statusStrip1.PerformLayout();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.sbyali)).EndInit();
@@ -585,6 +650,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.stopThreshold)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.startThreshold)).EndInit();
             this.groupBox3.ResumeLayout(false);
+            this.groupBox4.ResumeLayout(false);
+            this.groupBox4.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -592,11 +659,6 @@
 
         #endregion
         private HslControls.HslButton hslButton3;
-        private System.Windows.Forms.StatusStrip statusStrip1;
-        private System.Windows.Forms.ToolStripStatusLabel waterPresuer;
-        private System.Windows.Forms.ToolStripStatusLabel waterHammer;
-        private System.Windows.Forms.ToolStripStatusLabel waterFlow;
-        private System.Windows.Forms.ToolStripStatusLabel waterTemperature;
         private Automation.BDaq.InstantDoCtrl instantDoCtrl1;
         private Automation.BDaq.InstantAoCtrl m_instantAoCtrl;
         private Automation.BDaq.InstantDiCtrl instantDiCtrl1;
@@ -619,8 +681,6 @@
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.Label qdfstatus;
         private System.Windows.Forms.GroupBox groupBox3;
-        private System.Windows.Forms.ToolStripStatusLabel pressureMax;
-        private System.Windows.Forms.ToolStripStatusLabel waterHammerMax;
         private HslControls.HslSwitch hslSwitch1;
         private HslControls.HslBlower hslBlower1;
         private System.Windows.Forms.Label systemInfo;
@@ -633,6 +693,14 @@
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.NumericUpDown stopThreshold;
         private System.Windows.Forms.Label label9;
+        private HslControls.HslButton hslButton2;
+        private HslControls.HslButton hslButton1;
+        private System.Windows.Forms.GroupBox groupBox4;
+        private System.Windows.Forms.Label waterHammer;
+        private System.Windows.Forms.Label waterPresuer;
+        private System.Windows.Forms.Label waterTemperature;
+        private System.Windows.Forms.Label waterHammerMax;
+        private System.Windows.Forms.Label pressureMax;
     }
 }
 
