@@ -280,7 +280,7 @@
             this.hslCurveHistory3.Name = "hslCurveHistory3";
             this.hslCurveHistory3.Size = new System.Drawing.Size(821, 506);
             this.hslCurveHistory3.TabIndex = 6;
-            this.hslCurveHistory3.Text = "累计流量未达到9L，请继续测试...";
+            this.hslCurveHistory3.Text = "BSEN曲线";
             this.hslCurveHistory3.ValueMaxLeft = 10F;
             this.hslCurveHistory3.ValueMaxRight = 10F;
             this.hslCurveHistory3.ValueSegment = 20;

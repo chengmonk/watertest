@@ -257,6 +257,65 @@ namespace 冲水阀水力特性测试机
                 hslCurveHistory2.RenderCurveUI();
 
             }
+                //BSEN曲线
+                { 
+                   
+                    hslCurveHistory3.SetLeftCurve("流量", flow, Color.DodgerBlue, true, "{0:F1} L/s");
+                hslCurveHistory3.SetDateTimes(dateTime);
+
+                // 增加一个三角形的线段标记示例 Points的每个点的X是数据索引，Y是数据值（需要选对参考坐标轴，默认为左坐标轴）                             
+                //增加EHAO矩阵
+                hslCurveHistory3.AddMarkLine(new HslControls.HslMarkLine()
+                {
+                    CircleBrush = Brushes.Yellow,
+                    IsLeftFrame = true,
+                    IsLineClosed = false,
+                    LinePen = Pens.Yellow,
+                    TextBrush = Brushes.Yellow,
+                    Points = new PointF[]
+                    {
+                         E,H,A
+                    },
+                    Marks = new string[] { "        E(Qmin)", "H", "A" },
+                });
+                //HMBA
+                hslCurveHistory3.AddMarkLine(new HslControls.HslMarkLine()
+                {
+                    CircleBrush = Brushes.Yellow,
+                    IsLeftFrame = true,
+                    IsLineClosed = false,
+                    LinePen = Pens.Yellow,
+                    TextBrush = Brushes.Yellow,
+                    Points = new PointF[]
+                   {
+                         H,N,C
+                   },
+                    Marks = new string[] { "H", "N", "C" },
+                });
+                //DM
+                Console.WriteLine();
+                hslCurveHistory3.AddMarkLine(new HslControls.HslMarkLine()
+                {
+                    CircleBrush = Brushes.Yellow,
+                    IsLeftFrame = true,
+                    IsLineClosed = true,
+                    LinePen = Pens.Yellow,
+                    TextBrush = Brushes.Yellow,
+                    Points = new PointF[]
+                   {
+                         D,N
+                   },
+                    Marks = new string[] { "         D(Qs)", "" },
+                });
+
+
+                hslCurveHistory3.ValueMaxLeft = 10;
+                hslCurveHistory3.ValueMinLeft = 0;
+                hslCurveHistory3.SetScaleByXAxis(xAxis);
+
+                hslCurveHistory3.RenderCurveUI();
+
+            }
             }
             ));            
         }
