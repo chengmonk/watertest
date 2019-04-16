@@ -142,10 +142,10 @@ namespace 冲水阀水力特性测试机
                 { 
                     dt.Rows.Add(t.ToString("yyyy-MM-dd hh:mm:ss:fff"), Math.Round(data[0], 2), Math.Round(data[2], 2));
                     hslCurve1.AddCurveData(
-                        new string[] { "A" },
+                        new string[] { "流量" ,"温度"},
                         new float[]
                         {
-                            (float) l[l.Count - 1]
+                            (float) l[l.Count - 1],(float)Math.Round( data[0],2)
                         }
                     );
                 }
@@ -620,6 +620,16 @@ namespace 冲水阀水力特性测试机
         {
             Properties.Settings.Default.停止阈值 = startThreshold.Value;
             Properties.Settings.Default.Save();
+        }
+
+        private void Label14_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void Label13_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

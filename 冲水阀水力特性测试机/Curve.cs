@@ -52,7 +52,7 @@ namespace 冲水阀水力特性测试机
         }
         //计算特征点
         //PointF Qmin = new PointF();
-        PointF Qs = new PointF();
+        //PointF Qs = new PointF();
         PointF A = new PointF();//2s以后 横轴上的点
         PointF B = new PointF();//累计流量到达6L
         PointF C = new PointF();//累计流量到达9L
@@ -61,7 +61,7 @@ namespace 冲水阀水力特性测试机
         PointF H = new PointF();
         PointF M = new PointF();
         PointF N = new PointF();
-        PointF O = new PointF();
+        //PointF O = new PointF();
         PointF A_BSEN = new PointF();
         PointF B_BSEN = new PointF();
         PointF C_BSEN = new PointF();
