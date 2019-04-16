@@ -95,7 +95,7 @@
             this.statusStrip1.Location = new System.Drawing.Point(0, 649);
             this.statusStrip1.Name = "statusStrip1";
             this.statusStrip1.Padding = new System.Windows.Forms.Padding(1, 0, 13, 0);
-            this.statusStrip1.Size = new System.Drawing.Size(1026, 22);
+            this.statusStrip1.Size = new System.Drawing.Size(1028, 22);
             this.statusStrip1.TabIndex = 1;
             this.statusStrip1.Text = "statusStrip1";
             // 
@@ -154,7 +154,7 @@
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Controls.Add(this.open);
             this.groupBox1.Font = new System.Drawing.Font("黑体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.groupBox1.Location = new System.Drawing.Point(606, 13);
+            this.groupBox1.Location = new System.Drawing.Point(608, 13);
             this.groupBox1.Margin = new System.Windows.Forms.Padding(4);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Padding = new System.Windows.Forms.Padding(4);
@@ -375,7 +375,7 @@
             this.groupBox2.Controls.Add(this.label5);
             this.groupBox2.Controls.Add(this.label3);
             this.groupBox2.Font = new System.Drawing.Font("黑体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.groupBox2.Location = new System.Drawing.Point(606, 383);
+            this.groupBox2.Location = new System.Drawing.Point(608, 383);
             this.groupBox2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
@@ -395,7 +395,7 @@
             // 
             // stopThreshold
             // 
-            this.stopThreshold.DecimalPlaces = 1;
+            this.stopThreshold.DecimalPlaces = 2;
             this.stopThreshold.Increment = new decimal(new int[] {
             1,
             0,
@@ -423,7 +423,7 @@
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(137, 11);
             this.label9.TabIndex = 42;
-            this.label9.Text = "压力小于这个值停止采集";
+            this.label9.Text = "流量小于这个值停止采集";
             // 
             // label7
             // 
@@ -436,7 +436,7 @@
             // 
             // startThreshold
             // 
-            this.startThreshold.DecimalPlaces = 1;
+            this.startThreshold.DecimalPlaces = 2;
             this.startThreshold.Increment = new decimal(new int[] {
             1,
             0,
@@ -464,11 +464,11 @@
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(137, 11);
             this.label10.TabIndex = 39;
-            this.label10.Text = "压力大于这个值开始计时";
+            this.label10.Text = "流量大于这个值开始计时";
             // 
             // qmin
             // 
-            this.qmin.DecimalPlaces = 1;
+            this.qmin.DecimalPlaces = 2;
             this.qmin.Increment = new decimal(new int[] {
             1,
             0,
@@ -482,7 +482,6 @@
             0,
             -2147483648});
             this.qmin.Name = "qmin";
-            this.qmin.ReadOnly = true;
             this.qmin.Size = new System.Drawing.Size(71, 21);
             this.qmin.TabIndex = 32;
             this.qmin.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
@@ -598,7 +597,7 @@
             this.hslCurve1.Location = new System.Drawing.Point(12, 4);
             this.hslCurve1.Margin = new System.Windows.Forms.Padding(4);
             this.hslCurve1.Name = "hslCurve1";
-            this.hslCurve1.Size = new System.Drawing.Size(650, 449);
+            this.hslCurve1.Size = new System.Drawing.Size(652, 449);
             this.hslCurve1.TabIndex = 2;
             this.hslCurve1.ValueMaxLeft = 10F;
             this.hslCurve1.ValueMaxRight = 10F;
@@ -619,7 +618,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1026, 671);
+            this.ClientSize = new System.Drawing.Size(1028, 671);
             this.Controls.Add(this.systemInfo);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox2);

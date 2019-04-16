@@ -423,7 +423,7 @@
             // 
             // stopThreshold
             // 
-            this.stopThreshold.DecimalPlaces = 1;
+            this.stopThreshold.DecimalPlaces = 2;
             this.stopThreshold.Increment = new decimal(new int[] {
             1,
             0,
@@ -464,7 +464,7 @@
             // 
             // startThreshold
             // 
-            this.startThreshold.DecimalPlaces = 1;
+            this.startThreshold.DecimalPlaces = 2;
             this.startThreshold.Increment = new decimal(new int[] {
             1,
             0,

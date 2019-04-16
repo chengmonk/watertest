@@ -354,6 +354,8 @@ namespace 冲水阀水力特性测试机
             sbzt.Text = "水泵当前状态：";
             sbyali.Value = Properties.Settings.Default.水泵压力;
             numericUpDown1.Value = Properties.Settings.Default.保持时间;
+            startThreshold.Value = Properties.Settings.Default.开始计时阈值;
+            stopThreshold.Value = Properties.Settings.Default.停止阈值;
 
             hslCurve1.SetLeftCurve("A", null, Color.DodgerBlue);
             hslCurve1.SetLeftCurve("B", null, Color.DarkOrange);
