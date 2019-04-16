@@ -80,6 +80,7 @@ namespace 冲水阀水力特性测试机
 
                 l.Add(data[2]);
                 maxFlow = l.Max();
+                maxflow_pose = l.IndexOf(l.Max());
                 //连续采样N个数据，去掉一个最大值和一个最小值然后计算N - 2个数据的算术平均值N值的选取：3~14
                 //if (l.Count > 8)
                 //{
@@ -123,7 +124,7 @@ namespace 冲水阀水力特性测试机
                 pushFlag = true;
                
             }
-            if ( loadDataFlag)
+            if (loadDataFlag)
             {
                 if (Math.Abs(Math.Round(totalFlow, 2) - 6) < 1 && first6l)//记录到达6l的索引
                 {
@@ -136,18 +137,20 @@ namespace 冲水阀水力特性测试机
                     L9 = l.Count;
                     first9l = false;
                 }
-                
 
-                dt.Rows.Add(t.ToString("yyyy-MM-dd hh:mm:ss:fff"), Math.Round(data[0], 2), Math.Round(data[2], 2));
-                hslCurve1.AddCurveData(
+                if (FLOW > (double)startThreshold.Value)//大于阈值开始绘制曲线以及记录数据
+                { 
+                    dt.Rows.Add(t.ToString("yyyy-MM-dd hh:mm:ss:fff"), Math.Round(data[0], 2), Math.Round(data[2], 2));
+                    hslCurve1.AddCurveData(
                         new string[] { "A" },
                         new float[]
                         {
-                  (float) l[l.Count - 1]
+                            (float) l[l.Count - 1]
                         }
                     );
+                }
                 Console.WriteLine("pushedFlag:" + pushedFlag);
-                if (l[l.Count - 1] < (double) stopThreshold.Value && pushedFlag)
+                if (l[l.Count - 1] < (double) stopThreshold.Value && pushedFlag)//小于阈值停止记录
                 {
                     loadDataFlag = false;
                     pushFlag = false;
@@ -171,7 +174,8 @@ namespace 冲水阀水力特性测试机
         double[] aoData = new double[1];
         System.Timers.Timer monitor;
         System.Timers.Timer pushWork;
-        double maxFlow = 0;
+       public static double maxFlow = 0;
+        public static int maxflow_pose = 0;
         M_485Rtu mr;
         COMconfig conf;
         private ModbusRtu busRtuClient = null;

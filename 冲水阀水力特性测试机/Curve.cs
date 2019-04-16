@@ -62,6 +62,13 @@ namespace 冲水阀水力特性测试机
         PointF M = new PointF();
         PointF N = new PointF();
         PointF O = new PointF();
+        PointF A_BSEN = new PointF();
+        PointF B_BSEN = new PointF();
+        PointF C_BSEN = new PointF();
+        PointF M_BSEN = new PointF();
+        PointF N_BSEN = new PointF();
+        PointF QM_BSEN = new PointF();
+        PointF QM_INGRAPH_BSEN = new PointF();
         double totalFlow = 0;
         private void ThreadReadExample1()
         {
@@ -127,6 +134,22 @@ namespace 冲水阀水力特性测试机
             //N
             N.X = C.X;
             N.Y = D.Y;
+
+            A_BSEN.X = (int)(dt.Rows.Count * 0.2);
+            A_BSEN.Y = 0;
+            B_BSEN.X = (int)(dt.Rows.Count * 0.7);
+            B_BSEN.Y = 0;
+
+            QM_BSEN.Y = (float)Form2.maxFlow;
+            QM_BSEN.X = 0;
+            C_BSEN.X = 0;
+            C_BSEN.Y = (float)(QM_BSEN.Y * 0.7);
+            M_BSEN.Y = C_BSEN.Y;
+            N_BSEN.Y = C_BSEN.Y;
+            M_BSEN.X = A_BSEN.X;
+            N_BSEN.X = B_BSEN.X;
+            QM_INGRAPH_BSEN = QM_BSEN;
+            QM_INGRAPH_BSEN.X = Form2.maxflow_pose;
 
             // 显示出数据信息来
             Invoke(new Action(() =>
@@ -264,36 +287,7 @@ namespace 冲水阀水力特性测试机
                 hslCurveHistory3.SetDateTimes(dateTime);
 
                 // 增加一个三角形的线段标记示例 Points的每个点的X是数据索引，Y是数据值（需要选对参考坐标轴，默认为左坐标轴）                             
-                //增加EHAO矩阵
-                hslCurveHistory3.AddMarkLine(new HslControls.HslMarkLine()
-                {
-                    CircleBrush = Brushes.Yellow,
-                    IsLeftFrame = true,
-                    IsLineClosed = false,
-                    LinePen = Pens.Yellow,
-                    TextBrush = Brushes.Yellow,
-                    Points = new PointF[]
-                    {
-                         E,H,A
-                    },
-                    Marks = new string[] { "        E(Qmin)", "H", "A" },
-                });
-                //HMBA
-                hslCurveHistory3.AddMarkLine(new HslControls.HslMarkLine()
-                {
-                    CircleBrush = Brushes.Yellow,
-                    IsLeftFrame = true,
-                    IsLineClosed = false,
-                    LinePen = Pens.Yellow,
-                    TextBrush = Brushes.Yellow,
-                    Points = new PointF[]
-                   {
-                         H,N,C
-                   },
-                    Marks = new string[] { "H", "N", "C" },
-                });
-                //DM
-                Console.WriteLine();
+                //增加abmn矩阵
                 hslCurveHistory3.AddMarkLine(new HslControls.HslMarkLine()
                 {
                     CircleBrush = Brushes.Yellow,
@@ -302,14 +296,43 @@ namespace 冲水阀水力特性测试机
                     LinePen = Pens.Yellow,
                     TextBrush = Brushes.Yellow,
                     Points = new PointF[]
-                   {
-                         D,N
-                   },
-                    Marks = new string[] { "         D(Qs)", "" },
+                    {
+                         A_BSEN,B_BSEN,M_BSEN,N_BSEN
+                    },
+                    Marks = new string[] { "A", "B", "M","N" },
                 });
 
+                    //cm
+                    hslCurveHistory3.AddMarkLine(new HslControls.HslMarkLine()
+                    {
+                        CircleBrush = Brushes.Yellow,
+                        IsLeftFrame = true,
+                        IsLineClosed = false,
+                        LinePen = Pens.Yellow,
+                        TextBrush = Brushes.Yellow,
+                        Points = new PointF[]
+                   {
+                         C_BSEN,M_BSEN
+                   },
+                        Marks = new string[] { "        C", "  " },
+                    });
+                    //qm-qm_ingraph
+                    hslCurveHistory3.AddMarkLine(new HslControls.HslMarkLine()
+                    {
+                        CircleBrush = Brushes.Yellow,
+                        IsLeftFrame = true,
+                        IsLineClosed = false,
+                        LinePen = Pens.Yellow,
+                        TextBrush = Brushes.Yellow,
+                        Points = new PointF[]
+                   {
+                         QM_BSEN,QM_INGRAPH_BSEN
+                   },
+                        Marks = new string[] { "        QM", "  " },
+                    });
 
-                hslCurveHistory3.ValueMaxLeft = 10;
+
+                    hslCurveHistory3.ValueMaxLeft = 10;
                 hslCurveHistory3.ValueMinLeft = 0;
                 hslCurveHistory3.SetScaleByXAxis(xAxis);
 
@@ -390,6 +413,18 @@ namespace 冲水阀水力特性测试机
                 MessageBox.Show("保存成功!");
             }
             fileDialog.Dispose();
+        }
+
+        private void HslButton7_Click(object sender, EventArgs e)
+        {
+            hslCurveHistory1.SetScaleByXAxis(--xAxis > 0 ? xAxis : (xAxis = 1));
+            hslCurveHistory1.RenderCurveUI();
+        }
+
+        private void HslButton8_Click(object sender, EventArgs e)
+        {
+            hslCurveHistory2.SetScaleByXAxis(++xAxis > 0 ? xAxis : (xAxis = 1));
+            hslCurveHistory2.RenderCurveUI();
         }
     }
 }
