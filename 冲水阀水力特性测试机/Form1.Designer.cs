@@ -287,7 +287,6 @@
             0,
             0});
             this.sbyali.Name = "sbyali";
-            this.sbyali.ReadOnly = true;
             this.sbyali.Size = new System.Drawing.Size(89, 21);
             this.sbyali.TabIndex = 12;
             this.sbyali.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
@@ -325,7 +324,7 @@
             // 
             // numericUpDown1
             // 
-            this.numericUpDown1.DecimalPlaces = 1;
+            this.numericUpDown1.DecimalPlaces = 2;
             this.numericUpDown1.Increment = new decimal(new int[] {
             1,
             0,
@@ -333,12 +332,11 @@
             65536});
             this.numericUpDown1.Location = new System.Drawing.Point(105, 22);
             this.numericUpDown1.Maximum = new decimal(new int[] {
-            10,
+            10000000,
             0,
             0,
             0});
             this.numericUpDown1.Name = "numericUpDown1";
-            this.numericUpDown1.ReadOnly = true;
             this.numericUpDown1.Size = new System.Drawing.Size(89, 21);
             this.numericUpDown1.TabIndex = 15;
             this.numericUpDown1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;

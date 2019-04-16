@@ -319,5 +319,18 @@ namespace 冲水阀水力特性测试机
         {
 
         }
+
+        private void HslButton9_Click(object sender, EventArgs e)
+        {
+            SaveFileDialog fileDialog = new SaveFileDialog();
+            fileDialog.Filter = "图片|*.png";
+            fileDialog.InitialDirectory = Application.StartupPath;
+            if (fileDialog.ShowDialog() == DialogResult.OK)
+            {
+                hslCurveHistory3.SaveToBitmap().Save(fileDialog.FileName);
+                MessageBox.Show("保存成功!");
+            }
+            fileDialog.Dispose();
+        }
     }
 }

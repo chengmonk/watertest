@@ -41,9 +41,14 @@
             this.hslButton2 = new HslControls.HslButton();
             this.hslCurveHistory2 = new HslControls.HslCurveHistory();
             this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.hslButton7 = new HslControls.HslButton();
+            this.hslButton8 = new HslControls.HslButton();
+            this.hslButton9 = new HslControls.HslButton();
+            this.hslCurveHistory3 = new HslControls.HslCurveHistory();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
+            this.tabPage3.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -54,7 +59,7 @@
             this.tabControl1.Cursor = System.Windows.Forms.Cursors.Hand;
             this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabControl1.Location = new System.Drawing.Point(0, 0);
-            this.tabControl1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.tabControl1.Margin = new System.Windows.Forms.Padding(2);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
             this.tabControl1.Size = new System.Drawing.Size(834, 575);
@@ -67,9 +72,9 @@
             this.tabPage1.Controls.Add(this.hslCurveHistory1);
             this.tabPage1.Controls.Add(this.hslButton1);
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
-            this.tabPage1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.tabPage1.Margin = new System.Windows.Forms.Padding(2);
             this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.tabPage1.Padding = new System.Windows.Forms.Padding(2);
             this.tabPage1.Size = new System.Drawing.Size(826, 549);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "EN 6L流量统计图";
@@ -141,9 +146,9 @@
             this.tabPage2.Controls.Add(this.hslButton2);
             this.tabPage2.Controls.Add(this.hslCurveHistory2);
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
-            this.tabPage2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.tabPage2.Margin = new System.Windows.Forms.Padding(2);
             this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.tabPage2.Padding = new System.Windows.Forms.Padding(2);
             this.tabPage2.Size = new System.Drawing.Size(826, 549);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "EN 9L流量统计图";
@@ -211,14 +216,74 @@
             // 
             // tabPage3
             // 
+            this.tabPage3.Controls.Add(this.hslButton7);
+            this.tabPage3.Controls.Add(this.hslButton8);
+            this.tabPage3.Controls.Add(this.hslButton9);
+            this.tabPage3.Controls.Add(this.hslCurveHistory3);
             this.tabPage3.Location = new System.Drawing.Point(4, 22);
-            this.tabPage3.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.tabPage3.Margin = new System.Windows.Forms.Padding(2);
             this.tabPage3.Name = "tabPage3";
-            this.tabPage3.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.tabPage3.Padding = new System.Windows.Forms.Padding(2);
             this.tabPage3.Size = new System.Drawing.Size(826, 549);
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "BSEN 流量统计图";
             this.tabPage3.UseVisualStyleBackColor = true;
+            // 
+            // hslButton7
+            // 
+            this.hslButton7.ActiveColor = System.Drawing.Color.Cyan;
+            this.hslButton7.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.hslButton7.CustomerInformation = null;
+            this.hslButton7.EnableColor = System.Drawing.Color.DodgerBlue;
+            this.hslButton7.Location = new System.Drawing.Point(111, 514);
+            this.hslButton7.Name = "hslButton7";
+            this.hslButton7.OriginalColor = System.Drawing.Color.PaleGreen;
+            this.hslButton7.Size = new System.Drawing.Size(78, 32);
+            this.hslButton7.TabIndex = 9;
+            this.hslButton7.Text = "缩小-";
+            // 
+            // hslButton8
+            // 
+            this.hslButton8.ActiveColor = System.Drawing.Color.Cyan;
+            this.hslButton8.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.hslButton8.CustomerInformation = null;
+            this.hslButton8.EnableColor = System.Drawing.Color.DodgerBlue;
+            this.hslButton8.Location = new System.Drawing.Point(214, 514);
+            this.hslButton8.Name = "hslButton8";
+            this.hslButton8.OriginalColor = System.Drawing.Color.PaleGreen;
+            this.hslButton8.Size = new System.Drawing.Size(78, 32);
+            this.hslButton8.TabIndex = 8;
+            this.hslButton8.Text = "放大+";
+            // 
+            // hslButton9
+            // 
+            this.hslButton9.ActiveColor = System.Drawing.Color.Cyan;
+            this.hslButton9.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.hslButton9.CustomerInformation = null;
+            this.hslButton9.EnableColor = System.Drawing.Color.DodgerBlue;
+            this.hslButton9.Location = new System.Drawing.Point(2, 514);
+            this.hslButton9.Name = "hslButton9";
+            this.hslButton9.OriginalColor = System.Drawing.Color.PaleGreen;
+            this.hslButton9.Size = new System.Drawing.Size(78, 32);
+            this.hslButton9.TabIndex = 7;
+            this.hslButton9.Text = "保存图像";
+            this.hslButton9.Click += new System.EventHandler(this.HslButton9_Click);
+            // 
+            // hslCurveHistory3
+            // 
+            this.hslCurveHistory3.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.hslCurveHistory3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(46)))), ((int)(((byte)(46)))));
+            this.hslCurveHistory3.DashCoordinateColor = System.Drawing.Color.FromArgb(((int)(((byte)(72)))), ((int)(((byte)(72)))), ((int)(((byte)(72)))));
+            this.hslCurveHistory3.Location = new System.Drawing.Point(2, 2);
+            this.hslCurveHistory3.MarkTextColor = System.Drawing.Color.Yellow;
+            this.hslCurveHistory3.Name = "hslCurveHistory3";
+            this.hslCurveHistory3.Size = new System.Drawing.Size(821, 506);
+            this.hslCurveHistory3.TabIndex = 6;
+            this.hslCurveHistory3.Text = "累计流量未达到9L，请继续测试...";
+            this.hslCurveHistory3.ValueMaxLeft = 10F;
+            this.hslCurveHistory3.ValueMaxRight = 10F;
+            this.hslCurveHistory3.ValueSegment = 20;
             // 
             // Curve
             // 
@@ -230,7 +295,7 @@
             this.ClientSize = new System.Drawing.Size(834, 575);
             this.Controls.Add(this.tabControl1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "Curve";
             this.Text = "流量曲线统计图";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
@@ -238,6 +303,7 @@
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.tabPage2.ResumeLayout(false);
+            this.tabPage3.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -256,5 +322,9 @@
         private HslControls.HslCurveHistory hslCurveHistory1;
         private HslControls.HslButton hslButton3;
         private HslControls.HslButton hslButton4;
+        private HslControls.HslButton hslButton7;
+        private HslControls.HslButton hslButton8;
+        private HslControls.HslButton hslButton9;
+        private HslControls.HslCurveHistory hslCurveHistory3;
     }
 }
