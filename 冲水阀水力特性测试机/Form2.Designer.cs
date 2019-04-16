@@ -56,6 +56,12 @@
             this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
             this.label4 = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.label8 = new System.Windows.Forms.Label();
+            this.stopThreshold = new System.Windows.Forms.NumericUpDown();
+            this.label9 = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
+            this.startThreshold = new System.Windows.Forms.NumericUpDown();
+            this.label10 = new System.Windows.Forms.Label();
             this.qmin = new System.Windows.Forms.NumericUpDown();
             this.label6 = new System.Windows.Forms.Label();
             this.hslSwitch2 = new HslControls.HslSwitch();
@@ -72,6 +78,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.sbyali)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
             this.groupBox2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.stopThreshold)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.startThreshold)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.qmin)).BeginInit();
             this.groupBox3.SuspendLayout();
             this.SuspendLayout();
@@ -84,10 +92,10 @@
             this.waterTemperature,
             this.maxWaterFlow,
             this.totalFlowShow});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 612);
+            this.statusStrip1.Location = new System.Drawing.Point(0, 649);
             this.statusStrip1.Name = "statusStrip1";
             this.statusStrip1.Padding = new System.Windows.Forms.Padding(1, 0, 13, 0);
-            this.statusStrip1.Size = new System.Drawing.Size(1092, 22);
+            this.statusStrip1.Size = new System.Drawing.Size(1026, 22);
             this.statusStrip1.TabIndex = 1;
             this.statusStrip1.Text = "statusStrip1";
             // 
@@ -146,11 +154,11 @@
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Controls.Add(this.open);
             this.groupBox1.Font = new System.Drawing.Font("黑体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.groupBox1.Location = new System.Drawing.Point(672, 13);
+            this.groupBox1.Location = new System.Drawing.Point(606, 13);
             this.groupBox1.Margin = new System.Windows.Forms.Padding(4);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Padding = new System.Windows.Forms.Padding(4);
-            this.groupBox1.Size = new System.Drawing.Size(407, 364);
+            this.groupBox1.Size = new System.Drawing.Size(407, 401);
             this.groupBox1.TabIndex = 10;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "水泵控制";
@@ -351,6 +359,12 @@
             // 
             this.groupBox2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox2.Controls.Add(this.label8);
+            this.groupBox2.Controls.Add(this.stopThreshold);
+            this.groupBox2.Controls.Add(this.label9);
+            this.groupBox2.Controls.Add(this.label7);
+            this.groupBox2.Controls.Add(this.startThreshold);
+            this.groupBox2.Controls.Add(this.label10);
             this.groupBox2.Controls.Add(this.qmin);
             this.groupBox2.Controls.Add(this.label6);
             this.groupBox2.Controls.Add(this.hslSwitch2);
@@ -361,14 +375,96 @@
             this.groupBox2.Controls.Add(this.label5);
             this.groupBox2.Controls.Add(this.label3);
             this.groupBox2.Font = new System.Drawing.Font("黑体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.groupBox2.Location = new System.Drawing.Point(672, 383);
+            this.groupBox2.Location = new System.Drawing.Point(606, 383);
             this.groupBox2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.groupBox2.Size = new System.Drawing.Size(408, 227);
+            this.groupBox2.Size = new System.Drawing.Size(408, 264);
             this.groupBox2.TabIndex = 25;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "工件属性";
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(11, 233);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(89, 12);
+            this.label8.TabIndex = 40;
+            this.label8.Text = "停止采集阈值：";
+            // 
+            // stopThreshold
+            // 
+            this.stopThreshold.DecimalPlaces = 1;
+            this.stopThreshold.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            131072});
+            this.stopThreshold.Location = new System.Drawing.Point(101, 231);
+            this.stopThreshold.Minimum = new decimal(new int[] {
+            100,
+            0,
+            0,
+            -2147483648});
+            this.stopThreshold.Name = "stopThreshold";
+            this.stopThreshold.Size = new System.Drawing.Size(61, 21);
+            this.stopThreshold.TabIndex = 41;
+            this.stopThreshold.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.stopThreshold.ThousandsSeparator = true;
+            this.stopThreshold.UpDownAlign = System.Windows.Forms.LeftRightAlignment.Left;
+            this.stopThreshold.ValueChanged += new System.EventHandler(this.StopThreshold_ValueChanged);
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Font = new System.Drawing.Font("黑体", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label9.Location = new System.Drawing.Point(168, 233);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(137, 11);
+            this.label9.TabIndex = 42;
+            this.label9.Text = "压力小于这个值停止采集";
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(12, 202);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(89, 12);
+            this.label7.TabIndex = 37;
+            this.label7.Text = "开始计时阈值：";
+            // 
+            // startThreshold
+            // 
+            this.startThreshold.DecimalPlaces = 1;
+            this.startThreshold.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            131072});
+            this.startThreshold.Location = new System.Drawing.Point(102, 200);
+            this.startThreshold.Minimum = new decimal(new int[] {
+            100,
+            0,
+            0,
+            -2147483648});
+            this.startThreshold.Name = "startThreshold";
+            this.startThreshold.Size = new System.Drawing.Size(61, 21);
+            this.startThreshold.TabIndex = 38;
+            this.startThreshold.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.startThreshold.ThousandsSeparator = true;
+            this.startThreshold.UpDownAlign = System.Windows.Forms.LeftRightAlignment.Left;
+            this.startThreshold.ValueChanged += new System.EventHandler(this.StartThreshold_ValueChanged);
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Font = new System.Drawing.Font("黑体", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label10.Location = new System.Drawing.Point(169, 202);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(137, 11);
+            this.label10.TabIndex = 39;
+            this.label10.Text = "压力大于这个值开始计时";
             // 
             // qmin
             // 
@@ -378,7 +474,7 @@
             0,
             0,
             65536});
-            this.qmin.Location = new System.Drawing.Point(215, 188);
+            this.qmin.Location = new System.Drawing.Point(215, 165);
             this.qmin.Margin = new System.Windows.Forms.Padding(4);
             this.qmin.Minimum = new decimal(new int[] {
             100,
@@ -387,7 +483,7 @@
             -2147483648});
             this.qmin.Name = "qmin";
             this.qmin.ReadOnly = true;
-            this.qmin.Size = new System.Drawing.Size(119, 21);
+            this.qmin.Size = new System.Drawing.Size(71, 21);
             this.qmin.TabIndex = 32;
             this.qmin.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.qmin.ThousandsSeparator = true;
@@ -397,7 +493,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(9, 190);
+            this.label6.Location = new System.Drawing.Point(9, 170);
             this.label6.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(209, 12);
@@ -420,7 +516,7 @@
             // qdfstatus
             // 
             this.qdfstatus.AutoSize = true;
-            this.qdfstatus.Location = new System.Drawing.Point(9, 152);
+            this.qdfstatus.Location = new System.Drawing.Point(9, 139);
             this.qdfstatus.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.qdfstatus.Name = "qdfstatus";
             this.qdfstatus.Size = new System.Drawing.Size(101, 12);
@@ -435,7 +531,7 @@
             this.groupBox3.Controls.Add(this.hslButton2);
             this.groupBox3.Controls.Add(this.hslButton4);
             this.groupBox3.Font = new System.Drawing.Font("黑体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.groupBox3.Location = new System.Drawing.Point(12, 422);
+            this.groupBox3.Location = new System.Drawing.Point(12, 459);
             this.groupBox3.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
@@ -502,7 +598,7 @@
             this.hslCurve1.Location = new System.Drawing.Point(12, 4);
             this.hslCurve1.Margin = new System.Windows.Forms.Padding(4);
             this.hslCurve1.Name = "hslCurve1";
-            this.hslCurve1.Size = new System.Drawing.Size(652, 412);
+            this.hslCurve1.Size = new System.Drawing.Size(650, 449);
             this.hslCurve1.TabIndex = 2;
             this.hslCurve1.ValueMaxLeft = 10F;
             this.hslCurve1.ValueMaxRight = 10F;
@@ -512,7 +608,7 @@
             // 
             this.systemInfo.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.systemInfo.AutoSize = true;
-            this.systemInfo.Location = new System.Drawing.Point(13, 562);
+            this.systemInfo.Location = new System.Drawing.Point(13, 599);
             this.systemInfo.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.systemInfo.Name = "systemInfo";
             this.systemInfo.Size = new System.Drawing.Size(65, 12);
@@ -523,7 +619,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1092, 634);
+            this.ClientSize = new System.Drawing.Size(1026, 671);
             this.Controls.Add(this.systemInfo);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox2);
@@ -546,6 +642,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.stopThreshold)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.startThreshold)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.qmin)).EndInit();
             this.groupBox3.ResumeLayout(false);
             this.ResumeLayout(false);
@@ -591,5 +689,11 @@
         private System.Windows.Forms.ToolStripStatusLabel totalFlowShow;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.NumericUpDown qmin;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.NumericUpDown stopThreshold;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.NumericUpDown startThreshold;
+        private System.Windows.Forms.Label label10;
     }
 }

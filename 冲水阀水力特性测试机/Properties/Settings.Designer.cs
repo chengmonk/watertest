@@ -106,5 +106,29 @@ namespace 冲水阀水力特性测试机.Properties {
                 this["qmin"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0.05")]
+        public decimal 开始计时阈值 {
+            get {
+                return ((decimal)(this["开始计时阈值"]));
+            }
+            set {
+                this["开始计时阈值"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0.05")]
+        public decimal 停止阈值 {
+            get {
+                return ((decimal)(this["停止阈值"]));
+            }
+            set {
+                this["停止阈值"] = value;
+            }
+        }
     }
 }

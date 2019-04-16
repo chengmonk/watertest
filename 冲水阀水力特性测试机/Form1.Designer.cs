@@ -60,6 +60,12 @@
             this.label5 = new System.Windows.Forms.Label();
             this.workName = new System.Windows.Forms.TextBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.label8 = new System.Windows.Forms.Label();
+            this.stopThreshold = new System.Windows.Forms.NumericUpDown();
+            this.label9 = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
+            this.startThreshold = new System.Windows.Forms.NumericUpDown();
+            this.label7 = new System.Windows.Forms.Label();
             this.hslSwitch2 = new HslControls.HslSwitch();
             this.qdfstatus = new System.Windows.Forms.Label();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
@@ -71,6 +77,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.sbyali)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
             this.groupBox2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.stopThreshold)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.startThreshold)).BeginInit();
             this.groupBox3.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -179,7 +187,7 @@
             this.groupBox1.Font = new System.Drawing.Font("黑体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.groupBox1.Location = new System.Drawing.Point(643, 10);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(326, 326);
+            this.groupBox1.Size = new System.Drawing.Size(326, 272);
             this.groupBox1.TabIndex = 9;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "水泵控制";
@@ -381,6 +389,12 @@
             // groupBox2
             // 
             this.groupBox2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox2.Controls.Add(this.label8);
+            this.groupBox2.Controls.Add(this.stopThreshold);
+            this.groupBox2.Controls.Add(this.label9);
+            this.groupBox2.Controls.Add(this.label6);
+            this.groupBox2.Controls.Add(this.startThreshold);
+            this.groupBox2.Controls.Add(this.label7);
             this.groupBox2.Controls.Add(this.hslSwitch2);
             this.groupBox2.Controls.Add(this.qdfstatus);
             this.groupBox2.Controls.Add(this.workName);
@@ -389,14 +403,96 @@
             this.groupBox2.Controls.Add(this.numericUpDown1);
             this.groupBox2.Controls.Add(this.label3);
             this.groupBox2.Font = new System.Drawing.Font("黑体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.groupBox2.Location = new System.Drawing.Point(643, 344);
+            this.groupBox2.Location = new System.Drawing.Point(642, 282);
             this.groupBox2.Margin = new System.Windows.Forms.Padding(2);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Padding = new System.Windows.Forms.Padding(2);
-            this.groupBox2.Size = new System.Drawing.Size(326, 153);
+            this.groupBox2.Size = new System.Drawing.Size(326, 213);
             this.groupBox2.TabIndex = 20;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "工件属性";
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(16, 186);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(89, 12);
+            this.label8.TabIndex = 34;
+            this.label8.Text = "停止采集阈值：";
+            // 
+            // stopThreshold
+            // 
+            this.stopThreshold.DecimalPlaces = 1;
+            this.stopThreshold.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            131072});
+            this.stopThreshold.Location = new System.Drawing.Point(106, 184);
+            this.stopThreshold.Minimum = new decimal(new int[] {
+            100,
+            0,
+            0,
+            -2147483648});
+            this.stopThreshold.Name = "stopThreshold";
+            this.stopThreshold.Size = new System.Drawing.Size(61, 21);
+            this.stopThreshold.TabIndex = 35;
+            this.stopThreshold.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.stopThreshold.ThousandsSeparator = true;
+            this.stopThreshold.UpDownAlign = System.Windows.Forms.LeftRightAlignment.Left;
+            this.stopThreshold.ValueChanged += new System.EventHandler(this.StopThreshold_ValueChanged);
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Font = new System.Drawing.Font("黑体", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label9.Location = new System.Drawing.Point(173, 186);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(137, 11);
+            this.label9.TabIndex = 36;
+            this.label9.Text = "压力小于这个值停止采集";
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(17, 155);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(89, 12);
+            this.label6.TabIndex = 31;
+            this.label6.Text = "开始计时阈值：";
+            // 
+            // startThreshold
+            // 
+            this.startThreshold.DecimalPlaces = 1;
+            this.startThreshold.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            131072});
+            this.startThreshold.Location = new System.Drawing.Point(107, 153);
+            this.startThreshold.Minimum = new decimal(new int[] {
+            100,
+            0,
+            0,
+            -2147483648});
+            this.startThreshold.Name = "startThreshold";
+            this.startThreshold.Size = new System.Drawing.Size(61, 21);
+            this.startThreshold.TabIndex = 32;
+            this.startThreshold.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.startThreshold.ThousandsSeparator = true;
+            this.startThreshold.UpDownAlign = System.Windows.Forms.LeftRightAlignment.Left;
+            this.startThreshold.ValueChanged += new System.EventHandler(this.StartThreshold_ValueChanged);
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Font = new System.Drawing.Font("黑体", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label7.Location = new System.Drawing.Point(174, 155);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(137, 11);
+            this.label7.TabIndex = 33;
+            this.label7.Text = "压力大于这个值开始计时";
             // 
             // hslSwitch2
             // 
@@ -488,6 +584,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.stopThreshold)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.startThreshold)).EndInit();
             this.groupBox3.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -531,6 +629,12 @@
         private HslControls.HslSwitch hslSwitch2;
         private HslControls.HslPlay hslPlay1;
         private Automation.BDaq.InstantAiCtrl instantAiCtrl1;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.NumericUpDown startThreshold;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.NumericUpDown stopThreshold;
+        private System.Windows.Forms.Label label9;
     }
 }
 

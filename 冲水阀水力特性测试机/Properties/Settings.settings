@@ -23,5 +23,11 @@
     <Setting Name="qmin" Type="System.Decimal" Scope="User">
       <Value Profile="(Default)">6</Value>
     </Setting>
+    <Setting Name="开始计时阈值" Type="System.Decimal" Scope="User">
+      <Value Profile="(Default)">0.05</Value>
+    </Setting>
+    <Setting Name="停止阈值" Type="System.Decimal" Scope="User">
+      <Value Profile="(Default)">0.05</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

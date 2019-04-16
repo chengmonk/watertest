@@ -40,7 +40,7 @@ namespace 冲水阀水力特性测试机
             //System.Console.WriteLine("push:" + doData[0]);
            while(true)//流量大于某个数值以后开始计时
             {
-                if (FLOW > 0.05)
+                if (FLOW > (double)startThreshold.Value)
                 {
                     
                     break;
@@ -147,7 +147,7 @@ namespace 冲水阀水力特性测试机
                         }
                     );
                 Console.WriteLine("pushedFlag:" + pushedFlag);
-                if (l[l.Count - 1] < 0.1 && pushedFlag)
+                if (l[l.Count - 1] < (double) stopThreshold.Value && pushedFlag)
                 {
                     loadDataFlag = false;
                     pushFlag = false;
@@ -602,6 +602,18 @@ namespace 冲水阀水力特性测试机
         private void Form2_FormClosed(object sender, FormClosedEventArgs e)
         {
 
+        }
+
+        private void StartThreshold_ValueChanged(object sender, EventArgs e)
+        {
+            Properties.Settings.Default.开始计时阈值 = startThreshold.Value;
+            Properties.Settings.Default.Save();
+        }
+
+        private void StopThreshold_ValueChanged(object sender, EventArgs e)
+        {
+            Properties.Settings.Default.停止阈值 = startThreshold.Value;
+            Properties.Settings.Default.Save();
         }
     }
 }

@@ -143,11 +143,11 @@ namespace 冲水阀水力特性测试机
                         m_dataScaled[i] += (double)Properties.Settings.Default.m压力;
                         m_dataScaled[i + 1] += (double)Properties.Settings.Default.m冲击力;
                         m_dataScaled[i + 2] += (double)Properties.Settings.Default.m温度;
-                        if (Math.Round(m_dataScaled[i], 2) > 0.05)//当压力大于某个数值开始 计按下工件的延时
+                        if (Math.Round(m_dataScaled[i], 2) > (double)startThreshold.Value)//当压力大于某个数值开始 计按下工件的延时
                             pushFlag = true;
                     if (maxPressure < Math.Round(m_dataScaled[i] , 2)) { maxPressure = Math.Round(m_dataScaled[i] , 2); }
                     if(maxHammer < Math.Round(m_dataScaled[i + 1] , 2)) { maxHammer = Math.Round(m_dataScaled[i + 1] , 2); }
-                    if(pushedFlag && Math.Round(m_dataScaled[i] , 2) <= 0.1)//当压力小于等于某个数值，停止向缓冲区写数据
+                    if(pushedFlag && Math.Round(m_dataScaled[i] , 2) <= (double)stopThreshold.Value)//当压力小于等于某个数值，停止向缓冲区写数据
                         {
                             startFlag = false;
                             pushFlag = false;
@@ -676,6 +676,18 @@ namespace 冲水阀水力特性测试机
         private void HslBlower1_Load(object sender, EventArgs e)
         {
 
+        }
+
+        private void StartThreshold_ValueChanged(object sender, EventArgs e)
+        {
+            Properties.Settings.Default.开始计时阈值 = startThreshold.Value;
+            Properties.Settings.Default.Save();
+        }
+
+        private void StopThreshold_ValueChanged(object sender, EventArgs e)
+        {
+            Properties.Settings.Default.停止阈值 = startThreshold.Value;
+            Properties.Settings.Default.Save();
         }
 
         private void workName_TextChanged(object sender, EventArgs e)
