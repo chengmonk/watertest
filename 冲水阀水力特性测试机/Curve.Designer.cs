@@ -87,7 +87,7 @@
             this.hslButton3.CustomerInformation = null;
             this.hslButton3.EnableColor = System.Drawing.Color.DodgerBlue;
             this.hslButton3.Location = new System.Drawing.Point(301, 640);
-            this.hslButton3.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.hslButton3.Margin = new System.Windows.Forms.Padding(4);
             this.hslButton3.Name = "hslButton3";
             this.hslButton3.OriginalColor = System.Drawing.Color.PaleGreen;
             this.hslButton3.Size = new System.Drawing.Size(104, 40);
@@ -102,7 +102,7 @@
             this.hslButton4.CustomerInformation = null;
             this.hslButton4.EnableColor = System.Drawing.Color.DodgerBlue;
             this.hslButton4.Location = new System.Drawing.Point(164, 640);
-            this.hslButton4.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.hslButton4.Margin = new System.Windows.Forms.Padding(4);
             this.hslButton4.Name = "hslButton4";
             this.hslButton4.OriginalColor = System.Drawing.Color.PaleGreen;
             this.hslButton4.Size = new System.Drawing.Size(104, 40);
@@ -118,7 +118,7 @@
             this.hslCurveHistory1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(46)))), ((int)(((byte)(46)))));
             this.hslCurveHistory1.DashCoordinateColor = System.Drawing.Color.FromArgb(((int)(((byte)(72)))), ((int)(((byte)(72)))), ((int)(((byte)(72)))));
             this.hslCurveHistory1.Location = new System.Drawing.Point(0, 0);
-            this.hslCurveHistory1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.hslCurveHistory1.Margin = new System.Windows.Forms.Padding(4);
             this.hslCurveHistory1.MarkTextColor = System.Drawing.Color.Yellow;
             this.hslCurveHistory1.Name = "hslCurveHistory1";
             this.hslCurveHistory1.Size = new System.Drawing.Size(1088, 632);
@@ -135,7 +135,7 @@
             this.hslButton1.CustomerInformation = null;
             this.hslButton1.EnableColor = System.Drawing.Color.DodgerBlue;
             this.hslButton1.Location = new System.Drawing.Point(4, 640);
-            this.hslButton1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.hslButton1.Margin = new System.Windows.Forms.Padding(4);
             this.hslButton1.Name = "hslButton1";
             this.hslButton1.OriginalColor = System.Drawing.Color.PaleGreen;
             this.hslButton1.Size = new System.Drawing.Size(104, 40);
@@ -165,7 +165,7 @@
             this.hslButton5.CustomerInformation = null;
             this.hslButton5.EnableColor = System.Drawing.Color.DodgerBlue;
             this.hslButton5.Location = new System.Drawing.Point(145, 642);
-            this.hslButton5.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.hslButton5.Margin = new System.Windows.Forms.Padding(4);
             this.hslButton5.Name = "hslButton5";
             this.hslButton5.OriginalColor = System.Drawing.Color.PaleGreen;
             this.hslButton5.Size = new System.Drawing.Size(104, 40);
@@ -180,7 +180,7 @@
             this.hslButton6.CustomerInformation = null;
             this.hslButton6.EnableColor = System.Drawing.Color.DodgerBlue;
             this.hslButton6.Location = new System.Drawing.Point(283, 642);
-            this.hslButton6.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.hslButton6.Margin = new System.Windows.Forms.Padding(4);
             this.hslButton6.Name = "hslButton6";
             this.hslButton6.OriginalColor = System.Drawing.Color.PaleGreen;
             this.hslButton6.Size = new System.Drawing.Size(104, 40);
@@ -195,7 +195,7 @@
             this.hslButton2.CustomerInformation = null;
             this.hslButton2.EnableColor = System.Drawing.Color.DodgerBlue;
             this.hslButton2.Location = new System.Drawing.Point(0, 642);
-            this.hslButton2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.hslButton2.Margin = new System.Windows.Forms.Padding(4);
             this.hslButton2.Name = "hslButton2";
             this.hslButton2.OriginalColor = System.Drawing.Color.PaleGreen;
             this.hslButton2.Size = new System.Drawing.Size(104, 40);
@@ -211,7 +211,7 @@
             this.hslCurveHistory2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(46)))), ((int)(((byte)(46)))));
             this.hslCurveHistory2.DashCoordinateColor = System.Drawing.Color.FromArgb(((int)(((byte)(72)))), ((int)(((byte)(72)))), ((int)(((byte)(72)))));
             this.hslCurveHistory2.Location = new System.Drawing.Point(3, 2);
-            this.hslCurveHistory2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.hslCurveHistory2.Margin = new System.Windows.Forms.Padding(4);
             this.hslCurveHistory2.MarkTextColor = System.Drawing.Color.Yellow;
             this.hslCurveHistory2.Name = "hslCurveHistory2";
             this.hslCurveHistory2.Size = new System.Drawing.Size(1095, 632);
@@ -244,7 +244,7 @@
             this.hslButton7.CustomerInformation = null;
             this.hslButton7.EnableColor = System.Drawing.Color.DodgerBlue;
             this.hslButton7.Location = new System.Drawing.Point(148, 642);
-            this.hslButton7.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.hslButton7.Margin = new System.Windows.Forms.Padding(4);
             this.hslButton7.Name = "hslButton7";
             this.hslButton7.OriginalColor = System.Drawing.Color.PaleGreen;
             this.hslButton7.Size = new System.Drawing.Size(104, 40);
@@ -259,7 +259,7 @@
             this.hslButton8.CustomerInformation = null;
             this.hslButton8.EnableColor = System.Drawing.Color.DodgerBlue;
             this.hslButton8.Location = new System.Drawing.Point(285, 642);
-            this.hslButton8.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.hslButton8.Margin = new System.Windows.Forms.Padding(4);
             this.hslButton8.Name = "hslButton8";
             this.hslButton8.OriginalColor = System.Drawing.Color.PaleGreen;
             this.hslButton8.Size = new System.Drawing.Size(104, 40);
@@ -274,7 +274,7 @@
             this.hslButton9.CustomerInformation = null;
             this.hslButton9.EnableColor = System.Drawing.Color.DodgerBlue;
             this.hslButton9.Location = new System.Drawing.Point(3, 642);
-            this.hslButton9.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.hslButton9.Margin = new System.Windows.Forms.Padding(4);
             this.hslButton9.Name = "hslButton9";
             this.hslButton9.OriginalColor = System.Drawing.Color.PaleGreen;
             this.hslButton9.Size = new System.Drawing.Size(104, 40);
@@ -284,12 +284,13 @@
             // 
             // hslCurveHistory3
             // 
-            this.hslCurveHistory3.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.hslCurveHistory3.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.hslCurveHistory3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(46)))), ((int)(((byte)(46)))));
             this.hslCurveHistory3.DashCoordinateColor = System.Drawing.Color.FromArgb(((int)(((byte)(72)))), ((int)(((byte)(72)))), ((int)(((byte)(72)))));
             this.hslCurveHistory3.Location = new System.Drawing.Point(3, 2);
-            this.hslCurveHistory3.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.hslCurveHistory3.Margin = new System.Windows.Forms.Padding(4);
             this.hslCurveHistory3.MarkTextColor = System.Drawing.Color.Yellow;
             this.hslCurveHistory3.Name = "hslCurveHistory3";
             this.hslCurveHistory3.Size = new System.Drawing.Size(1095, 632);

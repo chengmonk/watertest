@@ -151,7 +151,7 @@ namespace 冲水阀水力特性测试机
                     sp.Parity = config.checkInfo == 0 ? System.IO.Ports.Parity.None : (config.checkInfo == 1 ? System.IO.Ports.Parity.Odd : System.IO.Ports.Parity.Even);
                 });
                 busRtuClient.Open();
-                MessageBox.Show("串口打开成功!!");
+                
                 // button2.Enabled = true;
                 // button1.Enabled = false;
                 //panel2.Enabled = true;
@@ -159,6 +159,7 @@ namespace 冲水阀水力特性测试机
             }
             catch (Exception ex)
             {
+                MessageBox.Show("串口打开失败!!");
                 MessageBox.Show(ex.Message);
             }
         }

@@ -586,7 +586,7 @@
             this.hslCurve1.Size = new System.Drawing.Size(744, 382);
             this.hslCurve1.TabIndex = 2;
             this.hslCurve1.ValueMaxLeft = 10F;
-            this.hslCurve1.ValueMaxRight = 10F;
+            this.hslCurve1.ValueMaxRight = 50F;
             this.hslCurve1.ValueSegment = 20;
             // 
             // systemInfo

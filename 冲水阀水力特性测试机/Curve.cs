@@ -22,33 +22,18 @@ namespace 冲水阀水力特性测试机
 
         private void Curve_Load(object sender, EventArgs e)
         {
-            totalFlow = Form2.totalFlow;
-            //MessageBox.Show("累计流量："+totalFlow);
-            load_Data();
-            //EN 6L流量统计图
-
-
-
-            //EN 9L流量统计图
-
-
-            //BSEN 流量统计图
-
+            totalFlow = Form2.totalFlow;       
+            load_Data();            
 
         }
 
         private void load_Data()
         {
-            //总流量达到6L加载数据
-            if ((totalFlow<6)) {
-
-            }
-            else
-            {
-                hslCurveHistory1.Text = "正在加载数据...";
-                hslCurveHistory1.RemoveAllCurve();
+           
+            
+               
                 new Thread(new ThreadStart(ThreadReadExample1)) { IsBackground = true }.Start();
-            }
+           
         }
         //计算特征点
         //PointF Qmin = new PointF();
@@ -78,7 +63,7 @@ namespace 冲水阀水力特性测试机
             DateTime[] dateTime = new DateTime[dt.Rows.Count];
             DateTimeFormatInfo dtFormat = new DateTimeFormatInfo();
             dtFormat.ShortDatePattern = "yyyy-MM-dd hh:mm:ss:fff";           
-
+            //加载流量数据
             for (int i = 0; i < dt.Rows.Count; i++)
             {
                 flow[i] = (float)Convert.ToDouble(dt.Rows[i][2]);
@@ -87,14 +72,87 @@ namespace 冲水阀水力特性测试机
                 //Console.WriteLine((array[i, 0]));
             }
 
+            //BSEN曲线
+            {
+                A_BSEN.X = (int)(dt.Rows.Count * 0.2);
+                A_BSEN.Y = 0;
+                B_BSEN.X = (int)(dt.Rows.Count * 0.7);
+                B_BSEN.Y = 0;
+                QM_BSEN.Y = (float)Form2.maxFlow;
+                QM_BSEN.X = 0;
+                C_BSEN.X = 0;
+                C_BSEN.Y = (float)(QM_BSEN.Y * 0.7);
+                M_BSEN.Y = C_BSEN.Y;
+                N_BSEN.Y = C_BSEN.Y;
+                M_BSEN.X = A_BSEN.X;
+                N_BSEN.X = B_BSEN.X;
+                QM_INGRAPH_BSEN = QM_BSEN;
+                QM_INGRAPH_BSEN.X = Form2.maxflow_pose;
+
+                hslCurveHistory3.Text = "正在加载数据...";
+                hslCurveHistory3.RemoveAllCurve();
+                hslCurveHistory3.SetLeftCurve("流量", flow, Color.DodgerBlue, true, "{0:F1} L/s");
+                hslCurveHistory3.SetDateTimes(dateTime);
+
+                // 增加一个三角形的线段标记示例 Points的每个点的X是数据索引，Y是数据值（需要选对参考坐标轴，默认为左坐标轴）                             
+                //增加abmn矩阵
+                hslCurveHistory3.AddMarkLine(new HslControls.HslMarkLine()
+                {
+                    CircleBrush = Brushes.Yellow,
+                    IsLeftFrame = true,
+                    IsLineClosed = true,
+                    LinePen = Pens.Yellow,
+                    TextBrush = Brushes.Yellow,
+                    Points = new PointF[]
+                    {
+                         A_BSEN,B_BSEN,M_BSEN,N_BSEN
+                    },
+                    Marks = new string[] { "A", "B", "M", "N" },
+                });
+
+                //cm
+                hslCurveHistory3.AddMarkLine(new HslControls.HslMarkLine()
+                {
+                    CircleBrush = Brushes.Yellow,
+                    IsLeftFrame = true,
+                    IsLineClosed = false,
+                    LinePen = Pens.Yellow,
+                    TextBrush = Brushes.Yellow,
+                    Points = new PointF[]
+               {
+                         C_BSEN,M_BSEN
+               },
+                    Marks = new string[] { "        C", "  " },
+                });
+                //qm-qm_ingraph
+                hslCurveHistory3.AddMarkLine(new HslControls.HslMarkLine()
+                {
+                    CircleBrush = Brushes.Yellow,
+                    IsLeftFrame = true,
+                    IsLineClosed = false,
+                    LinePen = Pens.Yellow,
+                    TextBrush = Brushes.Yellow,
+                    Points = new PointF[]
+               {
+                         QM_BSEN,QM_INGRAPH_BSEN
+               },
+                    Marks = new string[] { "        QM", "  " },
+                });
 
 
+                hslCurveHistory3.ValueMaxLeft = 10;
+                hslCurveHistory3.ValueMinLeft = 0;
+                hslCurveHistory3.SetScaleByXAxis(xAxis);
+
+                hslCurveHistory3.RenderCurveUI();
+
+            }
           
-
-
-            DateTime start = dateTime[0];
+                DateTime start = dateTime[0];
             DateTime PointA=dateTime[0].AddSeconds(2);
             TimeSpan ts = new TimeSpan(1);
+
+            //寻找开始两秒以后的点
             for (int i = 0; i < dt.Rows.Count; i++)
             {
                 if (dateTime[i].Second - PointA.Second==0&& Math.Abs(dateTime[i].Millisecond - PointA.Millisecond)< 100)
@@ -135,95 +193,91 @@ namespace 冲水阀水力特性测试机
             N.X = C.X;
             N.Y = D.Y;
 
-            A_BSEN.X = (int)(dt.Rows.Count * 0.2);
-            A_BSEN.Y = 0;
-            B_BSEN.X = (int)(dt.Rows.Count * 0.7);
-            B_BSEN.Y = 0;
-
-            QM_BSEN.Y = (float)Form2.maxFlow;
-            QM_BSEN.X = 0;
-            C_BSEN.X = 0;
-            C_BSEN.Y = (float)(QM_BSEN.Y * 0.7);
-            M_BSEN.Y = C_BSEN.Y;
-            N_BSEN.Y = C_BSEN.Y;
-            M_BSEN.X = A_BSEN.X;
-            N_BSEN.X = B_BSEN.X;
-            QM_INGRAPH_BSEN = QM_BSEN;
-            QM_INGRAPH_BSEN.X = Form2.maxflow_pose;
-
+           
             // 显示出数据信息来
             Invoke(new Action(() =>
             {
-
-                hslCurveHistory1.SetLeftCurve("流量", flow, Color.DodgerBlue, true, "{0:F1} L/s");
-                hslCurveHistory1.SetDateTimes(dateTime);               
-
-                // 增加一个三角形的线段标记示例 Points的每个点的X是数据索引，Y是数据值（需要选对参考坐标轴，默认为左坐标轴）                             
-                //增加EHAO矩阵
-                hslCurveHistory1.AddMarkLine(new HslControls.HslMarkLine()
+                //总流量达到6L加载数据
+                if ((totalFlow < 6))
                 {
-                    CircleBrush = Brushes.Yellow,
-                    IsLeftFrame = true,
-                    IsLineClosed = false,
-                    LinePen = Pens.Yellow,
-                    TextBrush = Brushes.Yellow,
-                    Points = new PointF[]
+                    hslCurveHistory1.Text = "累计流量未达到6L...";
+                    hslCurveHistory1.RemoveAllCurve();
+                }
+                else
+                {
+                    hslCurveHistory1.Text = "正在加载数据...";
+                    hslCurveHistory1.RemoveAllCurve();
+                    hslCurveHistory1.SetLeftCurve("流量", flow, Color.DodgerBlue, true, "{0:F1} L/s");
+                    hslCurveHistory1.SetDateTimes(dateTime);
+
+                    // 增加一个三角形的线段标记示例 Points的每个点的X是数据索引，Y是数据值（需要选对参考坐标轴，默认为左坐标轴）                             
+                    //增加EHAO矩阵
+                    hslCurveHistory1.AddMarkLine(new HslControls.HslMarkLine()
                     {
+                        CircleBrush = Brushes.Yellow,
+                        IsLeftFrame = true,
+                        IsLineClosed = false,
+                        LinePen = Pens.Yellow,
+                        TextBrush = Brushes.Yellow,
+                        Points = new PointF[]
+                        {
                          E,H,A
-                    },
-                    Marks = new string[] { "        E(Qmin)", "H", "A" },
-                });
-                //HMBA
-                hslCurveHistory1.AddMarkLine(new HslControls.HslMarkLine()
-                {
-                    CircleBrush = Brushes.Yellow,
-                    IsLeftFrame = true,
-                    IsLineClosed = false,
-                    LinePen = Pens.Yellow,
-                    TextBrush = Brushes.Yellow,
-                    Points = new PointF[]
-                   {
+                        },
+                        Marks = new string[] { "        E(Qmin)", "H", "A" },
+                    });
+                    //HMBA
+                    hslCurveHistory1.AddMarkLine(new HslControls.HslMarkLine()
+                    {
+                        CircleBrush = Brushes.Yellow,
+                        IsLeftFrame = true,
+                        IsLineClosed = false,
+                        LinePen = Pens.Yellow,
+                        TextBrush = Brushes.Yellow,
+                        Points = new PointF[]
+                       {
                          H,M,B
-                   },
-                    Marks = new string[] { "H", "M", "B" },
-                });
-                //DM
-                Console.WriteLine();
-                hslCurveHistory1.AddMarkLine(new HslControls.HslMarkLine()
-                {
-                    CircleBrush = Brushes.Yellow,
-                    IsLeftFrame = true,
-                    IsLineClosed = true,
-                    LinePen = Pens.Yellow,
-                    TextBrush = Brushes.Yellow,
-                    Points = new PointF[]
-                   {
+                       },
+                        Marks = new string[] { "H", "M", "B" },
+                    });
+                    //DM
+                    Console.WriteLine();
+                    hslCurveHistory1.AddMarkLine(new HslControls.HslMarkLine()
+                    {
+                        CircleBrush = Brushes.Yellow,
+                        IsLeftFrame = true,
+                        IsLineClosed = true,
+                        LinePen = Pens.Yellow,
+                        TextBrush = Brushes.Yellow,
+                        Points = new PointF[]
+                       {
                          D,M
-                   },
-                    Marks = new string[] { "         D(Qs)", "" },
-                });
+                       },
+                        Marks = new string[] { "         D(Qs)", "" },
+                    });
 
-                // 添加一个活动的标记
-                HslControls.HslMarkForeSection active = new HslControls.HslMarkForeSection()
-                {
-                    StartIndex = 1000,
-                    EndIndex = 1500,
-                    Height = 0.9f,
-                };
-                //active.CursorTexts.Add("条码", "A123123124ashdiahsd是的iahsidasd");
-                //active.CursorTexts.Add("工号", "asd2sd123dasf");
-                //hslCurveHistory1.AddMarkActiveSection(active);
+                    // 添加一个活动的标记
+                    HslControls.HslMarkForeSection active = new HslControls.HslMarkForeSection()
+                    {
+                        StartIndex = 1000,
+                        EndIndex = 1500,
+                        Height = 0.9f,
+                    };
+                    //active.CursorTexts.Add("条码", "A123123124ashdiahsd是的iahsidasd");
+                    //active.CursorTexts.Add("工号", "asd2sd123dasf");
+                    //hslCurveHistory1.AddMarkActiveSection(active);
 
-                //hslCurveHistory1.SetCurveVisible("步序", false);   // 步序不是曲线信息，不用显示出来
-                hslCurveHistory1.ValueMaxLeft = 10;
-                hslCurveHistory1.ValueMinLeft = 0;
-                hslCurveHistory1.SetScaleByXAxis(7);
-                hslCurveHistory1.RenderCurveUI();
-                Console.WriteLine("AY:" + A.Y + ":" + A.X);
-
+                    //hslCurveHistory1.SetCurveVisible("步序", false);   // 步序不是曲线信息，不用显示出来
+                    hslCurveHistory1.ValueMaxLeft = 10;
+                    hslCurveHistory1.ValueMinLeft = 0;
+                    hslCurveHistory1.SetScaleByXAxis(7);
+                    hslCurveHistory1.RenderCurveUI();
+                    Console.WriteLine("AY:" + A.Y + ":" + A.X);
+                }
                 if (totalFlow >= 9)//总流量达到9L加载数据
-                { 
+                {
                     //9L 流量图
+                    hslCurveHistory2.Text = "正在加载数据...";
+                    hslCurveHistory2.RemoveAllCurve();
                     hslCurveHistory2.SetLeftCurve("流量", flow, Color.DodgerBlue, true, "{0:F1} L/s");
                 hslCurveHistory2.SetDateTimes(dateTime);
 
@@ -280,65 +334,8 @@ namespace 冲水阀水力特性测试机
                 hslCurveHistory2.RenderCurveUI();
 
             }
-                //BSEN曲线
-                { 
-                   
-                    hslCurveHistory3.SetLeftCurve("流量", flow, Color.DodgerBlue, true, "{0:F1} L/s");
-                hslCurveHistory3.SetDateTimes(dateTime);
-
-                // 增加一个三角形的线段标记示例 Points的每个点的X是数据索引，Y是数据值（需要选对参考坐标轴，默认为左坐标轴）                             
-                //增加abmn矩阵
-                hslCurveHistory3.AddMarkLine(new HslControls.HslMarkLine()
-                {
-                    CircleBrush = Brushes.Yellow,
-                    IsLeftFrame = true,
-                    IsLineClosed = true,
-                    LinePen = Pens.Yellow,
-                    TextBrush = Brushes.Yellow,
-                    Points = new PointF[]
-                    {
-                         A_BSEN,B_BSEN,M_BSEN,N_BSEN
-                    },
-                    Marks = new string[] { "A", "B", "M","N" },
-                });
-
-                    //cm
-                    hslCurveHistory3.AddMarkLine(new HslControls.HslMarkLine()
-                    {
-                        CircleBrush = Brushes.Yellow,
-                        IsLeftFrame = true,
-                        IsLineClosed = false,
-                        LinePen = Pens.Yellow,
-                        TextBrush = Brushes.Yellow,
-                        Points = new PointF[]
-                   {
-                         C_BSEN,M_BSEN
-                   },
-                        Marks = new string[] { "        C", "  " },
-                    });
-                    //qm-qm_ingraph
-                    hslCurveHistory3.AddMarkLine(new HslControls.HslMarkLine()
-                    {
-                        CircleBrush = Brushes.Yellow,
-                        IsLeftFrame = true,
-                        IsLineClosed = false,
-                        LinePen = Pens.Yellow,
-                        TextBrush = Brushes.Yellow,
-                        Points = new PointF[]
-                   {
-                         QM_BSEN,QM_INGRAPH_BSEN
-                   },
-                        Marks = new string[] { "        QM", "  " },
-                    });
 
 
-                    hslCurveHistory3.ValueMaxLeft = 10;
-                hslCurveHistory3.ValueMinLeft = 0;
-                hslCurveHistory3.SetScaleByXAxis(xAxis);
-
-                hslCurveHistory3.RenderCurveUI();
-
-            }
             }
             ));            
         }

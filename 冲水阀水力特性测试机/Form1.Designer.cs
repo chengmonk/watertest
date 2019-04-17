@@ -68,11 +68,11 @@
             this.systemInfo = new System.Windows.Forms.Label();
             this.instantAiCtrl1 = new Automation.BDaq.InstantAiCtrl(this.components);
             this.groupBox4 = new System.Windows.Forms.GroupBox();
-            this.waterTemperature = new System.Windows.Forms.Label();
-            this.waterPresuer = new System.Windows.Forms.Label();
-            this.waterHammer = new System.Windows.Forms.Label();
-            this.pressureMax = new System.Windows.Forms.Label();
             this.waterHammerMax = new System.Windows.Forms.Label();
+            this.pressureMax = new System.Windows.Forms.Label();
+            this.waterHammer = new System.Windows.Forms.Label();
+            this.waterPresuer = new System.Windows.Forms.Label();
+            this.waterTemperature = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.sbyali)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
@@ -157,10 +157,10 @@
             this.hslBlower1.Color7 = System.Drawing.Color.FromArgb(((int)(((byte)(158)))), ((int)(((byte)(165)))), ((int)(((byte)(173)))));
             this.hslBlower1.Color8 = System.Drawing.Color.FromArgb(((int)(((byte)(176)))), ((int)(((byte)(182)))), ((int)(((byte)(189)))));
             this.hslBlower1.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.hslBlower1.Location = new System.Drawing.Point(155, 178);
+            this.hslBlower1.Location = new System.Drawing.Point(156, 231);
             this.hslBlower1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.hslBlower1.Name = "hslBlower1";
-            this.hslBlower1.Size = new System.Drawing.Size(141, 158);
+            this.hslBlower1.Size = new System.Drawing.Size(150, 170);
             this.hslBlower1.TabIndex = 22;
             this.hslBlower1.Text = "关闭";
             this.hslBlower1.Load += new System.EventHandler(this.HslBlower1_Load);
@@ -569,38 +569,16 @@
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "仪表显示";
             // 
-            // waterTemperature
+            // waterHammerMax
             // 
-            this.waterTemperature.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.waterTemperature.AutoSize = true;
-            this.waterTemperature.Location = new System.Drawing.Point(32, 151);
-            this.waterTemperature.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.waterTemperature.Name = "waterTemperature";
-            this.waterTemperature.Size = new System.Drawing.Size(52, 15);
-            this.waterTemperature.TabIndex = 23;
-            this.waterTemperature.Text = "温度：";
-            // 
-            // waterPresuer
-            // 
-            this.waterPresuer.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.waterPresuer.AutoSize = true;
-            this.waterPresuer.Location = new System.Drawing.Point(32, 42);
-            this.waterPresuer.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.waterPresuer.Name = "waterPresuer";
-            this.waterPresuer.Size = new System.Drawing.Size(52, 15);
-            this.waterPresuer.TabIndex = 24;
-            this.waterPresuer.Text = "压力：";
-            // 
-            // waterHammer
-            // 
-            this.waterHammer.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.waterHammer.AutoSize = true;
-            this.waterHammer.Location = new System.Drawing.Point(32, 100);
-            this.waterHammer.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.waterHammer.Name = "waterHammer";
-            this.waterHammer.Size = new System.Drawing.Size(67, 15);
-            this.waterHammer.TabIndex = 25;
-            this.waterHammer.Text = "冲击力：";
+            this.waterHammerMax.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.waterHammerMax.AutoSize = true;
+            this.waterHammerMax.Location = new System.Drawing.Point(32, 251);
+            this.waterHammerMax.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.waterHammerMax.Name = "waterHammerMax";
+            this.waterHammerMax.Size = new System.Drawing.Size(97, 15);
+            this.waterHammerMax.TabIndex = 27;
+            this.waterHammerMax.Text = "最大冲击力：";
             // 
             // pressureMax
             // 
@@ -613,16 +591,38 @@
             this.pressureMax.TabIndex = 26;
             this.pressureMax.Text = "最大压力：";
             // 
-            // waterHammerMax
+            // waterHammer
             // 
-            this.waterHammerMax.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.waterHammerMax.AutoSize = true;
-            this.waterHammerMax.Location = new System.Drawing.Point(32, 251);
-            this.waterHammerMax.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.waterHammerMax.Name = "waterHammerMax";
-            this.waterHammerMax.Size = new System.Drawing.Size(97, 15);
-            this.waterHammerMax.TabIndex = 27;
-            this.waterHammerMax.Text = "最大冲击力：";
+            this.waterHammer.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.waterHammer.AutoSize = true;
+            this.waterHammer.Location = new System.Drawing.Point(32, 100);
+            this.waterHammer.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.waterHammer.Name = "waterHammer";
+            this.waterHammer.Size = new System.Drawing.Size(67, 15);
+            this.waterHammer.TabIndex = 25;
+            this.waterHammer.Text = "冲击力：";
+            // 
+            // waterPresuer
+            // 
+            this.waterPresuer.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.waterPresuer.AutoSize = true;
+            this.waterPresuer.Location = new System.Drawing.Point(32, 42);
+            this.waterPresuer.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.waterPresuer.Name = "waterPresuer";
+            this.waterPresuer.Size = new System.Drawing.Size(52, 15);
+            this.waterPresuer.TabIndex = 24;
+            this.waterPresuer.Text = "压力：";
+            // 
+            // waterTemperature
+            // 
+            this.waterTemperature.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.waterTemperature.AutoSize = true;
+            this.waterTemperature.Location = new System.Drawing.Point(32, 151);
+            this.waterTemperature.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.waterTemperature.Name = "waterTemperature";
+            this.waterTemperature.Size = new System.Drawing.Size(52, 15);
+            this.waterTemperature.TabIndex = 23;
+            this.waterTemperature.Text = "温度：";
             // 
             // Form1
             // 

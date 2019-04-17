@@ -111,6 +111,7 @@ namespace 冲水阀水力特性测试机
             }
             //System.Console.WriteLine(m_dataScaled.Length.ToString());
         }
+        double PRESURE;
         private void waveformAiCtrl1_DataReady(object sender, BfdAiEventArgs args)
         {
             ErrorCode err = ErrorCode.Success;
@@ -136,6 +137,7 @@ namespace 冲水阀水力特性测试机
                 {
                     if (startFlag)
                     {
+                        PRESURE = Math.Round(m_dataScaled[i] + (double)Properties.Settings.Default.m压力, 2);
                         dt.Rows.Add(t.ToString("yyyy-MM-dd hh:mm:ss:fff"),
                             Math.Round(m_dataScaled[i] + (double)Properties.Settings.Default.m压力, 2),
                             Math.Round(m_dataScaled[i + 1]+ (double)Properties.Settings.Default.m冲击力, 2),
@@ -143,7 +145,7 @@ namespace 冲水阀水力特性测试机
                         m_dataScaled[i] += (double)Properties.Settings.Default.m压力;
                         m_dataScaled[i + 1] += (double)Properties.Settings.Default.m冲击力;
                         m_dataScaled[i + 2] += (double)Properties.Settings.Default.m温度;
-                        if (Math.Round(m_dataScaled[i], 2) > (double)startThreshold.Value)//当压力大于某个数值开始 计按下工件的延时
+                        if (Math.Round(m_dataScaled[i], 2) >= (double)startThreshold.Value)//当压力大于某个数值开始 计按下工件的延时
                             pushFlag = true;
                     if (maxPressure < Math.Round(m_dataScaled[i] , 2)) { maxPressure = Math.Round(m_dataScaled[i] , 2); }
                     if(maxHammer < Math.Round(m_dataScaled[i + 1] , 2)) { maxHammer = Math.Round(m_dataScaled[i + 1] , 2); }
@@ -188,7 +190,7 @@ namespace 冲水阀水力特性测试机
                 {
 
                     hslCurve1.AddCurveData(
-                        new string[] { "压力", "冲击力" },
+                        new string[] { "A", "B" },
                         new float[]
                         {
                    (float)data[i],
@@ -321,8 +323,20 @@ namespace 冲水阀水力特性测试机
         System.Timers.Timer pushWork;
         System.Timers.Timer monitor;
         double maxPressure, maxHammer;
+        M_485Rtu mr;
+        COMconfig conf;
         private void Form1_Load(object sender, EventArgs e)
         {
+            conf.botelv = "19200";
+            conf.zhanhao = "1";
+            conf.shujuwei = "8";
+            conf.tingzhiwei = "1";
+            conf.dataFromZero = true;
+            conf.stringReverse = false;
+            conf.COM_Name = "COM11";
+            conf.checkInfo = 2;
+            mr = new M_485Rtu(conf);
+            mr.connect();
             pushedFlag = false;
             startFlag = false;
             pushFlag = false;
@@ -696,14 +710,14 @@ namespace 冲水阀水力特性测试机
         {
             // 隐藏曲线
             pressureisVisiable = !pressureisVisiable;
-            hslCurve1.SetCurveVisible(new string[] { "压力" }, pressureisVisiable);
+            hslCurve1.SetCurveVisible(new string[] { "A" }, pressureisVisiable);
         }
         bool hummerisVisiable = true;
         private void HslButton2_Click_1(object sender, EventArgs e)
         {
             // 隐藏曲线
             hummerisVisiable = !hummerisVisiable;
-            hslCurve1.SetCurveVisible(new string[] { "压力" }, hummerisVisiable);
+            hslCurve1.SetCurveVisible(new string[] { "B" }, hummerisVisiable);
         }
 
         private void workName_TextChanged(object sender, EventArgs e)
