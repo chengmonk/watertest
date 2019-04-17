@@ -198,7 +198,7 @@ namespace 冲水阀水力特性测试机
             Invoke(new Action(() =>
             {
                 //总流量达到6L加载数据
-                if (!(totalFlow < 6))
+                if ((totalFlow < 6))
                 {
                     hslCurveHistory1.Text = "累计流量未达到6L...";
                     hslCurveHistory1.RemoveAllCurve();
