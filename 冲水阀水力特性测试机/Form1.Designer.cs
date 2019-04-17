@@ -440,8 +440,8 @@
             this.startThreshold.Location = new System.Drawing.Point(143, 191);
             this.startThreshold.Margin = new System.Windows.Forms.Padding(4);
             this.startThreshold.Minimum = new decimal(new int[] {
-            100,
-            0,
+            1215752191,
+            23,
             0,
             -2147483648});
             this.startThreshold.Name = "startThreshold";

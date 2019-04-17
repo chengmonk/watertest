@@ -406,8 +406,8 @@
             131072});
             this.startThreshold.Location = new System.Drawing.Point(132, 200);
             this.startThreshold.Minimum = new decimal(new int[] {
-            100,
-            0,
+            -727379969,
+            232,
             0,
             -2147483648});
             this.startThreshold.Name = "startThreshold";
