@@ -84,11 +84,12 @@ namespace 冲水阀水力特性测试机
                     ;
                 else
                 wendu.Add(data[2]);
-                maxFlow = l.Max();
-                maxflow_pose = l.IndexOf(l.Max());
+                //maxFlow = l.Max();
+               
                 //连续采样N个数据，去掉一个最大值和一个最小值然后计算N - 2个数据的算术平均值N值的选取：3~14
                 if (l.Count > 8)
                 {
+                    
                     double sum = 0;
                     List<double> temp = new List<double>();
                     for (int i = 1; i < 8; i++)
@@ -99,6 +100,7 @@ namespace 冲水阀水力特性测试机
                     sum = sum - temp.Max() - temp.Min();
                     l[l.Count - 4] = (sum / 5);
                     if (l[l.Count - 4] > maxFlow) { maxFlow = l[l.Count - 4]; }
+                    maxflow_pose = l.IndexOf(l.Max()) - 8;
                 }
             }
             myDelegate md = new myDelegate(setText);
