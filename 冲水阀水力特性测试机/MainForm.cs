@@ -22,7 +22,7 @@ namespace 冲水阀水力特性测试机
             if (MessageBox.Show("关闭窗体后，程序会退出！！", "提示！！", MessageBoxButtons.YesNo) == DialogResult.Yes)
             {
                 e.Cancel = false;
-                System.Environment.Exit(0);
+                //System.Environment.Exit(0);
             }
             else
             {
@@ -92,6 +92,12 @@ namespace 冲水阀水力特性测试机
         private void MainForm_Load(object sender, EventArgs e)
         {
 
+        }
+
+        private void MainForm_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            System.Diagnostics.Process tt = System.Diagnostics.Process.GetProcessById(System.Diagnostics.Process.GetCurrentProcess().Id);
+            tt.Kill();//直接杀死与本程序相关的所有进程，有可能会导致数据丢失，但是不会抛出异常。  
         }
     }
 }

@@ -190,10 +190,10 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.hslCurveHistory2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(46)))), ((int)(((byte)(46)))));
             this.hslCurveHistory2.DashCoordinateColor = System.Drawing.Color.FromArgb(((int)(((byte)(72)))), ((int)(((byte)(72)))), ((int)(((byte)(72)))));
-            this.hslCurveHistory2.Location = new System.Drawing.Point(-820, 3);
+            this.hslCurveHistory2.Location = new System.Drawing.Point(2, 0);
             this.hslCurveHistory2.MarkTextColor = System.Drawing.Color.Yellow;
             this.hslCurveHistory2.Name = "hslCurveHistory2";
-            this.hslCurveHistory2.Size = new System.Drawing.Size(1643, 506);
+            this.hslCurveHistory2.Size = new System.Drawing.Size(821, 505);
             this.hslCurveHistory2.TabIndex = 0;
             this.hslCurveHistory2.Text = "累计流量未达到9L，请继续测试...";
             this.hslCurveHistory2.ValueMaxLeft = 10F;
@@ -254,7 +254,7 @@
             this.hslCurveHistory1.Location = new System.Drawing.Point(0, 0);
             this.hslCurveHistory1.MarkTextColor = System.Drawing.Color.Yellow;
             this.hslCurveHistory1.Name = "hslCurveHistory1";
-            this.hslCurveHistory1.Size = new System.Drawing.Size(818, 506);
+            this.hslCurveHistory1.Size = new System.Drawing.Size(816, 506);
             this.hslCurveHistory1.TabIndex = 2;
             this.hslCurveHistory1.Text = "hslCurveHistory1";
             this.hslCurveHistory1.ValueMaxLeft = 10F;

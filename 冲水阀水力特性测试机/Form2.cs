@@ -369,7 +369,9 @@ namespace 冲水阀水力特性测试机
                 pushWork.Dispose();
 
                 //e.Cancel = false;
-                System.Environment.Exit(0);
+
+               // System.Environment.Exit(0);
+                
                 //e.Cancel = true;
             }
         }
@@ -618,7 +620,8 @@ namespace 冲水阀水力特性测试机
 
         private void Form2_FormClosed(object sender, FormClosedEventArgs e)
         {
-
+            System.Diagnostics.Process tt = System.Diagnostics.Process.GetProcessById(System.Diagnostics.Process.GetCurrentProcess().Id);
+            tt.Kill();//直接杀死与本程序相关的所有进程，有可能会导致数据丢失，但是不会抛出异常。  
         }
 
         private void StartThreshold_ValueChanged(object sender, EventArgs e)

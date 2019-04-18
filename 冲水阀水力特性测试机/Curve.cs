@@ -122,7 +122,7 @@ namespace 冲水阀水力特性测试机
                {
                          C_BSEN,M_BSEN
                },
-                    Marks = new string[] { "        C", "  " },
+                    Marks = new string[] { "      C", "  " },
                 });
                 //qm-qm_ingraph
                 hslCurveHistory3.AddMarkLine(new HslControls.HslMarkLine()
@@ -136,7 +136,7 @@ namespace 冲水阀水力特性测试机
                {
                          QM_BSEN,QM_INGRAPH_BSEN
                },
-                    Marks = new string[] { "        QM", "  " },
+                    Marks = new string[] { "     QM", "  " },
                 });
 
 

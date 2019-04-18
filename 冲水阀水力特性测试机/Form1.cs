@@ -487,7 +487,7 @@ namespace 冲水阀水力特性测试机
                 if (pushWork.Enabled)
                     pushWork.Dispose();
                 //e.Cancel = false;
-                System.Environment.Exit(0);
+                //System.Environment.Exit(0);
                 //e.Cancel = true;
             }
         }
@@ -718,6 +718,12 @@ namespace 冲水阀水力特性测试机
             // 隐藏曲线
             hummerisVisiable = !hummerisVisiable;
             hslCurve1.SetCurveVisible(new string[] { "B" }, hummerisVisiable);
+        }
+
+        private void Form1_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            System.Diagnostics.Process tt = System.Diagnostics.Process.GetProcessById(System.Diagnostics.Process.GetCurrentProcess().Id);
+            tt.Kill();//直接杀死与本程序相关的所有进程，有可能会导致数据丢失，但是不会抛出异常。
         }
 
         private void workName_TextChanged(object sender, EventArgs e)
