@@ -91,7 +91,7 @@ namespace 冲水阀水力特性测试机
 
                 hslCurveHistory3.Text = "正在加载数据...";
                 hslCurveHistory3.RemoveAllCurve();
-                hslCurveHistory3.SetLeftCurve("流量", flow, Color.DodgerBlue, true, "{0:F1} L/s");
+                hslCurveHistory3.SetLeftCurve("流量", flow, Color.DodgerBlue, true, "{0:F1} L/s");//布尔变量：是否开启曲线平滑
                 hslCurveHistory3.SetDateTimes(dateTime);
 
                 // 增加一个三角形的线段标记示例 Points的每个点的X是数据索引，Y是数据值（需要选对参考坐标轴，默认为左坐标轴）                             
@@ -105,9 +105,9 @@ namespace 冲水阀水力特性测试机
                     TextBrush = Brushes.Yellow,
                     Points = new PointF[]
                     {
-                         A_BSEN,B_BSEN,M_BSEN,N_BSEN
+                         A_BSEN,B_BSEN,N_BSEN,M_BSEN
                     },
-                    Marks = new string[] { "A", "B", "M", "N" },
+                    Marks = new string[] { "A", "B", "N", "M" },
                 });
 
                 //cm
@@ -207,7 +207,7 @@ namespace 冲水阀水力特性测试机
                 {
                     hslCurveHistory1.Text = "正在加载数据...";
                     hslCurveHistory1.RemoveAllCurve();
-                    hslCurveHistory1.SetLeftCurve("流量", flow, Color.DodgerBlue, true, "{0:F1} L/s");
+                    hslCurveHistory1.SetLeftCurve("流量", flow, Color.DodgerBlue, true, "{0:F1} L/s");//布尔变量：是否开启曲线平滑
                     hslCurveHistory1.SetDateTimes(dateTime);
 
                     // 增加一个三角形的线段标记示例 Points的每个点的X是数据索引，Y是数据值（需要选对参考坐标轴，默认为左坐标轴）                             
@@ -278,8 +278,8 @@ namespace 冲水阀水力特性测试机
                     //9L 流量图
                     hslCurveHistory2.Text = "正在加载数据...";
                     hslCurveHistory2.RemoveAllCurve();
-                    hslCurveHistory2.SetLeftCurve("流量", flow, Color.DodgerBlue, true, "{0:F1} L/s");
-                hslCurveHistory2.SetDateTimes(dateTime);
+                    hslCurveHistory2.SetLeftCurve("流量", flow, Color.DodgerBlue, true, "{0:F1} L/s");//布尔变量：是否开启曲线平滑
+                    hslCurveHistory2.SetDateTimes(dateTime);
 
                 // 增加一个三角形的线段标记示例 Points的每个点的X是数据索引，Y是数据值（需要选对参考坐标轴，默认为左坐标轴）                             
                 //增加EHAO矩阵

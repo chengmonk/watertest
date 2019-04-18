@@ -64,43 +64,42 @@ namespace 冲水阀水力特性测试机
             //通道1  水冲击力  waterHammer
             //通道2  温度
             //通道3  变频器返回值
+            //通道4  水泵压力输出值
             //modbus   流量
-            double[] data = daq.InstantAi_Read(2, 2);
-            double[] D = new double[3];
-            D[0] = data[0];
-            D[1] = data[1];
+            double[] data = daq.InstantAi_Read(0, 4);
+            
             double flow=mr.read_float("3002");//读取3002地址的数据，单位立方米/s
             flow = flow * 1000;//转换成L/s
             flow = flow + Convert.ToDouble(Properties.Settings.Default.m流量);//加上误差调整
             totalFlow = mr.read_double("3014");//单位立方米
             totalFlow = totalFlow * 1000;//单位：L
-            data[2] = flow;
+            data[4] = flow;
             FLOW = flow;
-            data[0] =data[0]*10+ Convert.ToDouble(Properties.Settings.Default.m温度);
+            data[2] =data[2]*10+ Convert.ToDouble(Properties.Settings.Default.m温度);
             if (loadDataFlag && (FLOW >= (double)startThreshold.Value))//大于阈值开始绘制曲线以及记录数据
             {
 
-                l.Add(data[2]);
-                if (wendu.Count > 0 && Math.Abs(data[0] - wendu[wendu.Count - 1]) > 1)
+                l.Add(data[4]);
+                if (wendu.Count > 0 && Math.Abs(data[2] - wendu[wendu.Count - 1]) > 1)
                     ;
                 else
-                wendu.Add(data[0]);
+                wendu.Add(data[2]);
                 maxFlow = l.Max();
                 maxflow_pose = l.IndexOf(l.Max());
                 //连续采样N个数据，去掉一个最大值和一个最小值然后计算N - 2个数据的算术平均值N值的选取：3~14
-                //if (l.Count > 8)
-                //{
-                //    double sum = 0;
-                //    List<double> temp = new List<double>();
-                //    for (int i = 1; i < 8; i++)
-                //    {
-                //        temp.Add(l[l.Count - i]);
-                //        sum += l[l.Count - i];
-                //    }
-                //    sum = sum - temp.Max() - temp.Min();
-                //    l[l.Count - 4] = (sum / 5);
-                //    if (l[l.Count - 4] > maxFlow) { maxFlow = l[l.Count - 4]; }
-                //}
+                if (l.Count > 8)
+                {
+                    double sum = 0;
+                    List<double> temp = new List<double>();
+                    for (int i = 1; i < 8; i++)
+                    {
+                        temp.Add(l[l.Count - i]);
+                        sum += l[l.Count - i];
+                    }
+                    sum = sum - temp.Max() - temp.Min();
+                    l[l.Count - 4] = (sum / 5);
+                    if (l[l.Count - 4] > maxFlow) { maxFlow = l[l.Count - 4]; }
+                }
             }
             myDelegate md = new myDelegate(setText);
             // daq.EventCount_Read();
@@ -113,20 +112,23 @@ namespace 冲水阀水力特性测试机
         public static int L9 = 0;
         bool first6l = true;
         bool first9l = true;
+        bool firstadd0 = true;
         public void setText(double[] data)
         {            
             DateTime t = DateTime.Now;
             t.ToString("yyyy-MM-dd hh:mm:ss:fff");
                             //新建第一行，并赋值           
-            waterTemperature.Text = "温度：" +Math.Round( data[0],2)+"℃";
-            waterFlow.Text = "流量：" + Math.Round( data[2],2)+"L/s";
+            waterTemperature.Text = "温度：" +Math.Round( data[2],2)+"℃";
+            waterFlow.Text = "流量：" + Math.Round( data[4],2)+"L/s";
+
             maxWaterFlow.Text = "最大流量:" + Math.Round( maxFlow,2)+"L/s";
             totalFlowShow.Text = "累计流量：" + Math.Round(totalFlow, 2)  +"L";
-           
+
+            pressure.Text = "出水压力：" + Math.Round(data[0], 2) + "Bar";
           
             
-            bpqreturn.Text = Math.Round(data[1]*5, 2).ToString();
-            if (Math.Round(data[2], 2) > 0.01) {
+            bpqreturn.Text = Math.Round(data[3]*5, 2).ToString();
+            if (Math.Round(data[4], 2) > 0.01) {
                 pushFlag = true;
                
             }
@@ -143,18 +145,32 @@ namespace 冲水阀水力特性测试机
                     L9 = l.Count;
                     first9l = false;
                 }
+                if (l.Count > 8)
+                {
+                    if (firstadd0)//添加零点
+                    {
+                        dt.Rows.Add(t.ToString("yyyy-MM-dd hh:mm:ss:fff"), Math.Round(data[2], 2), 0);
+                        hslCurve1.AddCurveData(
+                            new string[] { "A", "B" },
+                            new float[]
+                            {
+                            (float) 0,(float)wendu[wendu.Count-1]
+                            }
+                        );
+                        firstadd0 = false;
+                    }
+                    else
+                    {
+                        dt.Rows.Add(t.ToString("yyyy-MM-dd hh:mm:ss:fff"), Math.Round(data[2], 2), l[l.Count-4]);
+                        hslCurve1.AddCurveData(
+                            new string[] { "A", "B" },
+                            new float[]
+                            {
+                            (float) l[l.Count - 4],(float)wendu[wendu.Count-1]
+                            }
+                        );
 
-               
-                { 
-                    dt.Rows.Add(t.ToString("yyyy-MM-dd hh:mm:ss:fff"), Math.Round(data[0], 2), Math.Round(data[2], 2));
-                    hslCurve1.AddCurveData(
-                        new string[] { "A" ,"B"},
-                        new float[]
-                        {
-                            (float) l[l.Count - 1],(float)wendu[wendu.Count-1]
-                        }
-                    );
-                    
+                    }
                 }
                // Console.WriteLine("pushedFlag:" + pushedFlag);
               
@@ -162,6 +178,15 @@ namespace 冲水阀水力特性测试机
            // systemInfo.Text = "系统信息："+pushedFlag;
             if (FLOW <= (double)stopThreshold.Value && pushedFlag)//小于阈值停止记录
             {
+                t = t.AddMilliseconds(500);
+                dt.Rows.Add(t.ToString("yyyy-MM-dd hh:mm:ss:fff"), Math.Round(data[2], 2), 0);
+                hslCurve1.AddCurveData(
+                    new string[] { "A", "B" },
+                    new float[]
+                    {
+                            (float) 0,(float)wendu[wendu.Count-1]
+                    }
+                );
                 loadDataFlag = false;
                 pushFlag = false;
                 pushedFlag = false;
@@ -191,6 +216,7 @@ namespace 冲水阀水力特性测试机
         private void Form2_Load(object sender, EventArgs e)
         {
             first6l = true;
+            firstadd0 = true;
             first9l = true;
             conf.botelv = "19200";
             conf.zhanhao = "1";
@@ -581,6 +607,7 @@ namespace 冲水阀水力特性测试机
             {
                 if (open.Text == "关闭水泵")
                 {
+                    //l.Add(0);//绘图从零点开始
                     pushedFlag = false;
                     first6l = true;
                     first9l = true;

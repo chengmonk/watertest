@@ -19,15 +19,7 @@ namespace 冲水阀水力特性测试机
 
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if (MessageBox.Show("关闭窗体后，程序会退出！！", "提示！！", MessageBoxButtons.YesNo) == DialogResult.Yes)
-            {
-                e.Cancel = false;
-                //System.Environment.Exit(0);
-            }
-            else
-            {
-                e.Cancel = true;
-            }
+           
         }
 
         private void hslButton1_Click(object sender, EventArgs e)
