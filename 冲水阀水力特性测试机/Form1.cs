@@ -20,7 +20,7 @@ namespace 冲水阀水力特性测试机
         private void hslButton1_Click(object sender, EventArgs e)
         {
             dt.Clear();
-            //hslCurve1.RemoveCurve("A");
+            //hslCurve1.RemoveCurve("压力");
             startFlag = true;
             systemInfo.Text = "系统信息：";
             pushWork.Enabled = true;//是否执行System.Timers.Timer.Elapsed事件；
@@ -190,7 +190,7 @@ namespace 冲水阀水力特性测试机
                 {
 
                     hslCurve1.AddCurveData(
-                        new string[] { "A", "B" },
+                        new string[] { "压力", "冲击力" },
                         new float[]
                         {
                    (float)data[i],
@@ -371,8 +371,8 @@ namespace 冲水阀水力特性测试机
             startThreshold.Value = Properties.Settings.Default.开始计时阈值;
             stopThreshold.Value = Properties.Settings.Default.停止阈值;
 
-            hslCurve1.SetLeftCurve("A", null, Color.DodgerBlue);
-            hslCurve1.SetLeftCurve("B", null, Color.DarkOrange);
+            hslCurve1.SetLeftCurve("压力", null, Color.DodgerBlue);
+            hslCurve1.SetLeftCurve("冲击力", null, Color.DarkOrange);
             
             hslCurve1.ValueMaxLeft = 10;
             hslCurve1.ValueMaxRight = 10;
@@ -668,7 +668,7 @@ namespace 冲水阀水力特性测试机
                 pushedFlag = false;
                 pushFlag = false;
                 dt.Clear();
-                //hslCurve1.RemoveCurve("A");
+                //hslCurve1.RemoveCurve("压力");
                 startFlag = true;
                 hslPlay1.Text = "停止";
                 systemInfo.Text = "系统信息：";
@@ -710,14 +710,14 @@ namespace 冲水阀水力特性测试机
         {
             // 隐藏曲线
             pressureisVisiable = !pressureisVisiable;
-            hslCurve1.SetCurveVisible(new string[] { "A" }, pressureisVisiable);
+            hslCurve1.SetCurveVisible(new string[] { "压力" }, pressureisVisiable);
         }
         bool hummerisVisiable = true;
         private void HslButton2_Click_1(object sender, EventArgs e)
         {
             // 隐藏曲线
             hummerisVisiable = !hummerisVisiable;
-            hslCurve1.SetCurveVisible(new string[] { "B" }, hummerisVisiable);
+            hslCurve1.SetCurveVisible(new string[] { "冲击力" }, hummerisVisiable);
         }
 
         private void Form1_FormClosed(object sender, FormClosedEventArgs e)
