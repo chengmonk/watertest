@@ -154,7 +154,7 @@
             this.hslBlower1.Color8 = System.Drawing.Color.FromArgb(((int)(((byte)(176)))), ((int)(((byte)(182)))), ((int)(((byte)(189)))));
             this.hslBlower1.Cursor = System.Windows.Forms.Cursors.Hand;
             this.hslBlower1.Location = new System.Drawing.Point(117, 185);
-            this.hslBlower1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.hslBlower1.Margin = new System.Windows.Forms.Padding(2);
             this.hslBlower1.Name = "hslBlower1";
             this.hslBlower1.Size = new System.Drawing.Size(112, 136);
             this.hslBlower1.TabIndex = 22;
@@ -166,7 +166,7 @@
             // 
             this.hslSwitch1.Cursor = System.Windows.Forms.Cursors.Hand;
             this.hslSwitch1.Location = new System.Drawing.Point(217, 19);
-            this.hslSwitch1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.hslSwitch1.Margin = new System.Windows.Forms.Padding(2);
             this.hslSwitch1.Name = "hslSwitch1";
             this.hslSwitch1.Size = new System.Drawing.Size(94, 106);
             this.hslSwitch1.SwitchBackground = System.Drawing.Color.Gray;
@@ -325,7 +325,7 @@
             // workName
             // 
             this.workName.Location = new System.Drawing.Point(94, 58);
-            this.workName.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.workName.Margin = new System.Windows.Forms.Padding(2);
             this.workName.Multiline = true;
             this.workName.Name = "workName";
             this.workName.ScrollBars = System.Windows.Forms.ScrollBars.Both;
@@ -352,9 +352,9 @@
             this.groupBox2.Controls.Add(this.label3);
             this.groupBox2.Font = new System.Drawing.Font("黑体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.groupBox2.Location = new System.Drawing.Point(642, 436);
-            this.groupBox2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox2.Margin = new System.Windows.Forms.Padding(2);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox2.Padding = new System.Windows.Forms.Padding(2);
             this.groupBox2.Size = new System.Drawing.Size(326, 213);
             this.groupBox2.TabIndex = 20;
             this.groupBox2.TabStop = false;
@@ -446,7 +446,7 @@
             // 
             this.hslSwitch2.Cursor = System.Windows.Forms.Cursors.Hand;
             this.hslSwitch2.Location = new System.Drawing.Point(236, 22);
-            this.hslSwitch2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.hslSwitch2.Margin = new System.Windows.Forms.Padding(2);
             this.hslSwitch2.Name = "hslSwitch2";
             this.hslSwitch2.Size = new System.Drawing.Size(76, 87);
             this.hslSwitch2.SwitchForeground = System.Drawing.Color.FromArgb(((int)(((byte)(36)))), ((int)(((byte)(36)))), ((int)(((byte)(36)))));
@@ -475,9 +475,9 @@
             this.groupBox3.Controls.Add(this.hslButton3);
             this.groupBox3.Font = new System.Drawing.Font("黑体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.groupBox3.Location = new System.Drawing.Point(9, 333);
-            this.groupBox3.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox3.Margin = new System.Windows.Forms.Padding(2);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox3.Padding = new System.Windows.Forms.Padding(2);
             this.groupBox3.Size = new System.Drawing.Size(226, 245);
             this.groupBox3.TabIndex = 21;
             this.groupBox3.TabStop = false;
@@ -491,6 +491,7 @@
             this.hslButton2.Size = new System.Drawing.Size(87, 30);
             this.hslButton2.TabIndex = 30;
             this.hslButton2.Text = "隐藏冲击力曲线";
+            this.hslButton2.Visible = false;
             this.hslButton2.Click += new System.EventHandler(this.HslButton2_Click_1);
             // 
             // hslButton1
@@ -501,6 +502,7 @@
             this.hslButton1.Size = new System.Drawing.Size(87, 30);
             this.hslButton1.TabIndex = 29;
             this.hslButton1.Text = "隐藏压力曲线";
+            this.hslButton1.Visible = false;
             this.hslButton1.Click += new System.EventHandler(this.HslButton1_Click_1);
             // 
             // hslPlay1
@@ -537,9 +539,9 @@
             this.groupBox4.Controls.Add(this.waterPresuer);
             this.groupBox4.Controls.Add(this.waterTemperature);
             this.groupBox4.Location = new System.Drawing.Point(239, 333);
-            this.groupBox4.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox4.Margin = new System.Windows.Forms.Padding(2);
             this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox4.Padding = new System.Windows.Forms.Padding(2);
             this.groupBox4.Size = new System.Drawing.Size(369, 245);
             this.groupBox4.TabIndex = 23;
             this.groupBox4.TabStop = false;
@@ -607,7 +609,7 @@
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.hslCurve1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "Form1";
             this.Text = "压力特性测试";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);

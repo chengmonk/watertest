@@ -71,12 +71,12 @@
             this.hslCurve1 = new HslControls.HslCurve();
             this.systemInfo = new System.Windows.Forms.Label();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.label11 = new System.Windows.Forms.Label();
             this.pressure = new System.Windows.Forms.Label();
             this.waterTemperature = new System.Windows.Forms.Label();
             this.totalFlowShow = new System.Windows.Forms.Label();
             this.maxWaterFlow = new System.Windows.Forms.Label();
             this.waterFlow = new System.Windows.Forms.Label();
-            this.label11 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.sbyali)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
@@ -618,6 +618,15 @@
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "仪表状态";
             // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(36, 211);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(65, 12);
+            this.label11.TabIndex = 5;
+            this.label11.Text = "水泵压力值";
+            // 
             // pressure
             // 
             this.pressure.AutoSize = true;
@@ -664,15 +673,6 @@
             this.waterFlow.Size = new System.Drawing.Size(53, 12);
             this.waterFlow.TabIndex = 0;
             this.waterFlow.Text = "当前流量";
-            // 
-            // label11
-            // 
-            this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(36, 211);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(65, 12);
-            this.label11.TabIndex = 5;
-            this.label11.Text = "水泵压力值";
             // 
             // Form2
             // 
