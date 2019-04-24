@@ -152,7 +152,7 @@ namespace 冲水阀水力特性测试机
                     {
                         dt.Rows.Add(t.ToString("yyyy-MM-dd hh:mm:ss:fff"), Math.Round(data[2], 2), 0);
                         hslCurve1.AddCurveData(
-                            new string[] { "A", "B" },
+                            new string[] { "流量", "温度" },
                             new float[]
                             {
                             (float) 0,(float)wendu[wendu.Count-1]
@@ -164,7 +164,7 @@ namespace 冲水阀水力特性测试机
                     {
                         dt.Rows.Add(t.ToString("yyyy-MM-dd hh:mm:ss:fff"), Math.Round(data[2], 2), l[l.Count-4]);
                         hslCurve1.AddCurveData(
-                            new string[] { "A", "B" },
+                            new string[] { "流量", "温度" },
                             new float[]
                             {
                             (float) l[l.Count - 4],(float)wendu[wendu.Count-1]
@@ -182,7 +182,7 @@ namespace 冲水阀水力特性测试机
                 t = t.AddMilliseconds(500);
                 dt.Rows.Add(t.ToString("yyyy-MM-dd hh:mm:ss:fff"), Math.Round(data[2], 2), 0);
                 hslCurve1.AddCurveData(
-                    new string[] { "A", "B" },
+                    new string[] { "流量", "温度" },
                     new float[]
                     {
                             (float) 0,(float)wendu[wendu.Count-1]
@@ -278,8 +278,8 @@ namespace 冲水阀水力特性测试机
             l.Clear();
             wendu = new List<double>();
             wendu.Clear();
-            hslCurve1.SetLeftCurve("A", null, Color.DodgerBlue);//流量
-            hslCurve1.SetRightCurve("B", null, Color.DarkOrange);//温度
+            hslCurve1.SetLeftCurve("流量", null, Color.DodgerBlue);//流量
+            hslCurve1.SetRightCurve("温度", null, Color.DarkOrange);//温度
             hslCurve1.ValueMaxLeft = 10;
             hslCurve1.ValueMaxRight = 50;
             hslCurve1.StrechDataCountMax = 300;//设置显示数据量
@@ -692,14 +692,14 @@ namespace 冲水阀水力特性测试机
         {
             // 隐藏流量曲线
             flowisVisiable = !flowisVisiable;
-            hslCurve1.SetCurveVisible(new string[] { "A" }, flowisVisiable);
+            hslCurve1.SetCurveVisible(new string[] { "流量" }, flowisVisiable);
         }
         bool tempisVisiable = true;
         private void HslButton3_Click_1(object sender, EventArgs e)
         {
             // 隐藏温度曲线
             tempisVisiable = !tempisVisiable;
-            hslCurve1.SetCurveVisible(new string[] { "B" }, tempisVisiable);
+            hslCurve1.SetCurveVisible(new string[] { "温度" }, tempisVisiable);
         }
     }
 }

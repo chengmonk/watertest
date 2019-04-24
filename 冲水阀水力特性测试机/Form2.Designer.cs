@@ -513,6 +513,7 @@
             this.hslButton3.Size = new System.Drawing.Size(120, 31);
             this.hslButton3.TabIndex = 29;
             this.hslButton3.Text = "隐藏温度曲线";
+            this.hslButton3.Visible = false;
             this.hslButton3.Click += new System.EventHandler(this.HslButton3_Click_1);
             // 
             // hslButton1
@@ -524,6 +525,7 @@
             this.hslButton1.Size = new System.Drawing.Size(120, 31);
             this.hslButton1.TabIndex = 28;
             this.hslButton1.Text = "隐藏流量曲线";
+            this.hslButton1.Visible = false;
             this.hslButton1.Click += new System.EventHandler(this.HslButton1_Click_1);
             // 
             // hslPlay1
