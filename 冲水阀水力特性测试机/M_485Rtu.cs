@@ -43,8 +43,8 @@ namespace 冲水阀水力特性测试机
     }
    public class M_485Rtu
     {
-        private static ModbusRtu busRtuClient = null;
-        public static COMconfig config;
+        private  ModbusRtu busRtuClient = null;
+        public  COMconfig config;
        public M_485Rtu(COMconfig c)
         {
             config = c;
@@ -97,7 +97,7 @@ namespace 冲水阀水力特性测试机
         public void write_short(string adreess, short val)
         {
             // short写入
-            OperateResult result= busRtuClient.Write(adreess, val);
+            OperateResult result= busRtuClient.Write(adreess,val);
             if (!result.IsSuccess) MessageBox.Show("short写入失败");
         }
         public void write_coil(string adreess,bool val)

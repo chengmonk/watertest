@@ -71,7 +71,7 @@
             this.hslCurve1 = new HslControls.HslCurve();
             this.systemInfo = new System.Windows.Forms.Label();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
-            this.label11 = new System.Windows.Forms.Label();
+            this.pumpOutPressure = new System.Windows.Forms.Label();
             this.pressure = new System.Windows.Forms.Label();
             this.waterTemperature = new System.Windows.Forms.Label();
             this.totalFlowShow = new System.Windows.Forms.Label();
@@ -607,7 +607,7 @@
             // 
             this.groupBox4.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.groupBox4.Controls.Add(this.label11);
+            this.groupBox4.Controls.Add(this.pumpOutPressure);
             this.groupBox4.Controls.Add(this.pressure);
             this.groupBox4.Controls.Add(this.waterTemperature);
             this.groupBox4.Controls.Add(this.totalFlowShow);
@@ -620,14 +620,14 @@
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "仪表状态";
             // 
-            // label11
+            // pumpOutPressure
             // 
-            this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(36, 211);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(65, 12);
-            this.label11.TabIndex = 5;
-            this.label11.Text = "水泵压力值";
+            this.pumpOutPressure.AutoSize = true;
+            this.pumpOutPressure.Location = new System.Drawing.Point(36, 211);
+            this.pumpOutPressure.Name = "pumpOutPressure";
+            this.pumpOutPressure.Size = new System.Drawing.Size(89, 12);
+            this.pumpOutPressure.TabIndex = 5;
+            this.pumpOutPressure.Text = "水泵输出压力值";
             // 
             // pressure
             // 
@@ -759,6 +759,6 @@
         private System.Windows.Forms.Label pressure;
         private HslControls.HslButton hslButton3;
         private HslControls.HslButton hslButton1;
-        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.Label pumpOutPressure;
     }
 }

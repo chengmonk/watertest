@@ -62,9 +62,8 @@ namespace 冲水阀水力特性测试机
         {
             //通道0  压力 pressure
             //通道1  水冲击力  waterHammer
-            //通道2  温度
-            //通道3  变频器返回值
-            //通道4  水泵压力输出值
+            //通道2  温度            
+            //通道3  水泵压力输出值
             //modbus   流量
             double[] data = daq.InstantAi_Read(0, 4);
             
@@ -74,6 +73,7 @@ namespace 冲水阀水力特性测试机
             totalFlow = mr.read_double("3014");//单位立方米
             totalFlow = totalFlow * 1000;//单位：L
             data[4] = flow;
+            data[5]= Math.Round(bpqMR.read_short("8451") / 100.0, 2);
             FLOW = flow;
             data[2] =data[2]*10+ Convert.ToDouble(Properties.Settings.Default.m温度);
             if (loadDataFlag && (FLOW >= (double)startThreshold.Value))//大于阈值开始绘制曲线以及记录数据
@@ -124,11 +124,10 @@ namespace 冲水阀水力特性测试机
 
             maxWaterFlow.Text = "最大流量:" + Math.Round( maxFlow,2)+"L/s";
             totalFlowShow.Text = "累计流量：" + Math.Round(totalFlow, 2)  +"L";
-
             pressure.Text = "出水压力：" + Math.Round(data[0], 2) + "Bar";
-          
-            
-            bpqreturn.Text = Math.Round(data[3]*5, 2).ToString();
+            pumpOutPressure.Text = "水泵输出压力值：" + Math.Round(data[3], 2)+"Bar";
+           
+            bpqreturn.Text =  Math.Round(data[5], 2).ToString();//变频器返回值
             if (Math.Round(data[4], 2) > 0.01) {
                 pushFlag = true;
                
@@ -209,30 +208,20 @@ namespace 冲水阀水力特性测试机
         double[] aoData = new double[1];
         System.Timers.Timer monitor;
         System.Timers.Timer pushWork;
-       public static double maxFlow = 0;
+        public static double maxFlow = 0;
         public static int maxflow_pose = 0;
         M_485Rtu mr;
-        M_485Rtu bpqMR;
+       static M_485Rtu bpqMR;
         COMconfig conf;
         COMconfig bpqCOMConf;
-        private ModbusRtu busRtuClient = null;
+        //private ModbusRtu busRtuClient = null;
         private void Form2_Load(object sender, EventArgs e)
         {
             first6l = true;
             firstadd0 = true;
             first9l = true;
 
-            bpqCOMConf.botelv = "9600";
-            bpqCOMConf.zhanhao = "2";//站号
-            bpqCOMConf.shujuwei = "8";
-            bpqCOMConf.tingzhiwei = "1";
-            bpqCOMConf.dataFromZero = true;
-            bpqCOMConf.stringReverse = false;
-            bpqCOMConf.COM_Name = "COM3";
-            bpqCOMConf.checkInfo = 2;
-            bpqMR = new M_485Rtu(bpqCOMConf);
-            bpqMR.connect();//变频器串口连接
-
+          
             conf.botelv = "19200";
             conf.zhanhao = "1";
             conf.shujuwei = "8";
@@ -244,6 +233,19 @@ namespace 冲水阀水力特性测试机
             mr = new M_485Rtu(conf);
             mr.connect();
             mr.write_coil("10", true);//停止累计流量
+
+
+            bpqCOMConf.botelv = "9600";
+            bpqCOMConf.zhanhao = "1";//站号
+            bpqCOMConf.shujuwei = "8";
+            bpqCOMConf.tingzhiwei = "1";
+            bpqCOMConf.dataFromZero = true;
+            bpqCOMConf.stringReverse = false;
+            bpqCOMConf.COM_Name = "COM3";
+            bpqCOMConf.checkInfo = 2;
+            bpqMR = new M_485Rtu(bpqCOMConf);
+            bpqMR.connect();//变频器串口连接        
+
             maxFlow = -1;
             pushedFlag = false;
             pushFlag = false;
@@ -436,6 +438,7 @@ namespace 冲水阀水力特性测试机
             //pushedFlag = false;
         }
         private byte[] doData;
+        short sbyali_short = 0;
         private void hslButton4_Click(object sender, EventArgs e)
         {
             if (open.Text == "打开水泵")
@@ -445,7 +448,9 @@ namespace 冲水阀水力特性测试机
 
                 aoData[0] = (double)sbyali.Value;
                 //daq.InstantAo_Write(aoData);
-                bpqMR.write_short("125",(short)(100*Math.Round(sbyali.Value*5,2)));
+                // sbyali_short = (short)(500 * sbyali.Value);             
+                bpqMR.connect();
+                bpqMR.write_short("125", (short)(sbyali.Value*500));
 
                 open.Text = "关闭水泵";
                 //sbzt.Text = "水泵当前状态：运行中...";
@@ -481,8 +486,9 @@ namespace 冲水阀水力特性测试机
             Properties.Settings.Default.水泵压力 = sbyali.Value;
             Properties.Settings.Default.Save();
             // daq.InstantAo_Write(aoData);
-            if(hslSwitch1.SwitchStatus==false)
-            bpqMR.write_short("125", (short)(100 * Math.Round(sbyali.Value*5, 2)));
+            if (hslSwitch1.SwitchStatus == false) {
+                 bpqMR.write_short("125", (short)(100 *sbyali.Value*5));
+            }
         }
 
         private void axgj_Click(object sender, EventArgs e)
@@ -574,7 +580,7 @@ namespace 冲水阀水力特性测试机
             {
                 aoData[0] = (double)sbyali.Value;
                 //daq.InstantAo_Write(aoData);
-                bpqMR.write_short("125", (short)(100 * Math.Round(sbyali.Value * 5, 2)));
+              bpqMR.write_short("125", (short)(100 *sbyali.Value * 5));
                 doData[0] = set_bit(doData[0], 2, false);
                 daq.InstantDo_Write(doData);
             }
