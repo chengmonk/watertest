@@ -444,7 +444,9 @@ namespace 冲水阀水力特性测试机
                 daq.InstantDo_Write(doData);
 
                 aoData[0] = (double)sbyali.Value;
-                daq.InstantAo_Write(aoData);
+                //daq.InstantAo_Write(aoData);
+                bpqMR.write_short("125",(short)(100*Math.Round(sbyali.Value*5,2)));
+
                 open.Text = "关闭水泵";
                 //sbzt.Text = "水泵当前状态：运行中...";
             }
@@ -478,7 +480,8 @@ namespace 冲水阀水力特性测试机
             aoData[0] = (double)sbyali.Value;
             Properties.Settings.Default.水泵压力 = sbyali.Value;
             Properties.Settings.Default.Save();
-            daq.InstantAo_Write(aoData);
+            // daq.InstantAo_Write(aoData);
+            bpqMR.write_short("125", (short)(100 * Math.Round(sbyali.Value*5, 2)));
         }
 
         private void axgj_Click(object sender, EventArgs e)
@@ -561,13 +564,16 @@ namespace 冲水阀水力特性测试机
                 doData[0] = set_bit(doData[0], 2, true);
                 daq.InstantDo_Write(doData);
 
-                aoData[0] = Convert.ToDouble(bpqreturn.Text)/5;
-                daq.InstantAo_Write(aoData);
+                //aoData[0] = Convert.ToDouble(bpqreturn.Text)/5;
+                //daq.InstantAo_Write(aoData);
+                aoData[0] = (double)sbyali.Value;
+                bpqMR.write_short("125", (short)(100 * Math.Round(sbyali.Value * 5, 2)));
             }
             else//变频
             {
                 aoData[0] = (double)sbyali.Value;
-                daq.InstantAo_Write(aoData);
+                //daq.InstantAo_Write(aoData);
+                bpqMR.write_short("125", (short)(100 * Math.Round(sbyali.Value * 5, 2)));
                 doData[0] = set_bit(doData[0], 2, false);
                 daq.InstantDo_Write(doData);
             }
