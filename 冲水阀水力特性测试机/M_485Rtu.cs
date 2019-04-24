@@ -87,6 +87,13 @@ namespace 冲水阀水力特性测试机
             busRtuClient.Close();
             MessageBox.Show("串口已关闭");
         }
+        public short read_short(string adreess)
+        {
+            // short读取
+            OperateResult<short> result = busRtuClient.ReadInt16(adreess);
+            if (result.IsSuccess) return result.Content;
+            else return (short)-999;
+        }
         public void write_short(string adreess, short val)
         {
             // short写入
@@ -94,7 +101,7 @@ namespace 冲水阀水力特性测试机
             if (!result.IsSuccess) MessageBox.Show("short写入失败");
         }
         public void write_coil(string adreess,bool val)
-        {
+        {   //写入线圈
             OperateResult result= busRtuClient.WriteCoil(adreess, val);
              if (!result.IsSuccess) MessageBox.Show("线圈写入失败"); 
         }

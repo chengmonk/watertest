@@ -481,6 +481,7 @@ namespace 冲水阀水力特性测试机
             Properties.Settings.Default.水泵压力 = sbyali.Value;
             Properties.Settings.Default.Save();
             // daq.InstantAo_Write(aoData);
+            if(hslSwitch1.SwitchStatus==false)
             bpqMR.write_short("125", (short)(100 * Math.Round(sbyali.Value*5, 2)));
         }
 
@@ -566,8 +567,8 @@ namespace 冲水阀水力特性测试机
 
                 //aoData[0] = Convert.ToDouble(bpqreturn.Text)/5;
                 //daq.InstantAo_Write(aoData);
-                aoData[0] = (double)sbyali.Value;
-                bpqMR.write_short("125", (short)(100 * Math.Round(sbyali.Value * 5, 2)));
+                aoData[0] = (double)bpqMR.read_short("8451");//读取变频器返回值
+                bpqMR.write_short("125", bpqMR.read_short("8451"));//直接将从变频器读取到数据写入变频器中
             }
             else//变频
             {
