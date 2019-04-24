@@ -80,9 +80,7 @@ namespace 冲水阀水力特性测试机
             {
 
                 l.Add(data[4]);
-                if (wendu.Count > 0 && Math.Abs(data[2] - wendu[wendu.Count - 1]) > 1)
-                    ;
-                else
+                if (!(wendu.Count > 0 && Math.Abs(data[2] - wendu[wendu.Count - 1]) > 1))                    
                 wendu.Add(data[2]);
                 //maxFlow = l.Max();
                
@@ -103,6 +101,7 @@ namespace 冲水阀水力特性测试机
                     maxflow_pose = l.IndexOf(l.Max()) - 8;
                 }
             }
+           
             myDelegate md = new myDelegate(setText);
             // daq.EventCount_Read();
             // if (IsDisposed || !this.Parent.IsHandleCreated) return;
