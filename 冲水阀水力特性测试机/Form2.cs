@@ -212,13 +212,27 @@ namespace 冲水阀水力特性测试机
        public static double maxFlow = 0;
         public static int maxflow_pose = 0;
         M_485Rtu mr;
+        M_485Rtu bpqMR;
         COMconfig conf;
+        COMconfig bpqCOMConf;
         private ModbusRtu busRtuClient = null;
         private void Form2_Load(object sender, EventArgs e)
         {
             first6l = true;
             firstadd0 = true;
             first9l = true;
+
+            bpqCOMConf.botelv = "9600";
+            bpqCOMConf.zhanhao = "2";//站号
+            bpqCOMConf.shujuwei = "8";
+            bpqCOMConf.tingzhiwei = "1";
+            bpqCOMConf.dataFromZero = true;
+            bpqCOMConf.stringReverse = false;
+            bpqCOMConf.COM_Name = "COM3";
+            bpqCOMConf.checkInfo = 2;
+            bpqMR = new M_485Rtu(bpqCOMConf);
+            bpqMR.connect();//变频器串口连接
+
             conf.botelv = "19200";
             conf.zhanhao = "1";
             conf.shujuwei = "8";
