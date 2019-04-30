@@ -438,7 +438,7 @@ namespace 冲水阀水力特性测试机
             //pushedFlag = false;
         }
         private byte[] doData;
-        short sbyali_short = 0;
+        //short sbyali_short = 0;
         private void hslButton4_Click(object sender, EventArgs e)
         {
             if (open.Text == "打开水泵")
