@@ -260,7 +260,7 @@ namespace 冲水阀水力特性测试机
             c.startChannel = 0;
 
             //初始化研华板卡的功能
-            daq = new DAQ_profile(0, c);
+            daq = new DAQ_profile(4, c);
             daq.InstantAo();
             daq.InstantDi();
             daq.InstantDo();
@@ -314,7 +314,6 @@ namespace 冲水阀水力特性测试机
             // daq.EventCount_Read();
             if(this.IsHandleCreated)
             this.Invoke(md, new object[] { doData, diData });
-
         }
         void alarmactive(byte[] data, byte diData)
         {
