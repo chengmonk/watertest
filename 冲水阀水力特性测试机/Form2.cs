@@ -295,7 +295,7 @@ namespace 冲水阀水力特性测试机
             t.Elapsed += new System.Timers.ElapsedEventHandler(theout);//到达时间的时候执行事件； 
             t.AutoReset = true;//设置是执行一次（false）还是一直执行(true)；
 
-            monitor = new System.Timers.Timer(50);
+            monitor = new System.Timers.Timer(500);
             monitor.Elapsed += new System.Timers.ElapsedEventHandler(monitorAction);//到达时间的时候执行事件； 
             monitor.AutoReset = true;//设置是执行一次（false）还是一直执行(true)；
             monitor.Enabled = true;//是否执行System.Timers.Timer.Elapsed事件； 
