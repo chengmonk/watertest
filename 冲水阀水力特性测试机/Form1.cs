@@ -235,16 +235,20 @@ namespace 冲水阀水力特性测试机
             }
             else
             {
-                SaveFileDialog fileDialog = new SaveFileDialog();
-                fileDialog.Filter = "文档|*.csv";
-                fileDialog.FileName = workName.Text + ".csv";
-                fileDialog.InitialDirectory = Application.StartupPath;
-                if (fileDialog.ShowDialog() == DialogResult.OK)
+                try
                 {
-                    dataTableToCsvT(dt, fileDialog.FileName);
-                    MessageBox.Show("保存成功!");
+                    SaveFileDialog fileDialog = new SaveFileDialog();
+                    fileDialog.Filter = "文档|*.csv";
+                    fileDialog.FileName = workName.Text + ".csv";
+                    fileDialog.InitialDirectory = Application.StartupPath;
+                    if (fileDialog.ShowDialog() == DialogResult.OK)
+                    {
+                        dataTableToCsvT(dt, fileDialog.FileName);
+                        MessageBox.Show("保存成功!");
+                    }
+                    fileDialog.Dispose();
                 }
-                fileDialog.Dispose();
+                catch { MessageBox.Show("请确认文件是否正在被另一程序使用！！！"); }
             }
         }
         /// <summary>
