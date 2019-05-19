@@ -221,7 +221,17 @@ namespace 冲水阀水力特性测试机
             firstadd0 = true;
             first9l = true;
 
-          
+            bpqCOMConf.botelv = "19200";
+            bpqCOMConf.zhanhao = "2";//站号
+            bpqCOMConf.shujuwei = "8";
+            bpqCOMConf.tingzhiwei = "1";
+            bpqCOMConf.dataFromZero = true;
+            bpqCOMConf.stringReverse = false;
+            bpqCOMConf.COM_Name = "COM11";
+            bpqCOMConf.checkInfo = 2;
+            bpqMR = new M_485Rtu(bpqCOMConf);
+            bpqMR.connect();//变频器串口连接   
+            MessageBox.Show("流量485连接成功");
             conf.botelv = "19200";
             conf.zhanhao = "1";
             conf.shujuwei = "8";
@@ -233,18 +243,9 @@ namespace 冲水阀水力特性测试机
             mr = new M_485Rtu(conf);
             mr.connect();
             mr.write_coil("10", true);//停止累计流量
+            
 
-
-            bpqCOMConf.botelv = "9600";
-            bpqCOMConf.zhanhao = "1";//站号
-            bpqCOMConf.shujuwei = "8";
-            bpqCOMConf.tingzhiwei = "1";
-            bpqCOMConf.dataFromZero = true;
-            bpqCOMConf.stringReverse = false;
-            bpqCOMConf.COM_Name = "COM3";
-            bpqCOMConf.checkInfo = 2;
-            bpqMR = new M_485Rtu(bpqCOMConf);
-            bpqMR.connect();//变频器串口连接        
+                 
 
             maxFlow = -1;
             pushedFlag = false;
@@ -467,9 +468,9 @@ namespace 冲水阀水力特性测试机
         {
             doData[0] = set_bit(doData[0], 2, true);
             daq.InstantDo_Write(doData);
-           // bpqzt.Text = "变频器当前状态：定频";
-            //dp.Enabled = false;
-            //bp.Enabled = true;
+            // bpqzt.Text = "变频器当前状态：定频";
+            // dp.Enabled = false;
+            // bp.Enabled = true;
         }
 
         private void bp_Click(object sender, EventArgs e)
@@ -572,8 +573,9 @@ namespace 冲水阀水力特性测试机
 
                 //aoData[0] = Convert.ToDouble(bpqreturn.Text)/5;
                 //daq.InstantAo_Write(aoData);
-                aoData[0] = (double)bpqMR.read_short("8451");//读取变频器返回值
-                bpqMR.write_short("125", bpqMR.read_short("8451"));//直接将从变频器读取到数据写入变频器中
+                aoData[0] = (double)bpqMR.read_short("8451")/500;//读取变频器返回值
+                bpqMR.write_short("17", bpqMR.read_short("8451"));//直接将从变频器读取到数据写入变频器中
+                dingpin_out.Value =(decimal)Math.Round(bpqMR.read_short("8451")/100.0,2);
             }
             else//变频
             {
@@ -712,6 +714,16 @@ namespace 冲水阀水力特性测试机
             // 隐藏温度曲线
             tempisVisiable = !tempisVisiable;
             hslCurve1.SetCurveVisible(new string[] { "温度" }, tempisVisiable);
+        }
+
+        private void Label11_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void Dingpin_out_ValueChanged(object sender, EventArgs e)
+        {
+            bpqMR.write_short("17", (short)(dingpin_out.Value*100));
         }
     }
 }

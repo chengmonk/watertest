@@ -35,6 +35,8 @@
             this.instantDiCtrl1 = new Automation.BDaq.InstantDiCtrl(this.components);
             this.instantAiCtrl1 = new Automation.BDaq.InstantAiCtrl(this.components);
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.dingpin_out = new System.Windows.Forms.NumericUpDown();
+            this.dingpin_ = new System.Windows.Forms.Label();
             this.hslSwitch1 = new HslControls.HslSwitch();
             this.hslBlower1 = new HslControls.HslBlower();
             this.bpqreturn = new System.Windows.Forms.Label();
@@ -78,6 +80,7 @@
             this.maxWaterFlow = new System.Windows.Forms.Label();
             this.waterFlow = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dingpin_out)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.sbyali)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
             this.groupBox2.SuspendLayout();
@@ -108,6 +111,8 @@
             // 
             this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox1.Controls.Add(this.dingpin_out);
+            this.groupBox1.Controls.Add(this.dingpin_);
             this.groupBox1.Controls.Add(this.hslSwitch1);
             this.groupBox1.Controls.Add(this.hslBlower1);
             this.groupBox1.Controls.Add(this.bpqreturn);
@@ -123,10 +128,43 @@
             this.groupBox1.Margin = new System.Windows.Forms.Padding(4);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Padding = new System.Windows.Forms.Padding(4);
-            this.groupBox1.Size = new System.Drawing.Size(407, 455);
+            this.groupBox1.Size = new System.Drawing.Size(407, 364);
             this.groupBox1.TabIndex = 10;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "水泵控制";
+            // 
+            // dingpin_out
+            // 
+            this.dingpin_out.DecimalPlaces = 2;
+            this.dingpin_out.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
+            this.dingpin_out.Location = new System.Drawing.Point(296, 189);
+            this.dingpin_out.Margin = new System.Windows.Forms.Padding(4);
+            this.dingpin_out.Minimum = new decimal(new int[] {
+            100,
+            0,
+            0,
+            -2147483648});
+            this.dingpin_out.Name = "dingpin_out";
+            this.dingpin_out.Size = new System.Drawing.Size(71, 21);
+            this.dingpin_out.TabIndex = 33;
+            this.dingpin_out.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.dingpin_out.ThousandsSeparator = true;
+            this.dingpin_out.UpDownAlign = System.Windows.Forms.LeftRightAlignment.Left;
+            this.dingpin_out.ValueChanged += new System.EventHandler(this.Dingpin_out_ValueChanged);
+            // 
+            // dingpin_
+            // 
+            this.dingpin_.AutoSize = true;
+            this.dingpin_.Location = new System.Drawing.Point(213, 191);
+            this.dingpin_.Name = "dingpin_";
+            this.dingpin_.Size = new System.Drawing.Size(89, 12);
+            this.dingpin_.TabIndex = 21;
+            this.dingpin_.Text = "定频输出频率：";
+            this.dingpin_.Click += new System.EventHandler(this.Label11_Click);
             // 
             // hslSwitch1
             // 
@@ -697,6 +735,7 @@
             this.Load += new System.EventHandler(this.Form2_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dingpin_out)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.sbyali)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
             this.groupBox2.ResumeLayout(false);
@@ -760,5 +799,7 @@
         private HslControls.HslButton hslButton3;
         private HslControls.HslButton hslButton1;
         private System.Windows.Forms.Label pumpOutPressure;
+        private System.Windows.Forms.Label dingpin_;
+        private System.Windows.Forms.NumericUpDown dingpin_out;
     }
 }
