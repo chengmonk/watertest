@@ -449,7 +449,7 @@ namespace 冲水阀水力特性测试机
                 aoData[0] = (double)sbyali.Value;
                 //daq.InstantAo_Write(aoData);
                 // sbyali_short = (short)(500 * sbyali.Value);             
-                bpqMR.connect();
+                //bpqMR.connect();
                 bpqMR.write_short("125", (short)(sbyali.Value*500));
 
                 open.Text = "关闭水泵";
@@ -570,7 +570,6 @@ namespace 冲水阀水力特性测试机
             {
                 doData[0] = set_bit(doData[0], 2, true);
                 daq.InstantDo_Write(doData);
-
                 //aoData[0] = Convert.ToDouble(bpqreturn.Text)/5;
                 //daq.InstantAo_Write(aoData);
                 aoData[0] = (double)bpqMR.read_short("8451")/500;//读取变频器返回值

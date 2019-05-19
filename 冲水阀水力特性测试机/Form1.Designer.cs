@@ -36,6 +36,8 @@
             this.instantDiCtrl1 = new Automation.BDaq.InstantDiCtrl(this.components);
             this.hslCurve1 = new HslControls.HslCurve();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.dingpin_out = new System.Windows.Forms.NumericUpDown();
+            this.dingpin_ = new System.Windows.Forms.Label();
             this.hslBlower1 = new HslControls.HslBlower();
             this.hslSwitch1 = new HslControls.HslSwitch();
             this.bpqreturn = new System.Windows.Forms.Label();
@@ -74,6 +76,7 @@
             this.waterPresuer = new System.Windows.Forms.Label();
             this.waterTemperature = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dingpin_out)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.sbyali)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
             this.groupBox2.SuspendLayout();
@@ -124,6 +127,8 @@
             // 
             this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox1.Controls.Add(this.dingpin_out);
+            this.groupBox1.Controls.Add(this.dingpin_);
             this.groupBox1.Controls.Add(this.hslBlower1);
             this.groupBox1.Controls.Add(this.hslSwitch1);
             this.groupBox1.Controls.Add(this.bpqreturn);
@@ -142,6 +147,38 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "水泵控制";
             // 
+            // dingpin_out
+            // 
+            this.dingpin_out.DecimalPlaces = 2;
+            this.dingpin_out.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
+            this.dingpin_out.Location = new System.Drawing.Point(243, 151);
+            this.dingpin_out.Margin = new System.Windows.Forms.Padding(4);
+            this.dingpin_out.Minimum = new decimal(new int[] {
+            100,
+            0,
+            0,
+            -2147483648});
+            this.dingpin_out.Name = "dingpin_out";
+            this.dingpin_out.Size = new System.Drawing.Size(71, 21);
+            this.dingpin_out.TabIndex = 35;
+            this.dingpin_out.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.dingpin_out.ThousandsSeparator = true;
+            this.dingpin_out.UpDownAlign = System.Windows.Forms.LeftRightAlignment.Left;
+            this.dingpin_out.ValueChanged += new System.EventHandler(this.Dingpin_out_ValueChanged);
+            // 
+            // dingpin_
+            // 
+            this.dingpin_.AutoSize = true;
+            this.dingpin_.Location = new System.Drawing.Point(160, 153);
+            this.dingpin_.Name = "dingpin_";
+            this.dingpin_.Size = new System.Drawing.Size(89, 12);
+            this.dingpin_.TabIndex = 34;
+            this.dingpin_.Text = "定频输出频率：";
+            // 
             // hslBlower1
             // 
             this.hslBlower1.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(199)))), ((int)(((byte)(205)))), ((int)(((byte)(211)))));
@@ -153,7 +190,7 @@
             this.hslBlower1.Color7 = System.Drawing.Color.FromArgb(((int)(((byte)(158)))), ((int)(((byte)(165)))), ((int)(((byte)(173)))));
             this.hslBlower1.Color8 = System.Drawing.Color.FromArgb(((int)(((byte)(176)))), ((int)(((byte)(182)))), ((int)(((byte)(189)))));
             this.hslBlower1.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.hslBlower1.Location = new System.Drawing.Point(117, 185);
+            this.hslBlower1.Location = new System.Drawing.Point(71, 196);
             this.hslBlower1.Margin = new System.Windows.Forms.Padding(2);
             this.hslBlower1.Name = "hslBlower1";
             this.hslBlower1.Size = new System.Drawing.Size(112, 136);
@@ -179,7 +216,7 @@
             // bpqreturn
             // 
             this.bpqreturn.AutoSize = true;
-            this.bpqreturn.Location = new System.Drawing.Point(98, 95);
+            this.bpqreturn.Location = new System.Drawing.Point(112, 95);
             this.bpqreturn.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.bpqreturn.Name = "bpqreturn";
             this.bpqreturn.Size = new System.Drawing.Size(23, 12);
@@ -617,6 +654,7 @@
             this.Load += new System.EventHandler(this.Form1_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dingpin_out)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.sbyali)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
             this.groupBox2.ResumeLayout(false);
@@ -675,6 +713,8 @@
         private System.Windows.Forms.Label waterTemperature;
         private System.Windows.Forms.Label waterHammerMax;
         private System.Windows.Forms.Label pressureMax;
+        private System.Windows.Forms.NumericUpDown dingpin_out;
+        private System.Windows.Forms.Label dingpin_;
     }
 }
 
