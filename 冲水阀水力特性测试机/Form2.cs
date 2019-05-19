@@ -271,11 +271,15 @@ namespace 冲水阀水力特性测试机
             //bp.Enabled = false;
             bpqzt.Text = "变频器当前状态：变频";
             //sbzt.Text = "水泵当前状态：关闭";
-            sbyali.Value = Properties.Settings.Default.水泵压力;
-            numericUpDown1.Value = Properties.Settings.Default.保持时间;
-            startThreshold.Value = Properties.Settings.Default.开始计时阈值;
-            stopThreshold.Value = Properties.Settings.Default.停止阈值;
-            qmin.Value = Properties.Settings.Default.qmin;
+            try
+            {
+                sbyali.Value = Properties.Settings.Default.水泵压力;
+                numericUpDown1.Value = Properties.Settings.Default.保持时间;
+                startThreshold.Value = Properties.Settings.Default.开始计时阈值;
+                stopThreshold.Value = Properties.Settings.Default.停止阈值;
+                qmin.Value = Properties.Settings.Default.qmin;
+            }
+            catch { }
             doData = new byte[2] { 0x00, 0x00 };
             l = new List<double>();
             l.Clear();

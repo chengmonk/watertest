@@ -213,12 +213,12 @@ namespace 冲水阀水力特性测试机
         }
         private void waveformAiCtrl1_CacheOverflow(object sender, BfdAiEventArgs e)
         {
-            throw new NotImplementedException();
+            
         }
 
         private void waveformAiCtrl1_Overrun(object sender, BfdAiEventArgs e)
         {
-            throw new NotImplementedException();
+            Console.WriteLine("waveformAiCtrl1_Overrun");
         }
 
         private void hslButton2_Click(object sender, EventArgs e)
@@ -383,10 +383,13 @@ namespace 冲水阀水力特性测试机
             bpqzt.Text = "变频器当前状态：变频";
             sbzt.Text = "水泵当前状态：";
             sbyali.Value = Properties.Settings.Default.水泵压力;
-            numericUpDown1.Value = Properties.Settings.Default.保持时间;
-            startThreshold.Value = Properties.Settings.Default.开始计时阈值;
-            stopThreshold.Value = Properties.Settings.Default.停止阈值;
-
+            try
+            {
+                numericUpDown1.Value = Properties.Settings.Default.保持时间;
+                startThreshold.Value = Properties.Settings.Default.开始计时阈值;
+                stopThreshold.Value = Properties.Settings.Default.停止阈值;
+            }
+            catch { }
             hslCurve1.SetLeftCurve("压力", null, Color.DodgerBlue);
             hslCurve1.SetLeftCurve("冲击力", null, Color.DarkOrange);
             
