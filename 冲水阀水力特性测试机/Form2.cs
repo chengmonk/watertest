@@ -105,8 +105,12 @@ namespace 冲水阀水力特性测试机
             myDelegate md = new myDelegate(setText);
             // daq.EventCount_Read();
             // if (IsDisposed || !this.Parent.IsHandleCreated) return;
-            if (this.IsHandleCreated)
-                this.Invoke(md, new object[] {data });
+            try
+            {
+                if (this.IsHandleCreated)
+                    this.Invoke(md, new object[] { data });
+            }
+            catch { }
 
         }
         public static int L6=0;
@@ -317,8 +321,12 @@ namespace 冲水阀水力特性测试机
             byte diData = daq.InstantDi_Read();
             alarmDelegate md = new alarmDelegate(alarmactive);
             // daq.EventCount_Read();
-            if(this.IsHandleCreated)
-            this.Invoke(md, new object[] { doData, diData });
+            try
+            {
+                if (this.IsHandleCreated)
+                    this.Invoke(md, new object[] { doData, diData });
+            }
+            catch { }
         }
         void alarmactive(byte[] data, byte diData)
         {
