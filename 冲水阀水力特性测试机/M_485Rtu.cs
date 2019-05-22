@@ -45,7 +45,7 @@ namespace 冲水阀水力特性测试机
     {
         private  ModbusRtu busRtuClient = null;
         public  COMconfig config;
-       public M_485Rtu(COMconfig c)
+        public M_485Rtu(COMconfig c)
         {
             config = c;
         }
@@ -87,34 +87,40 @@ namespace 冲水阀水力特性测试机
             busRtuClient.Close();
             MessageBox.Show("串口已关闭");
         }
-        public short read_short(string adreess)
+        public short read_short(string adreess, byte station)
         {
+            busRtuClient.Station = station;
             // short读取
             OperateResult<short> result = busRtuClient.ReadInt16(adreess);
             if (result.IsSuccess) return result.Content;
             else return (short)-999;
         }
-        public void write_short(string adreess, short val)
+        public void write_short(string adreess, short val, byte station)
         {
+            busRtuClient.Station = station;
             // short写入
             OperateResult result= busRtuClient.Write(adreess,val);
             if (!result.IsSuccess) MessageBox.Show("short写入失败");
         }
-        public void write_coil(string adreess,bool val)
-        {   //写入线圈
+        public void write_coil(string adreess,bool val, byte station)
+        {
+            busRtuClient.Station = station;
+            //写入线圈
             OperateResult result= busRtuClient.WriteCoil(adreess, val);
              if (!result.IsSuccess) MessageBox.Show("线圈写入失败"); 
         }
         // 读取float变量
-       public  float read_float(string adreess)
+       public  float read_float(string adreess, byte station)
         {
+            busRtuClient.Station = station;
             OperateResult<float> result = busRtuClient.ReadFloat(adreess);
             if (result.IsSuccess) return result.Content;
             else return (float)-999.0;
         }
 
-        public double read_double(string adress)
+        public double read_double(string adress, byte station)
         {
+            busRtuClient.Station = station;
             // 读取double变量
             OperateResult<double> result= busRtuClient.ReadDouble(adress);
             if (result.IsSuccess) return result.Content;
@@ -149,6 +155,7 @@ namespace 冲水阀水力特性测试机
 
             busRtuClient?.Close();
             busRtuClient = new ModbusRtu(station);
+            
             busRtuClient.AddressStartWithZero = config.dataFromZero;
 
             busRtuClient.IsStringReverse = config.stringReverse;

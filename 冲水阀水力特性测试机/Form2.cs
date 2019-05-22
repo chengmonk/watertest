@@ -67,13 +67,13 @@ namespace 冲水阀水力特性测试机
             //modbus   流量
             double[] data = daq.InstantAi_Read(0, 4);
             
-            double flow=mr.read_float("3002");//读取3002地址的数据，单位立方米/s
+            double flow=mr.read_float("3002",1);//读取3002地址的数据，单位立方米/s
             flow = flow * 1000;//转换成L/s
             flow = flow + Convert.ToDouble(Properties.Settings.Default.m流量);//加上误差调整
-            totalFlow = mr.read_double("3014");//单位立方米
+            totalFlow = mr.read_double("3014",1);//单位立方米
             totalFlow = totalFlow * 1000;//单位：L
             data[4] = flow;
-            data[5]= Math.Round(bpqMR.read_short("8451") / 100.0, 2);
+            data[5]= Math.Round(mr.read_short("8451",2) / 100.0, 2);
             FLOW = flow;
             data[2] =data[2]*10+ Convert.ToDouble(Properties.Settings.Default.m温度);
             if (loadDataFlag && (FLOW >= (double)startThreshold.Value))//大于阈值开始绘制曲线以及记录数据
@@ -195,7 +195,7 @@ namespace 冲水阀水力特性测试机
                 pushFlag = false;
                 pushedFlag = false;
                 hslPlay1.Text = "自动运行";
-                mr.write_coil("10", true);//停止累计流量
+                mr.write_coil("10", true,1);//停止累计流量
                 hslPlay1.Played = false;
                 systemInfo.Text = "系统信息：测试已完成！！！请及时保存数据。";
 
@@ -214,8 +214,8 @@ namespace 冲水阀水力特性测试机
         System.Timers.Timer pushWork;
         public static double maxFlow = 0;
         public static int maxflow_pose = 0;
-        M_485Rtu mr;
-       static M_485Rtu bpqMR;
+       
+       static M_485Rtu mr;
         COMconfig conf;
         COMconfig bpqCOMConf;
         //private ModbusRtu busRtuClient = null;
@@ -223,19 +223,8 @@ namespace 冲水阀水力特性测试机
         {
             first6l = true;
             firstadd0 = true;
-            first9l = true;
-
-            bpqCOMConf.botelv = "19200";
-            bpqCOMConf.zhanhao = "2";//站号
-            bpqCOMConf.shujuwei = "8";
-            bpqCOMConf.tingzhiwei = "1";
-            bpqCOMConf.dataFromZero = true;
-            bpqCOMConf.stringReverse = false;
-            bpqCOMConf.COM_Name = "COM11";
-            bpqCOMConf.checkInfo = 2;
-            bpqMR = new M_485Rtu(bpqCOMConf);
-            bpqMR.connect();//变频器串口连接   
-            MessageBox.Show("流量485连接成功");
+            first9l = true;                       
+            
             conf.botelv = "19200";
             conf.zhanhao = "1";
             conf.shujuwei = "8";
@@ -246,11 +235,9 @@ namespace 冲水阀水力特性测试机
             conf.checkInfo = 2;
             mr = new M_485Rtu(conf);
             mr.connect();
-            mr.write_coil("10", true);//停止累计流量
+            mr.write_coil("10", true,1);//停止累计流量
+            MessageBox.Show("485连接成功");
             
-
-                 
-
             maxFlow = -1;
             pushedFlag = false;
             pushFlag = false;
@@ -462,7 +449,7 @@ namespace 冲水阀水力特性测试机
                 //daq.InstantAo_Write(aoData);
                 // sbyali_short = (short)(500 * sbyali.Value);             
                 //bpqMR.connect();
-                bpqMR.write_short("125", (short)(sbyali.Value*500));
+                mr.write_short("125", (short)(sbyali.Value*500),2);
 
                 open.Text = "关闭水泵";
                 //sbzt.Text = "水泵当前状态：运行中...";
@@ -499,7 +486,7 @@ namespace 冲水阀水力特性测试机
             Properties.Settings.Default.Save();
             // daq.InstantAo_Write(aoData);
             if (hslSwitch1.SwitchStatus == false) {
-                 bpqMR.write_short("125", (short)(100 *sbyali.Value*5));
+                 mr.write_short("125", (short)(100 *sbyali.Value*5),2);
             }
         }
 
@@ -584,15 +571,15 @@ namespace 冲水阀水力特性测试机
                 daq.InstantDo_Write(doData);
                 //aoData[0] = Convert.ToDouble(bpqreturn.Text)/5;
                 //daq.InstantAo_Write(aoData);
-                aoData[0] = (double)bpqMR.read_short("8451")/500;//读取变频器返回值
-                bpqMR.write_short("17", bpqMR.read_short("8451"));//直接将从变频器读取到数据写入变频器中
-                dingpin_out.Value =(decimal)Math.Round(bpqMR.read_short("8451")/100.0,2);
+                aoData[0] = (double)mr.read_short("8451",2)/500;//读取变频器返回值
+                mr.write_short("17", mr.read_short("8451",2),2);//直接将从变频器读取到数据写入变频器中
+                dingpin_out.Value =(decimal)Math.Round(mr.read_short("8451",2)/100.0,2);
             }
             else//变频
             {
                 aoData[0] = (double)sbyali.Value;
                 //daq.InstantAo_Write(aoData);
-              bpqMR.write_short("125", (short)(100 *sbyali.Value * 5));
+              mr.write_short("125", (short)(100 *sbyali.Value * 5),2);
                 doData[0] = set_bit(doData[0], 2, false);
                 daq.InstantDo_Write(doData);
             }
@@ -653,8 +640,8 @@ namespace 冲水阀水力特性测试机
                     first9l = true;
                     pushFlag = false;
                     loadDataFlag = true;
-                    mr.write_coil("9", true);
-                    mr.write_coil("10", false);//开始累计流量
+                    mr.write_coil("9", true,1);
+                    mr.write_coil("10", false,1);//开始累计流量
                     hslPlay1.Text = "停止";
                     systemInfo.Text = "系统信息：";
                     pushWork.Enabled = true;//是否执行System.Timers.Timer.Elapsed事件；
@@ -668,7 +655,7 @@ namespace 冲水阀水力特性测试机
             else
             {
                 loadDataFlag = false;
-                mr.write_coil("10", true);//停止累计流量
+                mr.write_coil("10", true,1);//停止累计流量
                 pushedFlag = false;
                 hslPlay1.Text = "自动运行";
             }
@@ -734,7 +721,7 @@ namespace 冲水阀水力特性测试机
 
         private void Dingpin_out_ValueChanged(object sender, EventArgs e)
         {
-            bpqMR.write_short("17", (short)(dingpin_out.Value*100));
+            mr.write_short("17", (short)(dingpin_out.Value*100),2);
         }
     }
 }

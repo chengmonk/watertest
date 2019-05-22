@@ -116,7 +116,7 @@ namespace 冲水阀水力特性测试机
         private void waveformAiCtrl1_DataReady(object sender, BfdAiEventArgs args)
         {
             ErrorCode err = ErrorCode.Success;
-            bpqreturn_value= Math.Round(bpqMR.read_short("8451") / 100.0, 2);
+            bpqreturn_value= Math.Round(bpqMR.read_short("8451",2) / 100.0, 2);
             try
             {
                 //The WaveformAiCtrl has been disposed.
@@ -351,17 +351,7 @@ namespace 冲水阀水力特性测试机
             bpqCOMConf.checkInfo = 2;
             bpqMR = new M_485Rtu(bpqCOMConf);
             bpqMR.connect();//变频器串口连接   
-
-            conf.botelv = "19200";
-            conf.zhanhao = "1";
-            conf.shujuwei = "8";
-            conf.tingzhiwei = "1";
-            conf.dataFromZero = true;
-            conf.stringReverse = false;
-            conf.COM_Name = "COM11";
-            conf.checkInfo = 2;
-            mr = new M_485Rtu(conf);
-            mr.connect();
+            
             pushedFlag = false;
             startFlag = false;
             pushFlag = false;
@@ -572,7 +562,7 @@ namespace 冲水阀水力特性测试机
             //daq.InstantAo_Write(aoData);
             if (hslSwitch1.SwitchStatus == false)
             {
-                bpqMR.write_short("125", (short)(100 * sbyali.Value * 5));
+                bpqMR.write_short("125", (short)(100 * sbyali.Value * 5),2);
             }
         }
 
@@ -604,7 +594,7 @@ namespace 冲水阀水力特性测试机
                 
                  aoData[0] =   (double)sbyali.Value ;
                 //daq.InstantAo_Write(aoData);
-                bpqMR.write_short("125", (short)(sbyali.Value * 500));
+                bpqMR.write_short("125", (short)(sbyali.Value * 500),2);
                 open.Text = "关闭水泵";
                 //sbzt.Text = "水泵当前状态：运行中...";
             }
@@ -641,15 +631,15 @@ namespace 冲水阀水力特性测试机
                 doData[0] = set_bit(doData[0], 2, true);
                 daq.InstantDo_Write(doData);                                
                 //daq.InstantAo_Write(aoData);
-                aoData[0] = (double)bpqMR.read_short("8451") / 500;//读取变频器返回值
-                bpqMR.write_short("17", bpqMR.read_short("8451"));//直接将从变频器读取到数据写入变频器中
-                dingpin_out.Value = (decimal)Math.Round(bpqMR.read_short("8451") / 100.0, 2);
+                aoData[0] = (double)bpqMR.read_short("8451",2) / 500;//读取变频器返回值
+                bpqMR.write_short("17", bpqMR.read_short("8451",2),2);//直接将从变频器读取到数据写入变频器中
+                dingpin_out.Value = (decimal)Math.Round(bpqMR.read_short("8451",2) / 100.0, 2);
             }
             else//变频
             {
                 aoData[0] = (double)sbyali.Value;
                 //daq.InstantAo_Write(aoData);
-                bpqMR.write_short("125", (short)(100 * sbyali.Value * 5));
+                bpqMR.write_short("125", (short)(100 * sbyali.Value * 5),2);
                 doData[0] = set_bit(doData[0], 2, false);
                 daq.InstantDo_Write(doData);
             }
@@ -664,7 +654,7 @@ namespace 冲水阀水力特性测试机
 
                 aoData[0] = (double)sbyali.Value;
                 //daq.InstantAo_Write(aoData);
-                bpqMR.write_short("125", (short)(sbyali.Value * 500));
+                bpqMR.write_short("125", (short)(sbyali.Value * 500),2);
                 open.Text = "关闭水泵";
                 //sbzt.Text = "水泵当前状态：运行中...";
             }
@@ -768,7 +758,7 @@ namespace 冲水阀水力特性测试机
 
         private void Dingpin_out_ValueChanged(object sender, EventArgs e)
         {
-            bpqMR.write_short("17", (short)(dingpin_out.Value * 100));
+            bpqMR.write_short("17", (short)(dingpin_out.Value * 100),2);
         }
 
         private void workName_TextChanged(object sender, EventArgs e)
