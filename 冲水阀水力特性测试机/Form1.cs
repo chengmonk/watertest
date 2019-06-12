@@ -24,10 +24,10 @@ namespace 冲水阀水力特性测试机
             startFlag = true;
             systemInfo.Text = "系统信息：";
             pushWork.Enabled = true;//是否执行System.Timers.Timer.Elapsed事件；
-            
+
 
         }
-        void pushWorkThread(object source,System.Timers.ElapsedEventArgs e)
+        void pushWorkThread(object source, System.Timers.ElapsedEventArgs e)
         {
             doData[0] = set_bit(doData[0], 3, true);
             daq.InstantDo_Write(doData);
@@ -37,7 +37,7 @@ namespace 冲水阀水力特性测试机
                 if (pushFlag) break;
                 System.Threading.Thread.Sleep((int)50);//
             }
-            double t= 1000 * (double)numericUpDown1.Value;
+            double t = 1000 * (double)numericUpDown1.Value;
             System.Threading.Thread.Sleep((int)t);//
             doData[0] = set_bit(doData[0], 3, false);
             daq.InstantDo_Write(doData);
@@ -46,7 +46,7 @@ namespace 冲水阀水力特性测试机
             // System.Console.WriteLine("push:" + doData[0]);
         }
         private delegate void myDelegate(double[] data);//声明委托   
-        private delegate void alarmDelegate(byte[] data,byte diData);//声明委托   
+        private delegate void alarmDelegate(byte[] data, byte diData);//声明委托   
 
         private Automation.BDaq.WaveformAiCtrl waveformAiCtrl1;
         DAQ_profile daq;
@@ -59,12 +59,12 @@ namespace 冲水阀水力特性测试机
         {
             waveformAiCtrl1 = new Automation.BDaq.WaveformAiCtrl();
             waveformAiCtrl1.SelectedDevice = new DeviceInformation(c.deviceDescription);
-           // waveformAiCtrl1.LoadProfile(c.profilePath);
-           // System.Console.WriteLine(c.profilePath);
+            // waveformAiCtrl1.LoadProfile(c.profilePath);
+            // System.Console.WriteLine(c.profilePath);
             // waveformAiCtrl1._StateStream = ((Automation.BDaq.DeviceStateStreamer)(resources.GetObject("waveformAiCtrl1._StateStream")));
 
             Conversion conversion = waveformAiCtrl1.Conversion;
-            
+
             conversion.ChannelStart = c.startChannel;
             conversion.ChannelCount = c.channelCount;
             conversion.ClockRate = c.convertClkRate;
@@ -88,7 +88,7 @@ namespace 冲水阀水力特性测试机
             }
             Array.Clear(m_dataScaled, 0, m_dataScaled.Length);
         }
-        double bpqreturn_value=0;
+        double bpqreturn_value = 0;
         private void HandleError(ErrorCode err)
         {
             if (err != ErrorCode.Success)
@@ -116,7 +116,7 @@ namespace 冲水阀水力特性测试机
         private void waveformAiCtrl1_DataReady(object sender, BfdAiEventArgs args)
         {
             ErrorCode err = ErrorCode.Success;
-            bpqreturn_value= Math.Round(bpqMR.read_short("8451",2) / 100.0, 2);
+            bpqreturn_value = Math.Round(bpqMR.read_short("8451", 2) / 100.0, 2);
             try
             {
                 //The WaveformAiCtrl has been disposed.
@@ -134,6 +134,7 @@ namespace 冲水阀水力特性测试机
                 err = waveformAiCtrl1.GetData(args.Count, m_dataScaled);//读取数据     
                 DateTime t = DateTime.Now;
                 //
+                t = t.AddSeconds(-1);
                 t.ToString("yyyy-MM-dd hh:mm:ss:fff");
                 for (int i = 0; i < m_dataScaled.Length; i += 4)
                 {
@@ -142,27 +143,27 @@ namespace 冲水阀水力特性测试机
                         PRESURE = Math.Round(m_dataScaled[i] + (double)Properties.Settings.Default.m压力, 2);
                         dt.Rows.Add(t.ToString("yyyy-MM-dd hh:mm:ss:fff"),
                             Math.Round(m_dataScaled[i] + (double)Properties.Settings.Default.m压力, 2),
-                            Math.Round(m_dataScaled[i + 1]+ (double)Properties.Settings.Default.m冲击力, 2),
-                            Math.Round(m_dataScaled[i + 2]+ (double)Properties.Settings.Default.m温度, 2));                       
+                            Math.Round(m_dataScaled[i + 1] + (double)Properties.Settings.Default.m冲击力, 2),
+                            Math.Round(m_dataScaled[i + 2] + (double)Properties.Settings.Default.m温度, 2));
                         m_dataScaled[i] += (double)Properties.Settings.Default.m压力;
                         m_dataScaled[i + 1] += (double)Properties.Settings.Default.m冲击力;
                         m_dataScaled[i + 2] += (double)Properties.Settings.Default.m温度;
                         if (Math.Round(m_dataScaled[i], 2) >= (double)startThreshold.Value)//当压力大于某个数值开始 计按下工件的延时
                             pushFlag = true;
-                    if (maxPressure < Math.Round(m_dataScaled[i] , 2)) { maxPressure = Math.Round(m_dataScaled[i] , 2); }
-                    if(maxHammer < Math.Round(m_dataScaled[i + 1] , 2)) { maxHammer = Math.Round(m_dataScaled[i + 1] , 2); }
-                    if(pushedFlag && Math.Round(m_dataScaled[i] , 2) <= (double)stopThreshold.Value)//当压力小于等于某个数值，停止向缓冲区写数据
+                        if (maxPressure < Math.Round(m_dataScaled[i], 2)) { maxPressure = Math.Round(m_dataScaled[i], 2); }
+                        if (maxHammer < Math.Round(m_dataScaled[i + 1], 2)) { maxHammer = Math.Round(m_dataScaled[i + 1], 2); }
+                        if (pushedFlag && Math.Round(m_dataScaled[i], 2) <= (double)stopThreshold.Value)//当压力小于等于某个数值，停止向缓冲区写数据
                         {
                             startFlag = false;
                             pushFlag = false;
-                            pushedFlag = false;                           
+                            pushedFlag = false;
                             exit = true;
-                            
+
                         }
                     }
-                    t = t.AddMilliseconds(1.0); 
+                    t = t.AddMilliseconds(1.0);
                 }
-                
+
                 myDelegate md = new myDelegate(setText);
                 try
                 {
@@ -205,20 +206,19 @@ namespace 冲水阀水力特性测试机
                         }
                     );
                 }
-                waterHammerMax.Text = "最大水冲击力：" + maxHammer;
-                pressureMax.Text = "最大压力：" + maxPressure;
-               
+                
+
             }
 
             bpqreturn.Text = bpqreturn_value.ToString();
-            waterHammer.Text = "水冲击力：" + Math.Round(data[data.Length - 3], 2)+" N";
-            waterPresuer.Text = "压力：" + Math.Round( data[data.Length - 4], 2)+" Bar";
-            waterTemperature.Text = "温度：" +Math.Round( data[data.Length - 2],2)*10+" ℃";
-           
+            waterHammer.Text = "水冲击力：" + Math.Round(data[data.Length - 3], 2) + " N";
+            waterPresuer.Text = "压力：" + Math.Round(data[data.Length - 4], 2) + " Bar";
+            waterTemperature.Text = "温度：" + Math.Round(data[data.Length - 2], 2) * 10 + " ℃";
+
         }
         private void waveformAiCtrl1_CacheOverflow(object sender, BfdAiEventArgs e)
         {
-            
+
         }
 
         private void waveformAiCtrl1_Overrun(object sender, BfdAiEventArgs e)
@@ -351,7 +351,7 @@ namespace 冲水阀水力特性测试机
             bpqCOMConf.checkInfo = 2;
             bpqMR = new M_485Rtu(bpqCOMConf);
             bpqMR.connect();//变频器串口连接   
-            
+
             pushedFlag = false;
             startFlag = false;
             pushFlag = false;
@@ -376,7 +376,7 @@ namespace 冲水阀水力特性测试机
             daq.InstantAo();
             daq.InstantDi();
             daq.InstantDo();
-            doData = new byte[2] { 0x00,0x00};            
+            doData = new byte[2] { 0x00, 0x00 };
             daq.InstantDo_Write(doData);
 
             bpqzt.Text = "变频器当前状态：变频";
@@ -391,7 +391,7 @@ namespace 冲水阀水力特性测试机
             catch { }
             hslCurve1.SetLeftCurve("压力", null, Color.DodgerBlue);
             hslCurve1.SetLeftCurve("冲击力", null, Color.DarkOrange);
-            
+
             hslCurve1.ValueMaxLeft = 10;
             hslCurve1.ValueMaxRight = 10;
             hslCurve1.StrechDataCountMax = 1000;//设置显示数据量
@@ -418,7 +418,7 @@ namespace 冲水阀水力特性测试机
 
         }
 
-       
+
         /// <summary>
         /// 获取数据中某一位的值
         /// </summary>
@@ -431,12 +431,13 @@ namespace 冲水阀水力特性测试机
             //{
             //    return -1;
             //}
-            
+
             return ((input & (1 << index)) > 0) ? 1 : 0;
         }
-        void theout(object source, System.Timers.ElapsedEventArgs e) {
+        void theout(object source, System.Timers.ElapsedEventArgs e)
+        {
             byte diData = daq.InstantDi_Read();
-                alarmDelegate md = new alarmDelegate(alarmactive);
+            alarmDelegate md = new alarmDelegate(alarmactive);
             // daq.EventCount_Read();
             try
             {
@@ -444,10 +445,10 @@ namespace 冲水阀水力特性测试机
                     this.Invoke(md, new object[] { doData, diData });
             }
             catch { }
-            
+
         }
-        void alarmactive(byte[] data,byte diData)
-        { 
+        void alarmactive(byte[] data, byte diData)
+        {
             if (GetbitValue(data[0], 1) == 1)
             {
                 bpqzt.Text = "变频器当前状态：定频";
@@ -474,12 +475,15 @@ namespace 冲水阀水力特性测试机
             {
                 qdfstatus.Text = "气动阀当前状态：已按下...";
                 hslSwitch2.SwitchStatus = true;
-            }else
+            }
+            else
             {
                 hslSwitch2.SwitchStatus = false;
                 qdfstatus.Text = "气动阀当前状态：关闭";
             }
 
+            waterHammerMax.Text = "最大水冲击力：" + maxHammer;
+            pressureMax.Text = "最大压力：" + maxPressure;
             //变频器报警
             //重置所有设置
             if (GetbitValue(diData, 0) == 1)
@@ -498,8 +502,8 @@ namespace 冲水阀水力特性测试机
         }
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
-            
-            
+
+            try
             {
                 doData = new byte[2] { 0x00, 0x00 };
                 daq.InstantDo_Write(doData);
@@ -508,9 +512,14 @@ namespace 冲水阀水力特性测试机
                     monitor.Dispose();
                 if (pushWork.Enabled)
                     pushWork.Dispose();
+                daq.Dispose();
                 //e.Cancel = false;
-                //System.Environment.Exit(0);
+                System.Environment.Exit(0);
                 //e.Cancel = true;
+            }
+            catch
+            {
+                MessageBox.Show("系统关闭异常！！！");
             }
         }
 
@@ -531,7 +540,7 @@ namespace 冲水阀水力特性测试机
 
         private void hslButton4_Click(object sender, EventArgs e)
         {
-          
+
         }
 
         /// <summary>
@@ -549,7 +558,7 @@ namespace 冲水阀水力特性测试机
             int v = index < 2 ? index : (2 << (index - 2));
             return flag ? (byte)(data | v) : (byte)(data & ~v);
         }
-        
+
         private void hslButton5_Click(object sender, EventArgs e)
         {
         }
@@ -562,7 +571,7 @@ namespace 冲水阀水力特性测试机
             //daq.InstantAo_Write(aoData);
             if (hslSwitch1.SwitchStatus == false)
             {
-                bpqMR.write_short("125", (short)(100 * sbyali.Value * 5),2);
+                bpqMR.write_short("125", (short)(100 * sbyali.Value * 5), 2);
             }
         }
 
@@ -570,7 +579,7 @@ namespace 冲水阀水力特性测试机
         {
             doData[0] = set_bit(doData[0], 2, false);
             daq.InstantDo_Write(doData);
-           
+
             //bpqzt.Text = "变频器当前状态：变频";
         }
 
@@ -579,10 +588,10 @@ namespace 冲水阀水力特性测试机
             doData[0] = set_bit(doData[0], 2, true);
             daq.InstantDo_Write(doData);
 
-            aoData[0] = Convert.ToDouble( bpqreturn.Text);
+            aoData[0] = Convert.ToDouble(bpqreturn.Text);
             daq.InstantAo_Write(aoData);
 
-       
+
         }
         double[] aoData = new double[1];
         private void hslButton4_Click_1(object sender, EventArgs e)
@@ -591,10 +600,10 @@ namespace 冲水阀水力特性测试机
             {
                 doData[0] = set_bit(doData[0], 1, true);
                 daq.InstantDo_Write(doData);
-                
-                 aoData[0] =   (double)sbyali.Value ;
+
+                aoData[0] = (double)sbyali.Value;
                 //daq.InstantAo_Write(aoData);
-                bpqMR.write_short("125", (short)(sbyali.Value * 500),2);
+                bpqMR.write_short("125", (short)(sbyali.Value * 500), 2);
                 open.Text = "关闭水泵";
                 //sbzt.Text = "水泵当前状态：运行中...";
             }
@@ -629,17 +638,17 @@ namespace 冲水阀水力特性测试机
             if (arg2)//定频
             {
                 doData[0] = set_bit(doData[0], 2, true);
-                daq.InstantDo_Write(doData);                                
+                daq.InstantDo_Write(doData);
                 //daq.InstantAo_Write(aoData);
-                aoData[0] = (double)bpqMR.read_short("8451",2) / 500;//读取变频器返回值
-                bpqMR.write_short("17", bpqMR.read_short("8451",2),2);//直接将从变频器读取到数据写入变频器中
-                dingpin_out.Value = (decimal)Math.Round(bpqMR.read_short("8451",2) / 100.0, 2);
+                aoData[0] = (double)bpqMR.read_short("8451", 2) / 500;//读取变频器返回值
+                bpqMR.write_short("17", bpqMR.read_short("8451", 2), 2);//直接将从变频器读取到数据写入变频器中
+                dingpin_out.Value = (decimal)Math.Round(bpqMR.read_short("8451", 2) / 100.0, 2);
             }
             else//变频
             {
                 aoData[0] = (double)sbyali.Value;
                 //daq.InstantAo_Write(aoData);
-                bpqMR.write_short("125", (short)(100 * sbyali.Value * 5),2);
+                bpqMR.write_short("125", (short)(100 * sbyali.Value * 5), 2);
                 doData[0] = set_bit(doData[0], 2, false);
                 daq.InstantDo_Write(doData);
             }
@@ -654,7 +663,7 @@ namespace 冲水阀水力特性测试机
 
                 aoData[0] = (double)sbyali.Value;
                 //daq.InstantAo_Write(aoData);
-                bpqMR.write_short("125", (short)(sbyali.Value * 500),2);
+                bpqMR.write_short("125", (short)(sbyali.Value * 500), 2);
                 open.Text = "关闭水泵";
                 //sbzt.Text = "水泵当前状态：运行中...";
             }
@@ -670,7 +679,7 @@ namespace 冲水阀水力特性测试机
         private void hslButton5_Click_1(object sender, EventArgs e)
         {
 
-          
+
         }
 
         private void hslSwitch2_OnSwitchChanged(object arg1, bool arg2)
@@ -693,16 +702,26 @@ namespace 冲水阀水力特性测试机
         {
             if (arg2)
             {
-                if(open.Text == "关闭水泵") { 
-                exit = false;
-                pushedFlag = false;
-                pushFlag = false;
-                dt.Clear();
-                //hslCurve1.RemoveCurve("压力");
-                startFlag = true;
-                hslPlay1.Text = "停止";
-                systemInfo.Text = "系统信息：";
-                pushWork.Enabled = true;//是否执行System.Timers.Timer.Elapsed事件；
+                if (open.Text == "关闭水泵")
+                {
+                    exit = false;
+                    pushedFlag = false;
+                    pushFlag = false;
+                    //dt.Clear();
+                    hslCurve1.RemoveAllCurveData();
+                    dt.Clear();
+                   
+                    //hslCurve1.RemoveCurve("压力");
+                    startFlag = true;
+                    hslPlay1.Text = "停止";
+                    systemInfo.Text = "系统信息：";
+                    pushWork.Enabled = true;//是否执行System.Timers.Timer.Elapsed事件；
+                    maxHammer = -1;
+                    maxPressure = -1;
+
+                    waterHammerMax.Text = "最大水冲击力：" + maxHammer;
+                    pressureMax.Text = "最大压力：" + maxPressure;
+
                 }
                 else
                 {
@@ -752,13 +771,12 @@ namespace 冲水阀水力特性测试机
 
         private void Form1_FormClosed(object sender, FormClosedEventArgs e)
         {
-            System.Diagnostics.Process tt = System.Diagnostics.Process.GetProcessById(System.Diagnostics.Process.GetCurrentProcess().Id);
-            tt.Kill();//直接杀死与本程序相关的所有进程，有可能会导致数据丢失，但是不会抛出异常。
+            
         }
 
         private void Dingpin_out_ValueChanged(object sender, EventArgs e)
         {
-            bpqMR.write_short("17", (short)(dingpin_out.Value * 100),2);
+            bpqMR.write_short("17", (short)(dingpin_out.Value * 100), 2);
         }
 
         private void workName_TextChanged(object sender, EventArgs e)

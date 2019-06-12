@@ -19,6 +19,23 @@ namespace 冲水阀水力特性测试机
     }
     internal class DAQ_profile
     {
+        public void Dispose()
+        {
+            try
+            {
+                instantDiCtrl1.Dispose();
+                instantDoCtrl1.Dispose();
+                instantAiCtrl1.Dispose();
+                m_instantAoCtrl.Dispose();
+                m_eventCounterCtrl.Dispose();
+
+            }
+            catch
+            {
+
+            }
+
+        }
         private Automation.BDaq.WaveformAiCtrl waveformAiCtrl1;
         private Automation.BDaq.InstantAiCtrl instantAiCtrl1;
         private Automation.BDaq.InstantAoCtrl m_instantAoCtrl;
@@ -143,7 +160,7 @@ namespace 冲水阀水力特性测试机
         {
             this.m_instantAoCtrl = new Automation.BDaq.InstantAoCtrl();
             this.m_instantAoCtrl.SelectedDevice = new DeviceInformation(conf.deviceDescription);
-           // this.m_instantAoCtrl._StateStream = ((Automation.BDaq.DeviceStateStreamer)(resources.GetObject("m_instantAoCtrl._StateStream")));
+            // this.m_instantAoCtrl._StateStream = ((Automation.BDaq.DeviceStateStreamer)(resources.GetObject("m_instantAoCtrl._StateStream")));
         }
 
         public void InstantAo(System.ComponentModel.IContainer components)
@@ -186,7 +203,7 @@ namespace 冲水阀水力特性测试机
         {
             waveformAiCtrl1 = new Automation.BDaq.WaveformAiCtrl(components);
             waveformAiCtrl1.SelectedDevice = new DeviceInformation(conf.deviceDescription);
-           // waveformAiCtrl1._StateStream = ((Automation.BDaq.DeviceStateStreamer)(resources.GetObject("waveformAiCtrl1._StateStream")));
+            // waveformAiCtrl1._StateStream = ((Automation.BDaq.DeviceStateStreamer)(resources.GetObject("waveformAiCtrl1._StateStream")));
             // Step 4: Set necessary parameter
             Conversion conversion = waveformAiCtrl1.Conversion;
             conversion.ChannelStart = conf.startChannel;
