@@ -162,5 +162,24 @@
   <ItemGroup>
     <Content Include="Properties\watercube.ico" />
   </ItemGroup>
+  <ItemGroup>
+    <COMReference Include="AxBDaqOcxLib">
+      <Guid>{1752FF26-D6C9-4BC8-BFE9-7D0CA26DED89}</Guid>
+      <VersionMajor>1</VersionMajor>
+      <VersionMinor>0</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>aximp</WrapperTool>
+      <Isolated>False</Isolated>
+    </COMReference>
+    <COMReference Include="BDaqOcxLib">
+      <Guid>{1752FF26-D6C9-4BC8-BFE9-7D0CA26DED89}</Guid>
+      <VersionMajor>1</VersionMajor>
+      <VersionMinor>0</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>tlbimp</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

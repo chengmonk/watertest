@@ -508,12 +508,12 @@ namespace 冲水阀水力特性测试机
                 doData = new byte[2] { 0x00, 0x00 };
                 daq.InstantDo_Write(doData);
                 waveformAiCtrl1_Stop();
-                if (monitor.Enabled)
+                //if (monitor.Enabled)
                     monitor.Dispose();
-                if (pushWork.Enabled)
+               // if (pushWork.Enabled)
                     pushWork.Dispose();
                 daq.Dispose();
-                //e.Cancel = false;
+                
                 System.Environment.Exit(0);
                 //e.Cancel = true;
             }

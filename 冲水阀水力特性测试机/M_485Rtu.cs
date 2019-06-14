@@ -85,7 +85,8 @@ namespace 冲水阀水力特性测试机
         public void disConnect()
         {
             busRtuClient.Close();
-            MessageBox.Show("串口已关闭");
+            
+            //MessageBox.Show("串口已关闭");
         }
         public short read_short(string adreess, byte station)
         {

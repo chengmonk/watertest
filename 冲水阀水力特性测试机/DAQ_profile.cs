@@ -23,12 +23,18 @@ namespace 冲水阀水力特性测试机
         {
             try
             {
-                instantDiCtrl1.Dispose();
-                instantDoCtrl1.Dispose();
-                instantAiCtrl1.Dispose();
-                m_instantAoCtrl.Dispose();
-                m_eventCounterCtrl.Dispose();
-
+                //if (instantDiCtrl1 != null)
+                //    instantDiCtrl1.Dispose();
+                if (instantDoCtrl1 != null)
+                    instantDoCtrl1.Dispose();
+                if (instantAiCtrl1 != null)
+                    instantAiCtrl1.Dispose();
+                if (m_instantAoCtrl != null)
+                    m_instantAoCtrl.Dispose();
+                if (waveformAiCtrl1 != null)
+                    waveformAiCtrl1.Dispose();
+                if (m_eventCounterCtrl != null)
+                    m_eventCounterCtrl.Dispose();
             }
             catch
             {

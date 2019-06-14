@@ -7,6 +7,7 @@ using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -18,22 +19,16 @@ namespace 冲水阀水力特性测试机
         {
             InitializeComponent();
         }
-        System.Timers.Timer t;
+        //System.Timers.Timer t;
         static List<double> l;
         static List<double> wendu;
         bool loadDataFlag = false;
         bool pushedFlag = false;
-        bool pushFlag = false;
+        
         double FLOW = 0;
-        private void hslButton1_Click(object sender, EventArgs e)
-        {
-            loadDataFlag = true;
-            dt.Clear();
-            systemInfo.Text = "系统信息：";
-            pushWork.Enabled = true;//是否执行System.Timers.Timer.Elapsed事件；
-            //t.Enabled = true;//是否执行System.Timers.Timer.Elapsed事件；   
-        }
-        void pushWorkThread(object source, System.Timers.ElapsedEventArgs e)
+       
+        void pushWorkThread(object source, System.Timers.ElapsedEventArgs e) { }
+        void pushThread()
         {
             doData[0] = set_bit(doData[0], 3, true);
             daq.InstantDo_Write(doData);
@@ -46,7 +41,7 @@ namespace 冲水阀水力特性测试机
 
                     break;
                 }
-                System.Threading.Thread.Sleep((int)50);//
+                System.Threading.Thread.Sleep((int)200);//
             }
             double t = 1000 * (double)numericUpDown1.Value;
             System.Threading.Thread.Sleep((int)t);//
@@ -55,11 +50,21 @@ namespace 冲水阀水力特性测试机
             // System.Console.WriteLine("push:" + doData[0]);
 
             pushedFlag = true;
-            pushFlag = false;
+            
         }
-        void theout(object source, System.Timers.ElapsedEventArgs e)
+        
+        void theout(object source)
 
         {
+            byte diData = daq.InstantDi_Read();
+            alarmDelegate mdd = new alarmDelegate(alarmactive);
+            // daq.EventCount_Read();
+            try
+            {
+                if (this.IsHandleCreated && !this.IsDisposed)
+                    this.Invoke(mdd, new object[] { doData, diData });
+            }
+            catch { }
             //通道0  压力 pressure
             //通道1  水冲击力  waterHammer
             //通道2  温度            
@@ -80,8 +85,8 @@ namespace 冲水阀水力特性测试机
             {
 
                 l.Add(data[4]);
-                if (!(wendu.Count > 0 && (Math.Abs(data[2] - wendu[wendu.Count - 1]) > 1 
-                    || data[2]>40 || wendu[wendu.Count - 1]>40)))
+                if ( (Math.Abs(data[2] - wendu[wendu.Count - 1]) <= 1
+                    && data[2] < 50 ))
                     wendu.Add(data[2]);
                 //maxFlow = l.Max();
 
@@ -108,7 +113,7 @@ namespace 冲水阀水力特性测试机
             // if (IsDisposed || !this.Parent.IsHandleCreated) return;
             try
             {
-                if (this.IsHandleCreated)
+                if (this.IsHandleCreated && !this.IsDisposed)
                     this.Invoke(md, new object[] { data });
             }
             catch { }
@@ -116,6 +121,7 @@ namespace 冲水阀水力特性测试机
         }
         public static int L6 = 0;
         public static int L9 = 0;
+
         bool first6l = true;
         bool first9l = true;
         bool firstadd0 = true;
@@ -125,21 +131,16 @@ namespace 冲水阀水力特性测试机
             DateTime t = DateTime.Now;
             t.ToString("yyyy-MM-dd hh:mm:ss:fff");
             //新建第一行，并赋值
-            if(wendu.Count>0)
-            waterTemperature.Text = "温度：" + Math.Round(wendu[wendu.Count-1], 2) + "℃";
+            if (wendu.Count > 0)
+                waterTemperature.Text = "温度：" + Math.Round(wendu[wendu.Count - 1], 2) + "℃";
             waterFlow.Text = "流量：" + Math.Round(data[4], 2) + "L/s";
-
             maxWaterFlow.Text = "最大流量:" + Math.Round(maxFlow, 2) + "L/s";
-            totalFlowShow.Text = "累计流量：" + Math.Round(totalFlow, 2) + "L";
+            totalFlowShow.Text = "累计流量：" + Math.Round(totalFlow, 2) + "L";            
             pressure.Text = "出水压力：" + Math.Round(data[0], 2) + "Bar";
             pumpOutPressure.Text = "水泵输出压力值：" + Math.Round(data[3], 2) + "Bar";
-            TEMP= Math.Round(data[2], 2);
+            TEMP = Math.Round(data[2], 2);
             bpqreturn.Text = Math.Round(data[5], 2).ToString();//变频器返回值
-            if (Math.Round(data[4], 2) > 0.01)
-            {
-                pushFlag = true;
-
-            }
+            
             if (loadDataFlag && (FLOW >= (double)startThreshold.Value))//大于阈值开始绘制曲线以及记录数据
             {
                 if (Math.Abs(Math.Round(totalFlow, 2) - 6) < 1 && first6l)//记录到达6l的索引
@@ -188,7 +189,8 @@ namespace 冲水阀水力特性测试机
 
             }
             // systemInfo.Text = "系统信息："+pushedFlag;
-            if (FLOW <= (double)stopThreshold.Value && pushedFlag && Math.Abs(FLOW- l[l.Count - 5])<0.5)//小于阈值停止记录
+            if (FLOW <= (double)stopThreshold.Value && pushedFlag && l.Count>8
+                && Math.Abs(FLOW - l[l.Count - 5]) < 0.5)//小于阈值停止记录
             {
                 t = t.AddMilliseconds(500);
                 if (wendu.Count > 0)
@@ -203,7 +205,7 @@ namespace 冲水阀水力特性测试机
                     }
                 );
                 loadDataFlag = false;
-                pushFlag = false;
+                
                 pushedFlag = false;
                 hslPlay1.Text = "自动运行";
                 mr.write_coil("10", true, 1);//停止累计流量
@@ -221,8 +223,10 @@ namespace 冲水阀水力特性测试机
         static public DataTable dt;
         static public double totalFlow = 0;
         double[] aoData = new double[1];
-        System.Timers.Timer monitor;
-        System.Timers.Timer pushWork;
+
+        //System.Threading.Timer monitor2;        
+        System.Threading.Timer t2;
+        Thread push_Thread;
         public static double maxFlow = 0;
         public static int maxflow_pose = 0;
 
@@ -230,8 +234,17 @@ namespace 冲水阀水力特性测试机
         COMconfig conf;
         COMconfig bpqCOMConf;
         //private ModbusRtu busRtuClient = null;
+        void timer_Elapsed(object sender)
+        {
+            for (int i = 0; i < 10; i++)
+            {
+                Console.Out.WriteLine(DateTime.Now + " " + DateTime.Now.Millisecond.ToString() + "timer in:");
+            }
+        }
         private void Form2_Load(object sender, EventArgs e)
         {
+            //ti=new  System.Threading.Timer(new TimerCallback(timer_Elapsed), null, 1000*10, 2000);
+
             first6l = true;
             firstadd0 = true;
             first9l = true;
@@ -247,22 +260,24 @@ namespace 冲水阀水力特性测试机
             mr = new M_485Rtu(conf);
             mr.connect();
             mr.write_coil("10", true, 1);//停止累计流量
-            MessageBox.Show("485连接成功");
+
+            //MessageBox.Show("485连接成功");
 
             maxFlow = -1;
             pushedFlag = false;
-            pushFlag = false;
+            
             loadDataFlag = false;
 
-           
+
 
             c = new config();
-            c.channelCount = 3;
-            c.convertClkRate = 1000;
+            //c.channelCount = 3;
+            c.convertClkRate = 100;
             c.deviceDescription = "PCI-1710HG,BID#0";
+            c.deviceDescription = "DemoDevice,BID#0";
             //c.profilePath = "D:/demo.xml";
             c.sectionCount = 0;//The 0 means setting 'streaming' mode.
-            c.sectionLength = 1000;
+            c.sectionLength = 100;
             c.startChannel = 0;
 
             //初始化研华板卡的功能
@@ -299,40 +314,48 @@ namespace 冲水阀水力特性测试机
             dt = new DataTable();
             dt.Columns.Add("时间", typeof(string));
             dt.Columns.Add("温度", typeof(double));   //新建第一列
-            dt.Columns.Add("流量", typeof(double));      //新建第二列    
+            dt.Columns.Add("流量", typeof(double));      //新建第二列    ElapsedEventHandler
 
-            t = new System.Timers.Timer(100);
-            t.Elapsed += new System.Timers.ElapsedEventHandler(theout);//到达时间的时候执行事件； 
-            t.AutoReset = true;//设置是执行一次（false）还是一直执行(true)；
-            t.Enabled = true;
+            //t = new System.Timers.Timer(100);
+            //t.Elapsed += new System.Timers.(theout);//到达时间的时候执行事件； 
+            //t.AutoReset = true;//设置是执行一次（false）还是一直执行(true)；
+            //t.Enabled = false;
+            daq.InstantAi();
+            t2 = new System.Threading.Timer(new TimerCallback(theout), null, 200, 110);
 
-            monitor = new System.Timers.Timer(500);
-            monitor.Elapsed += new System.Timers.ElapsedEventHandler(monitorAction);//到达时间的时候执行事件； 
-            monitor.AutoReset = true;//设置是执行一次（false）还是一直执行(true)；
-            monitor.Enabled = true;//是否执行System.Timers.Timer.Elapsed事件； 
+            //monitor = new System.Timers.Timer(500);
+            //monitor.Elapsed += new System.Timers.ElapsedEventHandler(monitorAction);//到达时间的时候执行事件； 
+            //monitor.AutoReset = true;//设置是执行一次（false）还是一直执行(true)；
+            //monitor.Enabled = false;//是否执行System.Timers.Timer.Elapsed事件； 
+            //monitor2 = new System.Threading.Timer(new TimerCallback(monitorAction), null, 0, 1000);
 
-            pushWork = new System.Timers.Timer(10);
-            pushWork.Elapsed += new System.Timers.ElapsedEventHandler(pushWorkThread);//到达时间的时候执行事件； 
-            pushWork.AutoReset = false;//设置是执行一次（false）还是一直执行(true)；
+
+            //pushWork = new System.Timers.Timer(10);
+            //pushWork.Elapsed += new System.Timers.ElapsedEventHandler(pushWorkThread);//到达时间的时候执行事件； 
+            //pushWork.AutoReset = false;//设置是执行一次（false）还是一直执行(true)；
+
+
+
 
             DateTime tt = DateTime.Now;
             maxFlow = -1;
             //hslCurve1.RemoveAllCurveData();
-            dt.Clear();
-            l.Clear();
-            wendu.Clear();
+            //dt.Clear();
+            //l.Clear();
+            //wendu.Clear();
             l.Add(0);//绘图从零点开始
             dt.Rows.Add(tt.ToString("yyyy-MM-dd hh:mm:ss:fff"), TEMP, 0);
             pushedFlag = false;
             first6l = true;
             first9l = true;
-            pushFlag = false;
+            
 
-            daq.InstantAi();
-            t.Start();
+            
+            //t.Start();
         }
-        private delegate void alarmDelegate(byte[] data, byte diData);//声明委托   
-        void monitorAction(object source, System.Timers.ElapsedEventArgs e)
+        private delegate void alarmDelegate(byte[] data, byte diData);//声明委托 
+        void monitorAction(object source, System.Timers.ElapsedEventArgs e) { }
+        void monitorAction(object source)
         {
             byte diData = daq.InstantDi_Read();
             alarmDelegate md = new alarmDelegate(alarmactive);
@@ -434,22 +457,34 @@ namespace 冲水阀水力特性测试机
             {
                 doData = new byte[2] { 0x00, 0x00 };
                 daq.InstantDo_Write(doData);
-                if (t.Enabled)
-                    t.Dispose();
-                if (monitor.Enabled)
-                    monitor.Dispose();
-                if (pushWork.Enabled)
-                    pushWork.Dispose();
+                //if (t.Enabled)
+                //    t.Dispose();
+                //if (monitor.Enabled)
+                //    monitor.Dispose();
+                //if (pushWork.Enabled)
+                //    pushWork.Dispose();
 
                 //e.Cancel = false;
                 maxFlow = -1;
-                hslCurve1.RemoveAllCurveData();
+                //pushWork.Enabled = false;
+                // monitor.Enabled = false;
+                //t.Enabled = false;
+                //pushWork.Dispose();
+                //monitor.Dispose();
+                //monitor2.Dispose();
+                //t.Dispose();
+                
+
+                //hslCurve1.RemoveAllCurveData();
                 dt.Clear();
                 l.Clear();
                 wendu.Clear();
-                daq.Dispose();
+                //daq.Dispose();
+                //mr.disConnect();
+                // daq.InstantDi_Read();
+                mr.disConnect();
+                Application.Exit();
                 System.Environment.Exit(0);
-
                 //e.Cancel = true;
             }
             catch
@@ -479,27 +514,41 @@ namespace 冲水阀水力特性测试机
         }
         private byte[] doData;
         //short sbyali_short = 0;
+        private void pump_open()
+        {
+            doData[0] = set_bit(doData[0], 1, true);
+            daq.InstantDo_Write(doData);
+            aoData[0] = (double)sbyali.Value;
+            //daq.InstantAo_Write(aoData);
+            // sbyali_short = (short)(500 * sbyali.Value);             
+            //bpqMR.connect();
+            mr.write_short("125", (short)(sbyali.Value * 500), 2);            
+            Invoke(new Action(() =>
+            {
+                open.Text = "关闭水泵";
+            }));
+        }
+        private void pump_off()
+        {
+            doData[0] = set_bit(doData[0], 1, false);
+            daq.InstantDo_Write(doData);
+            //sbzt.Text = "水泵当前状态：关闭";
+            
+            Invoke(new Action(() =>
+            {
+                open.Text = "打开水泵";
+            }));
+        }
         private void hslButton4_Click(object sender, EventArgs e)
         {
             if (open.Text == "打开水泵")
             {
-                doData[0] = set_bit(doData[0], 1, true);
-                daq.InstantDo_Write(doData);
-
-                aoData[0] = (double)sbyali.Value;
-                //daq.InstantAo_Write(aoData);
-                // sbyali_short = (short)(500 * sbyali.Value);             
-                //bpqMR.connect();
-                mr.write_short("125", (short)(sbyali.Value * 500), 2);
-                open.Text = "关闭水泵";
+                new Thread(new ThreadStart(pump_open)) { IsBackground = false }.Start();                
                 //sbzt.Text = "水泵当前状态：运行中...";
             }
             else
             {
-                doData[0] = set_bit(doData[0], 1, false);
-                daq.InstantDo_Write(doData);
-                //sbzt.Text = "水泵当前状态：关闭";
-                open.Text = "打开水泵";
+                new Thread(new ThreadStart(pump_off)) { IsBackground = false }.Start();                
             }
         }
 
@@ -518,17 +567,27 @@ namespace 冲水阀水力特性测试机
             daq.InstantDo_Write(doData);
 
         }
-
-        private void sbyali_ValueChanged(object sender, EventArgs e)
+        private void sbyaiThread()
         {
             aoData[0] = (double)sbyali.Value;
             Properties.Settings.Default.水泵压力 = sbyali.Value;
             Properties.Settings.Default.Save();
-            // daq.InstantAo_Write(aoData);
             if (hslSwitch1.SwitchStatus == false)
             {
+
                 mr.write_short("125", (short)(100 * sbyali.Value * 5), 2);
             }
+            Invoke(new Action(() =>
+            {
+               
+            }));
+        }
+        private void sbyali_ValueChanged(object sender, EventArgs e)
+        {
+            new Thread(new ThreadStart(sbyaiThread)) { IsBackground = false }.Start();
+            
+            // daq.InstantAo_Write(aoData);
+           
         }
 
         private void axgj_Click(object sender, EventArgs e)
@@ -604,26 +663,40 @@ namespace 冲水阀水力特性测试机
             Properties.Settings.Default.保持时间 = numericUpDown1.Value;
             Properties.Settings.Default.Save();
         }
-
+        private void change_bpq()
+        {
+            doData[0] = set_bit(doData[0], 2, true);
+            daq.InstantDo_Write(doData);
+            aoData[0] = (double)mr.read_short("8451", 2) / 500;//读取变频器返回值
+            mr.write_short("17", mr.read_short("8451", 2), 2);//直接将从变频器读取到数据写入变频器中
+            
+            Invoke(new Action(() =>
+            {
+                dingpin_out.Value = (decimal)Math.Round(mr.read_short("8451", 2) / 100.0, 2);
+            }));
+        }
+        private void change_bpq2()
+        {
+            aoData[0] = (double)sbyali.Value;
+            //daq.InstantAo_Write(aoData);
+            mr.write_short("125", (short)(100 * sbyali.Value * 5), 2);     
+            doData[0] = set_bit(doData[0], 2, false);
+            daq.InstantDo_Write(doData);
+        }
         private void hslSwitch1_OnSwitchChanged(object arg1, bool arg2)
         {
             if (arg2)//定频
             {
-                doData[0] = set_bit(doData[0], 2, true);
-                daq.InstantDo_Write(doData);
+               
                 //aoData[0] = Convert.ToDouble(bpqreturn.Text)/5;
                 //daq.InstantAo_Write(aoData);
-                aoData[0] = (double)mr.read_short("8451", 2) / 500;//读取变频器返回值
-                mr.write_short("17", mr.read_short("8451", 2), 2);//直接将从变频器读取到数据写入变频器中
-                dingpin_out.Value = (decimal)Math.Round(mr.read_short("8451", 2) / 100.0, 2);
+                new Thread(new ThreadStart(change_bpq)) { IsBackground = false }.Start();
+                
             }
             else//变频
             {
-                aoData[0] = (double)sbyali.Value;
-                //daq.InstantAo_Write(aoData);
-                mr.write_short("125", (short)(100 * sbyali.Value * 5), 2);
-                doData[0] = set_bit(doData[0], 2, false);
-                daq.InstantDo_Write(doData);
+                new Thread(new ThreadStart(change_bpq2)) { IsBackground = false }.Start();
+                
             }
         }
 
@@ -660,55 +733,86 @@ namespace 冲水阀水力特性测试机
             {
                 doData[0] = set_bit(doData[0], 3, true);
                 daq.InstantDo_Write(doData);
-
             }
             else
             {
                 doData[0] = set_bit(doData[0], 3, false);
                 daq.InstantDo_Write(doData);
-
             }
         }
+        private void startThread()
+        {
+            DateTime t = DateTime.Now;
+            dt.Clear();
+            l.Clear();
+            wendu.Clear();
+            maxFlow = -1;
+            l.Add(0);//绘图从零点开始
+            dt.Rows.Add(t.ToString("yyyy-MM-dd hh:mm:ss:fff"), TEMP, 0);
+            pushedFlag = false;
+            first6l = true;
+            first9l = true;            
+            //loadDataFlag = true;
+            firstadd0 = true;
+            mr.write_coil("9", true, 1);
+            mr.write_coil("10", false, 1);//开始累计流量
+            Invoke(new Action(() =>
+            {
+                //pushWork.Enabled = true;//是否执行System.Timers.Timer.Elapsed事件；
+                hslCurve1.RemoveAllCurveData();
+                hslPlay1.Text = "停止";
+                systemInfo.Text = "系统信息：";
 
+            }));
+        }
         private void hslPlay1_OnPlayChanged(object arg1, bool arg2)
         {
             if (arg2)
             {
                 if (open.Text == "关闭水泵")
                 {
-                    DateTime t = DateTime.Now;
-                    maxFlow = -1;
-                    hslCurve1.RemoveAllCurveData();
-                    dt.Clear();
-                    l.Clear();
-                    wendu.Clear();
-                    l.Add(0);//绘图从零点开始
-                    dt.Rows.Add(t.ToString("yyyy-MM-dd hh:mm:ss:fff"), TEMP, 0);
-                    pushedFlag = false;
-                    first6l = true;
-                    first9l = true;
-                    pushFlag = false;
-                    loadDataFlag = true;
-                    mr.write_coil("9", true, 1);
-                    mr.write_coil("10", false, 1);//开始累计流量
-                    hslPlay1.Text = "停止";
-                    systemInfo.Text = "系统信息：";
-                    pushWork.Enabled = true;//是否执行System.Timers.Timer.Elapsed事件；
-                    firstadd0 = true;
+                    // 启动线程
+                    new Thread(new ThreadStart(startThread)) { IsBackground = false }.Start();
+
+                    //if (push_Thread != null )
+                    //{
+                    //    if (push_Thread.IsAlive) { MessageBox.Show("请等待上一次任务执行完毕。"); }
+                    //    //push_Thread.Suspend();
+
+                    //    //push_Thread.Abort();//强制结束的时候当上一个进程没有结束的时候，调用这个函数会报错，是因为函数当中修改了全局的变量
+                    //}
+
+                    push_Thread = new Thread(new ThreadStart(pushThread));
+                    push_Thread.IsBackground = true;
+                    push_Thread.Start();
+
                 }
                 else
                 {
                     MessageBox.Show("请先打开水泵再点击自动运行！！！");
                     hslPlay1.Played = false;
+                    if (push_Thread != null && push_Thread.IsAlive)
+                        push_Thread.Abort();
                 }
             }
             else
             {
-                loadDataFlag = false;
-                mr.write_coil("10", true, 1);//停止累计流量
-                pushedFlag = false;
-                hslPlay1.Text = "自动运行";
+                new Thread(new ThreadStart(stopThread)) { IsBackground = false }.Start();
+                if (push_Thread != null && push_Thread.IsAlive)
+                    push_Thread.Abort();
+
             }
+        }
+        void stopThread()
+        {
+            loadDataFlag = false;
+            pushedFlag = false;            
+            mr.write_coil("10", true, 1);//停止累计流量
+            hslPlay1.Played = false;
+            Invoke(new Action(() =>
+            {                
+                hslPlay1.Text = "自动运行";
+            }));
         }
 
         private void Label6_Click(object sender, EventArgs e)
@@ -724,7 +828,7 @@ namespace 冲水阀水力特性测试机
 
         private void Form2_FormClosed(object sender, FormClosedEventArgs e)
         {
-          
+
         }
 
         private void StartThreshold_ValueChanged(object sender, EventArgs e)
@@ -749,43 +853,20 @@ namespace 冲水阀水力特性测试机
 
         }
         bool flowisVisiable = true;
-        private void HslButton1_Click_1(object sender, EventArgs e)
-        {
-            
-            first6l = true;
-            firstadd0 = true;
-            first9l = true;
-            
-            pushedFlag = false;
-            pushFlag = false;
-            loadDataFlag = false;
-            doData = new byte[2] { 0x00, 0x00 };
-            daq.InstantDo_Write(doData);
-            maxFlow = -1;
-            hslCurve1.RemoveAllCurveData();
-            dt.Clear();
-            l.Clear();
-            wendu.Clear();
-            loadDataFlag = false;
-            mr.write_coil("10", true, 1);//停止累计流量
-            pushedFlag = false;
-            hslPlay1.Text = "自动运行";
-            hslPlay1.Played = false;
-        }
+       
         bool tempisVisiable = true;
-        private void HslButton3_Click_1(object sender, EventArgs e)
-        {
-            // 隐藏温度曲线
-            tempisVisiable = !tempisVisiable;
-            hslCurve1.SetCurveVisible(new string[] { "温度" }, tempisVisiable);
-        }
-
+      
         private void Label11_Click(object sender, EventArgs e)
         {
 
         }
 
         private void Dingpin_out_ValueChanged(object sender, EventArgs e)
+        {
+            new Thread(new ThreadStart(dingpinThread)) { IsBackground = false }.Start();
+           
+        }
+        void dingpinThread()
         {
             mr.write_short("17", (short)(dingpin_out.Value * 100), 2);
         }

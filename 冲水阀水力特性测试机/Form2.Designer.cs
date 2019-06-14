@@ -64,8 +64,6 @@
             this.hslSwitch2 = new HslControls.HslSwitch();
             this.qdfstatus = new System.Windows.Forms.Label();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.hslButton3 = new HslControls.HslButton();
-            this.reset = new HslControls.HslButton();
             this.hslPlay1 = new HslControls.HslPlay();
             this.hslButton5 = new HslControls.HslButton();
             this.hslButton2 = new HslControls.HslButton();
@@ -526,8 +524,6 @@
             // groupBox3
             // 
             this.groupBox3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.groupBox3.Controls.Add(this.hslButton3);
-            this.groupBox3.Controls.Add(this.reset);
             this.groupBox3.Controls.Add(this.hslPlay1);
             this.groupBox3.Controls.Add(this.hslButton5);
             this.groupBox3.Controls.Add(this.hslButton2);
@@ -541,30 +537,6 @@
             this.groupBox3.TabIndex = 27;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "操作区";
-            // 
-            // hslButton3
-            // 
-            this.hslButton3.CustomerInformation = null;
-            this.hslButton3.Location = new System.Drawing.Point(147, 56);
-            this.hslButton3.Margin = new System.Windows.Forms.Padding(4);
-            this.hslButton3.Name = "hslButton3";
-            this.hslButton3.Size = new System.Drawing.Size(120, 31);
-            this.hslButton3.TabIndex = 29;
-            this.hslButton3.Text = "隐藏温度曲线";
-            this.hslButton3.Visible = false;
-            this.hslButton3.Click += new System.EventHandler(this.HslButton3_Click_1);
-            // 
-            // reset
-            // 
-            this.reset.CustomerInformation = null;
-            this.reset.Location = new System.Drawing.Point(147, 117);
-            this.reset.Margin = new System.Windows.Forms.Padding(4);
-            this.reset.Name = "reset";
-            this.reset.Size = new System.Drawing.Size(120, 31);
-            this.reset.TabIndex = 28;
-            this.reset.Text = "复位";
-            this.reset.Visible = false;
-            this.reset.Click += new System.EventHandler(this.HslButton1_Click_1);
             // 
             // hslPlay1
             // 
@@ -796,8 +768,6 @@
         private System.Windows.Forms.Label maxWaterFlow;
         private System.Windows.Forms.Label waterFlow;
         private System.Windows.Forms.Label pressure;
-        private HslControls.HslButton hslButton3;
-        private HslControls.HslButton reset;
         private System.Windows.Forms.Label pumpOutPressure;
         private System.Windows.Forms.Label dingpin_;
         private System.Windows.Forms.NumericUpDown dingpin_out;
