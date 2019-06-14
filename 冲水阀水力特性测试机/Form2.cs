@@ -85,7 +85,9 @@ namespace 冲水阀水力特性测试机
             {
 
                 l.Add(data[4]);
-                if ( (Math.Abs(data[2] - wendu[wendu.Count - 1]) <= 1
+                if(wendu.Count<1)
+                    wendu.Add(data[2]);
+                else if ( (Math.Abs(data[2] - wendu[wendu.Count - 1]) <= 1
                     && data[2] < 50 ))
                     wendu.Add(data[2]);
                 //maxFlow = l.Max();
@@ -104,7 +106,7 @@ namespace 冲水阀水力特性测试机
                     sum = sum - temp.Max() - temp.Min();
                     l[l.Count - 4] = (sum / 5);
                     if (l[l.Count - 4] > maxFlow) { maxFlow = l[l.Count - 4]; }
-                    maxflow_pose = l.IndexOf(l.Max()) - 8;
+                    maxflow_pose = l.IndexOf(l.Max()) ;
                 }
             }
 
@@ -189,7 +191,7 @@ namespace 冲水阀水力特性测试机
 
             }
             // systemInfo.Text = "系统信息："+pushedFlag;
-            if (FLOW <= (double)stopThreshold.Value && pushedFlag && l.Count>8
+            if (FLOW <= (double)stopThreshold.Value && pushedFlag && l.Count>5
                 && Math.Abs(FLOW - l[l.Count - 5]) < 0.5)//小于阈值停止记录
             {
                 t = t.AddMilliseconds(500);
@@ -204,8 +206,7 @@ namespace 冲水阀水力特性测试机
                             (float) 0,(float)wendu[wendu.Count-1]
                     }
                 );
-                loadDataFlag = false;
-                
+                loadDataFlag = false;                
                 pushedFlag = false;
                 hslPlay1.Text = "自动运行";
                 mr.write_coil("10", true, 1);//停止累计流量
@@ -274,7 +275,7 @@ namespace 冲水阀水力特性测试机
             //c.channelCount = 3;
             c.convertClkRate = 100;
             c.deviceDescription = "PCI-1710HG,BID#0";
-            c.deviceDescription = "DemoDevice,BID#0";
+            //c.deviceDescription = "DemoDevice,BID#0";
             //c.profilePath = "D:/demo.xml";
             c.sectionCount = 0;//The 0 means setting 'streaming' mode.
             c.sectionLength = 100;
@@ -752,7 +753,7 @@ namespace 冲水阀水力特性测试机
             pushedFlag = false;
             first6l = true;
             first9l = true;            
-            //loadDataFlag = true;
+            loadDataFlag = true;
             firstadd0 = true;
             mr.write_coil("9", true, 1);
             mr.write_coil("10", false, 1);//开始累计流量
